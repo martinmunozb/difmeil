@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Política de privacidad — Difmeil</title>
+<meta name="robots" content="index,follow" />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #202124;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --link: #1a73e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1b1b;
+      --fg: #e8eaed;
+      --muted: #9aa0a6;
+      --border: #3c4043;
+      --link: #8ab4f8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 "Google Sans", Roboto, Arial, sans-serif;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 36px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  p, li { color: var(--fg); }
+  ul { padding-left: 22px; }
+  a { color: var(--link); }
+  code {
+    background: var(--border);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .responsable {
+    background: var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0 24px;
+  }
+  .responsable p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Política de privacidad de Difmeil</h1>
+  <p class="updated">Última actualización: 7 de septiembre de 2026</p>
+
+  <p>Difmeil es una extensión de navegador diseñada para ayudar al usuario a
+  gestionar y visualizar sus correos electrónicos de forma más cómoda desde
+  su propio navegador.</p>
+
+  <p>Esta política de privacidad explica qué datos puede tratar Difmeil, para
+  qué se utilizan y qué derechos tiene el usuario.</p>
+
+  <h2>Responsable</h2>
+  <p>El responsable del tratamiento de los datos es:</p>
+  <div class="responsable">
+    <p><strong>Martín Muñoz Bastida</strong></p>
+    <p>NIF: 58453962Z</p>
+    <p>Domicilio: Plaza Aparejos, 4, 30319 Cartagena, Murcia, España</p>
+    <p>Correo de contacto: <a href="mailto:hola@difmeil.com">hola@difmeil.com</a></p>
+  </div>
+
+  <h2>Datos que puede tratar Difmeil</h2>
+  <p>Difmeil puede acceder a determinados datos de la cuenta de Google/Gmail
+  del usuario, siempre que el usuario conceda los permisos necesarios
+  mediante OAuth de Google.</p>
+  <p>Según las funcionalidades utilizadas, la extensión puede tratar:</p>
+  <ul>
+    <li>Dirección de correo electrónico del usuario.</li>
+    <li>Lista de correos electrónicos.</li>
+    <li>Remitente, destinatario, asunto, fecha y etiquetas de los correos.</li>
+    <li>Estado de lectura, destacados, archivados u otras acciones de organización.</li>
+    <li>Contenido de los correos únicamente cuando sea necesario para mostrarlo al usuario dentro de la extensión.</li>
+    <li>Datos técnicos básicos necesarios para el funcionamiento de la extensión.</li>
+  </ul>
+  <p>Difmeil no vende datos personales del usuario ni los utiliza para
+  publicidad de terceros.</p>
+
+  <h2>Finalidad del tratamiento</h2>
+  <p>Los datos se utilizan únicamente para:</p>
+  <ul>
+    <li>Permitir al usuario ver, organizar y gestionar sus correos.</li>
+    <li>Ejecutar acciones solicitadas por el usuario, como marcar correos como leídos, archivarlos, eliminarlos o enviarlos.</li>
+    <li>Mejorar la experiencia de uso dentro de la extensión.</li>
+    <li>Mantener la seguridad y el correcto funcionamiento del servicio.</li>
+  </ul>
+
+  <h2>Uso de datos de Google</h2>
+  <p>El uso y transferencia de información recibida desde las APIs de Google
+  se realiza de acuerdo con la política de datos de usuario de los servicios
+  API de Google, incluyendo los requisitos de uso limitado.</p>
+  <p>Difmeil solo solicita los permisos necesarios para prestar sus
+  funcionalidades. Los datos obtenidos mediante APIs de Google no se
+  utilizan para publicidad, venta de datos, elaboración de perfiles
+  comerciales ni cesión a terceros no necesarios para la prestación del
+  servicio.</p>
+
+  <h2>Permisos de Google solicitados</h2>
+  <p>Para que Difmeil pueda funcionar correctamente, la extensión puede
+  solicitar permisos de acceso a la cuenta de Google del usuario mediante
+  OAuth. Estos permisos solo se utilizan para ejecutar las funciones que el
+  usuario solicita dentro de la extensión.</p>
+  <p>Difmeil puede solicitar los siguientes permisos:</p>
+  <ul>
+    <li><code>https://www.googleapis.com/auth/gmail.modify</code>: permite leer, organizar y modificar correos de Gmail, por ejemplo marcar correos como leídos, archivarlos, aplicar etiquetas o moverlos cuando el usuario realiza una acción dentro de la extensión.</li>
+    <li><code>https://www.googleapis.com/auth/gmail.send</code>: permite enviar correos desde la cuenta de Gmail del usuario únicamente cuando el usuario solicita expresamente el envío desde Difmeil.</li>
+    <li><code>https://www.googleapis.com/auth/contacts.other.readonly</code>: permite consultar contactos u otros contactos de Google en modo solo lectura para facilitar funciones como autocompletado de destinatarios o identificación de contactos.</li>
+  </ul>
+  <p>Difmeil no utiliza estos permisos para vender datos, mostrar publicidad
+  personalizada, crear perfiles comerciales ni compartir información con
+  terceros no necesarios para prestar el servicio.</p>
+  <p>Los tokens de autenticación se gestionan de forma segura y se utilizan
+  únicamente para mantener la sesión y ejecutar las funciones autorizadas
+  por el usuario. La configuración local de la extensión puede guardarse en
+  <code>chrome.storage.local</code> para recordar preferencias del usuario
+  dentro del navegador.</p>
+
+  <h2>Almacenamiento de datos</h2>
+  <p>Difmeil puede almacenar ciertos datos localmente en el navegador del
+  usuario para recordar preferencias, configuración o mejorar el
+  funcionamiento de la extensión.</p>
+  <p>Salvo que sea estrictamente necesario para prestar el servicio, Difmeil
+  no almacena el contenido de los correos en servidores propios.</p>
+  <p>Cuando sea necesario para el funcionamiento técnico de la extensión,
+  Difmeil podrá utilizar una función backend segura para completar el
+  proceso OAuth y canjear códigos de autorización por tokens de acceso.
+  Estos tokens se usan únicamente para autenticar al usuario y ejecutar las
+  acciones autorizadas.</p>
+
+  <h2>Compartición de datos con terceros</h2>
+  <p>Difmeil no vende ni alquila datos personales.</p>
+  <p>Los datos solo podrán compartirse cuando sea necesario para:</p>
+  <ul>
+    <li>Cumplir obligaciones legales.</li>
+    <li>Prestar el servicio solicitado por el usuario.</li>
+    <li>Mantener la seguridad técnica de la extensión.</li>
+    <li>Usar proveedores técnicos necesarios para el funcionamiento del servicio, siempre bajo medidas adecuadas de protección.</li>
+  </ul>
+
+  <h2>Seguridad</h2>
+  <p>Difmeil aplica medidas razonables para proteger los datos del usuario
+  frente a accesos no autorizados, pérdida, alteración o uso indebido.</p>
+  <p>Aun así, ningún sistema informático es completamente seguro, por lo que
+  no puede garantizarse una seguridad absoluta.</p>
+
+  <h2>Conservación de datos</h2>
+  <p>Los datos se conservarán únicamente durante el tiempo necesario para
+  cumplir las finalidades descritas en esta política o mientras el usuario
+  mantenga instalada y conectada la extensión.</p>
+  <p>El usuario puede revocar el acceso de Difmeil a su cuenta de Google en
+  cualquier momento desde la configuración de seguridad de su cuenta de
+  Google.</p>
+
+  <h2>Derechos del usuario</h2>
+  <p>El usuario puede ejercer sus derechos de acceso, rectificación,
+  supresión, oposición, limitación del tratamiento y portabilidad
+  escribiendo a: <a href="mailto:hola@difmeil.com">hola@difmeil.com</a></p>
+  <p>También puede presentar una reclamación ante la Agencia Española de
+  Protección de Datos si considera que el tratamiento de sus datos no se
+  ajusta a la normativa aplicable.</p>
+
+  <h2>Menores de edad</h2>
+  <p>Difmeil no está dirigida específicamente a menores de edad. Si un menor
+  utiliza la extensión, deberá hacerlo con autorización de sus padres,
+  tutores o representantes legales cuando sea exigible.</p>
+
+  <h2>Cambios en esta política</h2>
+  <p>Difmeil podrá actualizar esta política de privacidad cuando sea
+  necesario por cambios legales, técnicos o funcionales. La versión
+  actualizada estará disponible en la página oficial de privacidad.</p>
+
+  <h2>Contacto</h2>
+  <p>Para cualquier duda sobre esta política de privacidad o sobre el
+  tratamiento de datos personales, el usuario puede contactar en:
+  <a href="mailto:hola@difmeil.com">hola@difmeil.com</a></p>
+</main>
+</body>
+</html>
