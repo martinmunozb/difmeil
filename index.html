@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Difmeil — todas tus cuentas de Gmail en un solo sitio</title>
+<meta name="description" content="Difmeil es una extensión de Chrome que une todas tus cuentas de Gmail en una sola bandeja, con notificaciones y apariencia bajo tu control." />
+<meta name="robots" content="index,follow" />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #202124;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --link: #1a73e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1b1b;
+      --fg: #e8eaed;
+      --muted: #9aa0a6;
+      --border: #3c4043;
+      --link: #8ab4f8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 "Google Sans", Roboto, Arial, sans-serif;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--link);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    flex: none;
+  }
+  h1 {
+    font-size: 1.7rem;
+    margin: 0;
+  }
+  .tagline {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 4px 0 32px;
+  }
+  p { color: var(--fg); }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 40px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  ul { padding-left: 22px; }
+  a { color: var(--link); }
+  .cta {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: var(--link);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .cta:hover { opacity: 0.9; }
+  footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <div class="logo-mark">D</div>
+    <h1>Difmeil</h1>
+  </div>
+  <p class="tagline">Todas tus cuentas de Gmail en un solo sitio.</p>
+
+  <p>Difmeil es una extensión de navegador que unifica tus cuentas de Gmail
+  en una sola bandeja de entrada, con notificaciones y apariencia
+  completamente bajo tu control. Sin saltar entre pestañas ni perfiles de
+  Chrome.</p>
+
+  <h2>Qué hace</h2>
+  <ul>
+    <li>Bandeja unificada de todas tus cuentas de Gmail, con vista individual por cuenta.</li>
+    <li>Notificaciones y contador de no leídos por cuenta.</li>
+    <li>Lectura, búsqueda y acciones rápidas (marcar como leído, archivar, eliminar, enviar) sin salir de la extensión.</li>
+    <li>Personalización de colores, iconos y modo claro/oscuro.</li>
+  </ul>
+
+  <h2>Privacidad</h2>
+  <p>Difmeil no tiene servidores propios que almacenen tu correo. Tus cuentas,
+  tokens y preferencias se guardan solo en tu navegador.</p>
+  <a class="cta" href="/privacidad/">Ver política de privacidad</a>
+
+  <h2>Contacto</h2>
+  <p>¿Un fallo o una sugerencia? Escríbenos a
+  <a href="mailto:hola@difmeil.com">hola@difmeil.com</a>.</p>
+
+  <footer>
+    <p>&copy; 2026 Difmeil · <a href="/privacidad/">Privacidad</a></p>
+  </footer>
+</main>
+</body>
+</html>
