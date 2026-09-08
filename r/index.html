@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Te han invitado a Difmeil</title>
+<meta name="description" content="Alguien te ha invitado a Difmeil: todas tus cuentas de Gmail en una sola bandeja. Instala la extensión y canjea el código." />
+<meta name="robots" content="noindex,follow" />
+<link rel="icon" type="image/png" href="/assets/logo-mark.png" />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f8fafd;
+    --surface: #ffffff;
+    --text: #1f1f1f;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --gold: #c6a15b;
+    --gold-soft: #f6efe1;
+    --on-gold: #1f1f1f;
+    --r-md: 16px;
+    --r-full: 999px;
+    --shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 24px -8px rgb(20 20 20 / 0.16);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f0f;
+      --surface: #181818;
+      --text: #f1f1f1;
+      --muted: #aaaaaa;
+      --border: #2b2b2b;
+      --gold: #d6b46b;
+      --gold-soft: #2a2416;
+      --on-gold: #121212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  .card {
+    max-width: 480px;
+    padding: 40px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  img { width: 56px; height: 56px; }
+  h1 { margin: 16px 0 8px; font-size: 1.5rem; letter-spacing: -0.02em; }
+  p { margin: 0 0 16px; color: var(--muted); }
+  .code {
+    display: inline-block;
+    margin: 8px 0 24px;
+    padding: 12px 24px;
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold);
+    border-radius: var(--r-full);
+    font: 600 1.25rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--gold);
+    color: var(--on-gold);
+    border-radius: var(--r-full);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  ol { margin: 24px 0 0; padding-left: 20px; text-align: left; color: var(--muted); font-size: 0.9375rem; }
+  li { margin-bottom: 8px; }
+  .fine { margin-top: 24px; font-size: 0.8125rem; }
+  a.plain { color: inherit; }
+</style>
+</head>
+<body>
+<main class="card">
+  <img src="/assets/logo-mark.png" alt="" />
+  <h1>Te han invitado a Difmeil</h1>
+  <p>Todas tus cuentas de Gmail en una sola bandeja, con notificaciones que sí ves.</p>
+
+  <!-- El código se enseña para copiarlo a mano: una página web y una extensión
+       no comparten almacenamiento, y la alternativa sería rastrear al visitante.
+       Ver §3.5 de MONETIZATION_IMPLEMENTATION_PLAN.md en el repo de la extensión. -->
+  <div class="code" id="code">—</div>
+
+  <div>
+    <a class="btn" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Instalar Difmeil</a>
+  </div>
+
+  <ol>
+    <li>Instala la extensión y conecta tu primera cuenta de Gmail.</li>
+    <li>Abre <strong>Ajustes → Cuenta</strong>.</li>
+    <li>Pega el código de arriba en «¿Te ha invitado alguien?».</li>
+  </ol>
+
+  <p class="fine">
+    Difmeil es gratis hasta 5 cuentas. Pro cuesta 2 €/mes o 20 € en pago único,
+    con 7 días de prueba. <a class="plain" href="/">Más información</a>.
+  </p>
+</main>
+
+<script>
+  // GitHub Pages no reescribe rutas, así que el código viaja en la query.
+  var code = new URLSearchParams(location.search).get('c');
+  var box = document.getElementById('code');
+  if (code) {
+    box.textContent = code.toUpperCase().slice(0, 32);
+  } else {
+    box.remove();
+  }
+</script>
+</body>
+</html>
