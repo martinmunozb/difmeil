@@ -3,131 +3,2492 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Difmeil — todas tus cuentas de Gmail en un solo sitio</title>
-<meta name="description" content="Difmeil es una extensión de Chrome que une todas tus cuentas de Gmail en una sola bandeja, con notificaciones y apariencia bajo tu control." />
+<title>Difmeil — todas tus cuentas de Gmail en una sola bandeja</title>
+<meta name="description" content="¿Se te escapan correos entre varias cuentas de Gmail? Difmeil las une todas en una sola bandeja, con notificaciones que sí ves. Extensión de Chrome, gratis hasta 5 cuentas." />
 <meta name="robots" content="index,follow" />
+<link rel="icon" type="image/png" href="/assets/logo-mark.png" />
+<meta property="og:title" content="Difmeil — todas tus cuentas de Gmail en una sola bandeja" />
+<meta property="og:description" content="Extensión de Chrome que unifica tus cuentas de Gmail, con notificaciones y apariencia bajo tu control. Sin servidores propios: tus datos se quedan en tu navegador." />
+<meta property="og:type" content="website" />
 <style>
   :root {
     color-scheme: light dark;
-    --bg: #ffffff;
-    --fg: #202124;
+    --bg: #f8fafd;
+    --surface: #ffffff;
+    --surface-2: #f1f4f9;
+    --text: #1f1f1f;
     --muted: #5f6368;
     --border: #e8eaed;
-    --link: #1a73e8;
+
+    --gold: #c6a15b;
+    --gold-strong: #8a6728;
+    --gold-soft: #f6efe1;
+    --on-gold: #1f1f1f;
+
+    --ink: #121212;
+    --ink-surface: #1c1c1c;
+    --ink-border: #333333;
+    --ink-text: #f4f1ea;
+    --ink-muted: #b7b2a6;
+
+    --r-sm: 12px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-full: 999px;
+    --shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 24px -8px rgb(20 20 20 / 0.16);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1b1b1b;
-      --fg: #e8eaed;
-      --muted: #9aa0a6;
-      --border: #3c4043;
-      --link: #8ab4f8;
+      --bg: #0f0f0f;
+      --surface: #181818;
+      --surface-2: #202020;
+      --text: #f1f1f1;
+      --muted: #aaaaaa;
+      --border: #2b2b2b;
+      --gold: #d6b46b;
+      --gold-strong: #ecd399;
+      --gold-soft: #2a2416;
+      --on-gold: #121212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -8px rgb(0 0 0 / 0.5);
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
-    color: var(--fg);
-    font: 16px/1.6 "Google Sans", Roboto, Arial, sans-serif;
+    color: var(--text);
+    font: 16px/1.6 Inter, Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  main {
-    max-width: 720px;
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap {
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 64px 24px 80px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
-  .logo {
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    background: var(--gold-soft);
+    color: var(--gold-strong);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-strong);
+  }
+  h1, h2, h3 { margin: 0; letter-spacing: -0.02em; }
+  p { margin: 0; }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 52px;
+    padding: 0 26px;
+    border-radius: var(--r-full);
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: var(--on-gold); }
+  .btn-gold:hover { opacity: 0.92; }
+  .btn-ghost-light { background: rgb(244 241 234 / 0.08); color: var(--ink-text); border: 1px solid rgb(244 241 234 / 0.28); }
+  .btn-ghost-light:hover { background: rgb(244 241 234 / 0.14); }
+  .btn-outline { border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { background: var(--surface-2); }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 72px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+  .brand img { width: 30px; height: 30px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .nav-cta .btn { height: 42px; padding: 0 20px; font-size: 0.9rem; }
+
+  /* ---------- Hero (oscuro) ---------- */
+  .hero {
+    background: radial-gradient(120% 140% at 50% -10%, #211c11 0%, var(--ink) 55%), var(--ink);
+    color: var(--ink-text);
+    padding: 96px 0 120px;
+    overflow: clip;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.3rem, 4vw, 3.4rem);
+    line-height: 1.08;
+    margin: 20px 0 20px;
+  }
+  .hero h1 span { color: var(--gold-strong); }
+  .hero p.lead {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 46ch;
+    margin-bottom: 32px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-note {
+    margin-top: 18px;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  /* ---------- Mock: bandeja unificada ---------- */
+  .mock {
+    background: var(--ink-surface);
+    border: 1px solid var(--ink-border);
+    border-radius: var(--r-lg);
+    box-shadow: 0 24px 60px -20px rgb(0 0 0 / 0.6);
+    overflow: hidden;
+  }
+  .mock-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--ink-border);
+  }
+  .mock-dot { width: 9px; height: 9px; border-radius: 50%; background: #4a463c; }
+  .mock-title { margin-left: 6px; font-size: 0.8rem; color: var(--ink-muted); font-weight: 600; }
+  .mock-accounts {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink-border);
+  }
+  .mock-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px 6px 6px;
+    border-radius: var(--r-full);
+    background: rgb(244 241 234 / 0.06);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+  .mock-pill.active { background: var(--gold-soft, rgb(214 180 107 / 0.16)); color: var(--gold-strong); }
+  .mock-avatar { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+  .mock-list { padding: 6px 0; }
+  .mock-row {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 8px;
+    padding: 13px 16px;
+    border-bottom: 1px solid rgb(244 241 234 / 0.05);
   }
-  .logo-mark {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--link);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.3rem;
-    flex: none;
+  .mock-row:last-child { border-bottom: none; }
+  .mock-row .mock-avatar { width: 32px; height: 32px; }
+  .mock-row-text { flex: 1; min-width: 0; }
+  .mock-sender { font-size: 0.86rem; font-weight: 600; color: var(--ink-text); }
+  .mock-row.read .mock-sender { color: var(--ink-muted); font-weight: 500; }
+  .mock-subject {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 2px;
   }
-  h1 {
-    font-size: 1.7rem;
-    margin: 0;
+  .mock-time { font-size: 0.72rem; color: var(--ink-muted); flex: none; }
+  .mock-unread-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-strong); flex: none; }
+
+  /* ---------- Secciones claras ---------- */
+  section { padding: 96px 0; }
+  .section-head {
+    max-width: 640px;
+    margin: 0 auto 56px;
+    text-align: center;
   }
-  .tagline {
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin: 14px 0 14px;
+  }
+  .section-head p {
     color: var(--muted);
     font-size: 1.05rem;
-    margin: 4px 0 32px;
+    line-height: 1.6;
   }
-  p { color: var(--fg); }
-  h2 {
-    font-size: 1.15rem;
-    margin-top: 40px;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
+  .center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Grid de dolor ---------- */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .pain-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px;
+    border-radius: var(--r-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .pain-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--muted);
+  }
+  .pain-icon svg { width: 20px; height: 20px; }
+  .pain-card h3 { font-size: 1rem; margin-bottom: 6px; }
+  .pain-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+  /* ---------- Grid de funciones ---------- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .feature-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-sm);
+    background: var(--gold-soft);
+    color: var(--gold-strong);
+    margin-bottom: 18px;
+  }
+  .feature-icon svg { width: 22px; height: 22px; }
+  .feature-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+  .feature-card p { color: var(--muted); font-size: 0.94rem; line-height: 1.55; }
+
+  /* ---------- Filas alternadas ---------- */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .split + .split { margin-top: 96px; }
+  .split.reverse .split-copy { order: 2; }
+  .split.reverse .split-visual { order: 1; }
+  .split-copy .eyebrow { margin-bottom: 18px; }
+  .split-copy h3 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin-bottom: 14px; line-height: 1.2; }
+  .split-copy p { color: var(--muted); font-size: 1rem; line-height: 1.65; margin-bottom: 20px; }
+  .split-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .split-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  .split-list svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: var(--gold-strong); }
+
+  .visual-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow);
+    padding: 22px;
+  }
+
+  /* Mock claro (notificaciones / personalización) reutiliza mismas clases con tema claro */
+  .visual-card .mock-light-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 4px;
     border-bottom: 1px solid var(--border);
   }
-  ul { padding-left: 22px; }
-  a { color: var(--link); }
-  .cta {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 10px 18px;
+  .visual-card .mock-light-row:last-child { border-bottom: none; }
+  .mock-light-label { font-size: 0.92rem; font-weight: 600; }
+  .mock-light-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .toggle {
+    width: 40px;
+    height: 24px;
+    border-radius: var(--r-full);
+    background: var(--border);
+    position: relative;
+    flex: none;
+  }
+  .toggle.on { background: var(--gold); }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: left 0.15s ease;
+  }
+  .toggle.on::after { left: 19px; }
+  .swatches { display: flex; gap: 8px; }
+  .swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border); }
+
+  .privacy-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .privacy-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: var(--r-sm);
+    background: var(--surface-2);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .privacy-row svg { width: 20px; height: 20px; flex: none; color: var(--gold-strong); }
+  .privacy-row.blocked { opacity: 0.55; text-decoration: line-through; }
+
+  /* ---------- Cómo funciona ---------- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    padding: 28px 24px 24px;
+    border-radius: var(--r-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--on-gold);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+  .step h3 { font-size: 1.02rem; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+  /* ---------- Precios ---------- */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .price-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+  }
+  .price-card.featured { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), var(--shadow); }
+  .price-badge {
+    position: absolute;
+    top: -13px;
+    right: 28px;
+    padding: 4px 12px;
+    border-radius: var(--r-full);
+    background: var(--gold);
+    color: var(--on-gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .price-plan { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .price-amount { font-size: 2.3rem; font-weight: 700; letter-spacing: -0.02em; }
+  .price-period { color: var(--muted); font-size: 0.88rem; margin-top: 2px; margin-bottom: 22px; }
+  .price-list { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .price-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.9rem; color: var(--text); }
+  .price-list svg { width: 16px; height: 16px; flex: none; margin-top: 3px; color: var(--gold-strong); }
+  .price-card .btn { width: 100%; }
+  .pricing-note { text-align: center; color: var(--muted); font-size: 0.85rem; max-width: 46ch; margin: 28px auto 0; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 760px; margin: 0 auto; }
+  .faq-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { padding-top: 0; }
+  .faq-item h3 { font-size: 1rem; margin-bottom: 8px; }
+  .faq-item p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+  /* ---------- CTA de cierre (oscuro) ---------- */
+  .cta-band {
+    background: var(--ink);
+    color: var(--ink-text);
+    border-radius: var(--r-lg);
+    padding: 64px 48px;
+    text-align: center;
+  }
+  .cta-band h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 14px; }
+  .cta-band p { color: var(--ink-muted); font-size: 1rem; max-width: 46ch; margin: 0 auto 28px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--ink-muted);
+    padding: 56px 0 32px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--ink-border);
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--ink-text); font-size: 1.05rem; }
+  .footer-brand img { width: 26px; height: 26px; }
+  .footer-tagline { margin-top: 10px; font-size: 0.88rem; max-width: 32ch; line-height: 1.5; }
+  .footer-links { display: flex; gap: 56px; flex-wrap: wrap; }
+  .footer-col h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-text); margin-bottom: 14px; }
+  .footer-col a { display: block; text-decoration: none; font-size: 0.9rem; margin-bottom: 10px; color: var(--ink-muted); }
+  .footer-col a:hover { color: var(--ink-text); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 72px; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .split, .split.reverse { grid-template-columns: 1fr; }
+    .split.reverse .split-copy, .split.reverse .split-visual { order: initial; }
+    .split + .split { margin-top: 64px; }
+    .steps { grid-template-columns: 1fr; }
+    .cta-band { padding: 48px 24px; }
+    section { padding: 64px 0; }
+  }
+  @media (max-width: 560px) {
+    .features { grid-template-columns: 1fr; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; }
+  }
+  /*
+    Editorial UI pass.
+    Text content is intentionally left untouched; these rules reshape only the visual system.
+  */
+  :root {
+    color-scheme: dark;
+    --bg: #11110f;
+    --surface: #1d1d19;
+    --surface-2: #171714;
+    --text: #f4f1e8;
+    --muted: #aaa79f;
+    --border: rgb(255 255 255 / 0.12);
+    --gold: #e6be5c;
+    --gold-strong: #f0d58b;
+    --gold-soft: rgb(230 190 92 / 0.11);
+    --on-gold: #14130f;
+    --ink: #11110f;
+    --ink-surface: #1d1d19;
+    --ink-border: rgb(255 255 255 / 0.12);
+    --ink-text: #f4f1e8;
+    --ink-muted: #aaa79f;
+    --r-sm: 8px;
+    --r-md: 10px;
+    --r-lg: 14px;
+    --r-full: 8px;
+    --shadow: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11110f;
+      --surface: #1d1d19;
+      --surface-2: #171714;
+      --text: #f4f1e8;
+      --muted: #aaa79f;
+      --border: rgb(255 255 255 / 0.12);
+      --gold: #e6be5c;
+      --gold-strong: #f0d58b;
+      --gold-soft: rgb(230 190 92 / 0.11);
+      --on-gold: #14130f;
+    }
+  }
+
+  html {
+    background: var(--bg);
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background:
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px) center top / min(8.333vw, 112px) 100%,
+      var(--bg);
+    color: var(--text);
+    font-family: Inter, Geist, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    line-height: 1.5;
+    overflow-x: clip;
+  }
+
+  body::selection {
+    background: rgb(230 190 92 / 0.35);
+    color: var(--text);
+  }
+
+  .wrap {
+    width: min(100%, 1360px);
+    max-width: none;
+    padding-inline: clamp(20px, 4.5vw, 64px);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 560;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  .eyebrow {
+    gap: 10px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 520;
+    letter-spacing: 0.12em;
+    line-height: 1.15;
+    text-transform: uppercase;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .eyebrow-dot {
+    width: 28px;
+    height: 1px;
+    border-radius: 0;
+    background: var(--gold);
+  }
+
+  .btn {
+    min-height: 46px;
+    height: auto;
     border-radius: 8px;
-    background: var(--link);
-    color: #fff;
-    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 0.94rem;
+    font-weight: 560;
+    line-height: 1;
+    transition:
+      transform 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
+    text-box: trim-both cap alphabetic;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--on-gold);
+  }
+
+  .btn-gold:hover {
+    background: var(--gold-strong);
+    opacity: 1;
+  }
+
+  .btn-ghost-light,
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .btn-ghost-light:hover,
+  .btn-outline:hover {
+    background: rgb(255 255 255 / 0.06);
+    border-color: rgb(255 255 255 / 0.28);
+  }
+
+  header.nav {
+    position: sticky;
+    background: rgb(17 17 15 / 0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-inner {
+    height: 78px;
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 28px;
+  }
+
+  .brand {
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 560;
+    letter-spacing: 0;
+  }
+
+  .brand img {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: clamp(18px, 2.6vw, 42px);
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 450;
+  }
+
+  .nav-links a {
+    text-box: trim-both cap alphabetic;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-strong);
+  }
+
+  .nav-cta {
+    justify-content: flex-end;
+  }
+
+  .nav-cta .btn {
+    min-height: 40px;
+    padding: 12px 16px;
+    font-size: 0.84rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-block: clamp(64px, 7vw, 104px) clamp(48px, 6vw, 82px);
+    background:
+      linear-gradient(180deg, rgb(230 190 92 / 0.075), transparent 28rem),
+      var(--bg);
+    color: var(--text);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+    gap: clamp(20px, 2.2vw, 32px);
+    min-width: 0;
+  }
+
+  .hero-grid > div:first-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: start;
+    row-gap: clamp(22px, 2.8vw, 38px);
+    min-width: 0;
+  }
+
+  .hero .eyebrow {
+    grid-column: 1 / 6;
+    color: var(--gold-strong);
+  }
+
+  .hero h1 {
+    grid-column: 1 / 8;
+    margin: 0;
+    max-width: 12ch;
+    color: var(--text);
+    font-size: clamp(4rem, 6vw, 5.9rem);
+    line-height: 0.94;
+    letter-spacing: 0;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .hero h1 span {
+    color: var(--text);
+  }
+
+  .hero p.lead {
+    grid-column: 8 / 13;
+    margin: 0;
+    max-width: min(34rem, 100%);
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+    line-height: 1.52;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .hero-actions {
+    grid-column: 1 / 6;
+    align-self: start;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .hero-note {
+    grid-column: 1 / 5;
+    margin: -28px 0 0;
+    color: rgb(244 241 232 / 0.55);
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .hero-grid > .mock {
+    grid-column: 1 / -1;
+    margin-top: clamp(24px, 3.5vw, 52px);
+    min-width: 0;
+  }
+
+  .mock {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #181814;
+    box-shadow: none;
+    overflow: clip;
+  }
+
+  .hero .mock {
+    min-height: clamp(420px, 54vw, 620px);
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .mock-bar,
+  .mock-accounts {
+    border-color: var(--border);
+    padding-inline: clamp(16px, 2vw, 28px);
+  }
+
+  .mock-bar {
+    min-height: 56px;
+  }
+
+  .mock-dot {
+    width: 7px;
+    height: 7px;
+    background: rgb(244 241 232 / 0.28);
+  }
+
+  .mock-title {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .mock-accounts {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-block: 14px;
+  }
+
+  .mock-pill {
+    border-radius: 8px;
+    background: rgb(244 241 232 / 0.045);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    color: var(--muted);
+    font-size: 0.74rem;
     font-weight: 500;
   }
-  .cta:hover { opacity: 0.9; }
-  footer {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 0.9rem;
+
+  .mock-pill.active {
+    background: rgb(230 190 92 / 0.12);
+    border-color: rgb(230 190 92 / 0.36);
+    color: var(--gold-strong);
   }
-  footer a { color: var(--muted); }
+
+  .mock-list {
+    display: grid;
+    align-content: stretch;
+    padding: 0;
+  }
+
+  .mock-row {
+    min-height: 82px;
+    gap: 16px;
+    padding: clamp(16px, 2vw, 24px) clamp(16px, 2vw, 28px);
+    border-bottom: 1px solid rgb(255 255 255 / 0.075);
+  }
+
+  .mock-row .mock-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+
+  .mock-avatar {
+    border-radius: 6px;
+  }
+
+  .mock-sender {
+    color: var(--text);
+    font-size: 0.94rem;
+    font-weight: 560;
+  }
+
+  .mock-row.read .mock-sender,
+  .mock-subject,
+  .mock-time {
+    color: var(--muted);
+  }
+
+  .mock-subject {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .mock-unread-dot {
+    background: var(--gold);
+  }
+
+  section {
+    padding-block: clamp(96px, 12vw, 176px);
+    background: transparent !important;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-head {
+    max-width: none;
+    margin: 0 0 clamp(48px, 7vw, 88px);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+    text-align: left;
+  }
+
+  .section-head .eyebrow {
+    grid-column: 1 / 4;
+  }
+
+  .section-head h2 {
+    grid-column: 1 / 9;
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.75rem, 5vw, 4.75rem);
+    line-height: 1;
+  }
+
+  .section-head p {
+    grid-column: 8 / 12;
+    align-self: end;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.2vw, 1.12rem);
+    line-height: 1.58;
+  }
+
+  .features,
+  .pain-grid,
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(20px, 2.2vw, 32px);
+  }
+
+  .feature-card,
+  .pain-card,
+  .price-card {
+    display: grid;
+    grid-template-columns: minmax(34px, auto) 1fr;
+    column-gap: 18px;
+    align-content: start;
+    min-height: 210px;
+    padding: 24px 0 34px;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .feature-card:nth-child(1),
+  .pain-card:nth-child(1),
+  .price-card:nth-child(1) { grid-column: 1 / 7; }
+  .feature-card:nth-child(2),
+  .pain-card:nth-child(2),
+  .price-card:nth-child(2) { grid-column: 8 / 13; }
+  .feature-card:nth-child(3),
+  .pain-card:nth-child(3),
+  .price-card:nth-child(3) { grid-column: 3 / 8; margin-top: 66px; }
+  .feature-card:nth-child(4) { grid-column: 9 / 13; margin-top: 66px; }
+  .feature-card:nth-child(5) { grid-column: 1 / 5; margin-top: 66px; }
+  .feature-card:nth-child(6) { grid-column: 6 / 13; margin-top: 66px; }
+
+  .feature-icon {
+    width: 28px;
+    height: 28px;
+    margin: 2px 0 0;
+    background: transparent;
+    color: var(--gold);
+    border-radius: 0;
+    place-items: start center;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.45;
+  }
+
+  .pain-icon {
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+    border-radius: 0;
+    background: transparent;
+    color: var(--gold);
+  }
+
+  .pain-icon svg {
+    width: 23px;
+    height: 23px;
+    stroke-width: 1.45;
+  }
+
+  .feature-card h3,
+  .pain-card h3,
+  .price-card h3 {
+    margin: 0 0 14px;
+    color: var(--text);
+    font-size: clamp(1.35rem, 1.65vw, 1.75rem);
+    line-height: 1.08;
+  }
+
+  .feature-card p,
+  .pain-card p,
+  .price-card p {
+    grid-column: 2;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+
+  .price-card.featured {
+    border-color: var(--gold);
+    box-shadow: none;
+  }
+
+  .price-badge {
+    position: static;
+    justify-self: start;
+    margin-bottom: 28px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--gold-strong);
+    font-size: 0.72rem;
+    font-weight: 560;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .price-plan {
+    grid-column: 1 / -1;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 560;
+    letter-spacing: 0.04em;
+  }
+
+  .price-amount {
+    grid-column: 1 / -1;
+    color: var(--text);
+    font-size: clamp(2.4rem, 4vw, 4.4rem);
+    font-weight: 560;
+    letter-spacing: 0;
+    line-height: 0.95;
+  }
+
+  .price-period,
+  .pricing-note {
+    color: var(--muted);
+  }
+
+  .price-list {
+    grid-column: 1 / -1;
+    gap: 0;
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .price-list li {
+    padding-block: 13px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .price-list svg {
+    color: var(--gold);
+    stroke-width: 1.7;
+  }
+
+  .price-card .btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+    width: auto;
+    margin-top: 22px;
+  }
+
+  .pricing-note {
+    max-width: 46rem;
+    margin: 42px 0 0;
+    text-align: left;
+  }
+
+  .faq {
+    max-width: none;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(20px, 2.2vw, 32px);
+  }
+
+  .faq-item {
+    grid-column: 4 / 12;
+    padding: 28px 0;
+    border-color: var(--border);
+  }
+
+  .faq-item:nth-child(odd) {
+    grid-column: 2 / 10;
+  }
+
+  .faq-item h3 {
+    color: var(--text);
+    font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+    font-weight: 560;
+    line-height: 1.12;
+  }
+
+  .faq-item p {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+    align-items: center;
+  }
+
+  .split + .split {
+    margin-top: clamp(104px, 13vw, 176px);
+  }
+
+  .split-copy {
+    grid-column: 1 / 6;
+  }
+
+  .split-visual {
+    grid-column: 7 / 13;
+  }
+
+  .split.reverse .split-copy {
+    grid-column: 8 / 13;
+    order: initial;
+  }
+
+  .split.reverse .split-visual {
+    grid-column: 1 / 7;
+    order: initial;
+  }
+
+  .split-copy .eyebrow {
+    margin-bottom: clamp(22px, 3vw, 34px);
+  }
+
+  .split-copy h3 {
+    margin: 0 0 22px;
+    color: var(--text);
+    font-size: clamp(2.15rem, 3.6vw, 4rem);
+    line-height: 1;
+  }
+
+  .split-copy p {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.18vw, 1.12rem);
+    line-height: 1.62;
+  }
+
+  .split-list {
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .split-list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 14px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.48;
+  }
+
+  .split-list svg {
+    width: 17px;
+    height: 17px;
+    margin-top: 3px;
+    color: var(--gold);
+    stroke-width: 1.7;
+  }
+
+  .visual-card {
+    padding: clamp(16px, 2vw, 24px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: none;
+  }
+
+  .visual-card .mock {
+    background: #151512;
+    border-color: var(--border);
+  }
+
+  .visual-card .mock-light-row {
+    padding: 20px 4px;
+    border-color: var(--border);
+  }
+
+  .mock-light-label {
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 560;
+  }
+
+  .mock-light-sub {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .toggle {
+    width: 42px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.13);
+  }
+
+  .toggle.on {
+    background: var(--gold);
+  }
+
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    box-shadow: none;
+  }
+
+  .privacy-visual {
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .privacy-row {
+    border-radius: 0;
+    background: transparent;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .privacy-row svg {
+    color: var(--gold);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+  }
+
+  .step {
+    min-height: 260px;
+    padding: 24px 0 0;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+  }
+
+  .step:nth-child(1) { grid-column: 1 / 5; }
+  .step:nth-child(2) { grid-column: 5 / 9; margin-top: 72px; }
+  .step:nth-child(3) { grid-column: 9 / 13; margin-top: 144px; }
+
+  .step-num {
+    width: auto;
+    height: auto;
+    margin-bottom: 42px;
+    border-radius: 0;
+    background: transparent;
+    color: var(--gold);
+    font-size: 0.82rem;
+    font-weight: 560;
+    letter-spacing: 0.12em;
+  }
+
+  .step-num::before {
+    content: "0";
+  }
+
+  .step h3 {
+    margin: 0 0 14px;
+    color: var(--text);
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    line-height: 1.08;
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+
+  .cta-band {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+    align-items: end;
+    padding: clamp(44px, 7vw, 88px) 0;
+    background: transparent;
+    border-block: 1px solid var(--border);
+    border-radius: 0;
+    text-align: left;
+  }
+
+  .cta-band .eyebrow {
+    grid-column: 1 / 4;
+    background: transparent !important;
+    color: var(--gold-strong) !important;
+  }
+
+  .cta-band h2 {
+    grid-column: 1 / 8;
+    margin: 0 !important;
+    font-size: clamp(2.5rem, 4.8vw, 4.5rem);
+    line-height: 1;
+  }
+
+  .cta-band p {
+    grid-column: 8 / 12;
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.58;
+  }
+
+  .cta-band .btn {
+    grid-column: 8 / 11;
+    justify-self: start;
+  }
+
+  footer {
+    background: var(--bg);
+    color: var(--muted);
+    padding-block: 64px 34px;
+    border-top: 0;
+  }
+
+  .footer-top {
+    border-color: var(--border);
+  }
+
+  .footer-brand {
+    color: var(--text);
+    font-weight: 560;
+  }
+
+  .footer-brand img {
+    border-radius: 8px;
+  }
+
+  .footer-col h4 {
+    color: var(--text);
+    font-weight: 560;
+    letter-spacing: 0.12em;
+  }
+
+  .footer-col a:hover {
+    color: var(--gold-strong);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .eyebrow,
+    .hero h1,
+    .hero p.lead,
+    .hero-actions,
+    .hero-note,
+    .hero .mock {
+      animation: editorial-in 560ms ease both;
+    }
+
+    .hero h1 { animation-delay: 80ms; }
+    .hero p.lead,
+    .hero-actions { animation-delay: 150ms; }
+    .hero-note { animation-delay: 210ms; }
+    .hero .mock { animation-delay: 260ms; }
+
+    .mock-row,
+    .feature-card,
+    .pain-card,
+    .price-card,
+    .split,
+    .step {
+      transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .feature-card:hover,
+    .pain-card:hover,
+    .price-card:hover,
+    .step:hover {
+      transform: translateY(-3px);
+      border-color: rgb(230 190 92 / 0.32);
+    }
+
+    .mock-row:hover {
+      background: rgb(255 255 255 / 0.025);
+    }
+  }
+
+  @keyframes editorial-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (forced-colors: active) {
+    :root {
+      --bg: Canvas;
+      --surface: Canvas;
+      --surface-2: Canvas;
+      --text: CanvasText;
+      --muted: GrayText;
+      --border: CanvasText;
+      --gold: Highlight;
+      --gold-strong: Highlight;
+      --on-gold: HighlightText;
+    }
+
+    body {
+      background: Canvas;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .nav-inner {
+      grid-template-columns: 1fr auto;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .hero-grid,
+    .hero-grid > div:first-child,
+    .section-head,
+    .features,
+    .pain-grid,
+    .pricing-grid,
+    .split,
+    .steps,
+    .cta-band {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .hero .eyebrow,
+    .hero h1,
+    .hero p.lead,
+    .hero-actions,
+    .hero-note,
+    .hero-grid > .mock,
+    .section-head .eyebrow,
+    .section-head h2,
+    .section-head p,
+    .split-copy,
+    .split-visual,
+    .split.reverse .split-copy,
+    .split.reverse .split-visual,
+    .cta-band .eyebrow,
+    .cta-band h2,
+    .cta-band p,
+    .cta-band .btn {
+      grid-column: 1 / -1;
+    }
+
+    .hero {
+      min-height: auto;
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      font-size: clamp(3.15rem, 11vw, 5.2rem);
+    }
+
+    .hero-note {
+      margin: -10px 0 0;
+    }
+
+    .hero .mock {
+      min-height: 390px;
+    }
+
+    .feature-card,
+    .feature-card:nth-child(1),
+    .feature-card:nth-child(2),
+    .feature-card:nth-child(3),
+    .feature-card:nth-child(4),
+    .feature-card:nth-child(5),
+    .feature-card:nth-child(6),
+    .pain-card,
+    .pain-card:nth-child(1),
+    .pain-card:nth-child(2),
+    .pain-card:nth-child(3),
+    .pain-card:nth-child(4),
+    .price-card,
+    .price-card:nth-child(1),
+    .price-card:nth-child(2),
+    .price-card:nth-child(3) {
+      grid-column: span 3;
+      margin-top: 0;
+    }
+
+    .split.reverse .split-copy,
+    .split.reverse .split-visual {
+      order: initial;
+    }
+
+    .step,
+    .step:nth-child(1),
+    .step:nth-child(2),
+    .step:nth-child(3) {
+      grid-column: span 2;
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    body {
+      background: var(--bg);
+    }
+
+    .wrap {
+      padding-inline: 20px;
+    }
+
+    .nav-inner {
+      height: 68px;
+    }
+
+    .nav-cta .btn {
+      padding-inline: 12px;
+      font-size: 0.8rem;
+    }
+
+    .hero {
+      padding-block: 54px 64px;
+    }
+
+    .hero-grid,
+    .hero-grid > div:first-child,
+    .section-head,
+    .features,
+    .pain-grid,
+    .pricing-grid,
+    .split,
+    .steps,
+    .cta-band {
+      grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+      max-width: 100%;
+      font-size: clamp(2.65rem, 14vw, 3.25rem);
+      line-height: 0.96;
+    }
+
+    .hero-actions {
+      align-items: stretch;
+    }
+
+    .hero-actions .btn,
+    .cta-band .btn {
+      width: 100%;
+    }
+
+    .hero .mock {
+      min-height: auto;
+    }
+
+    .mock-accounts {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) transparent;
+    }
+
+    .mock-row {
+      min-height: 76px;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .mock-time {
+      display: none;
+    }
+
+    section {
+      padding-block: 82px;
+    }
+
+    .section-head {
+      margin-bottom: 44px;
+    }
+
+    .section-head h2,
+    .split-copy h3,
+    .cta-band h2 {
+      font-size: clamp(2.35rem, 12vw, 3.2rem);
+    }
+
+    .feature-card,
+    .feature-card:nth-child(1),
+    .feature-card:nth-child(2),
+    .feature-card:nth-child(3),
+    .feature-card:nth-child(4),
+    .feature-card:nth-child(5),
+    .feature-card:nth-child(6),
+    .pain-card,
+    .pain-card:nth-child(1),
+    .pain-card:nth-child(2),
+    .pain-card:nth-child(3),
+    .pain-card:nth-child(4),
+    .price-card,
+    .price-card:nth-child(1),
+    .price-card:nth-child(2),
+    .price-card:nth-child(3),
+    .step,
+    .step:nth-child(1),
+    .step:nth-child(2),
+    .step:nth-child(3) {
+      grid-column: 1;
+      min-height: auto;
+      margin-top: 0;
+    }
+
+    .feature-card,
+    .pain-card,
+    .price-card {
+      grid-template-columns: 1fr;
+      row-gap: 16px;
+      padding-block: 22px 30px;
+    }
+
+    .feature-card p,
+    .pain-card p,
+    .price-card p {
+      grid-column: 1;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .split + .split {
+      margin-top: 82px;
+    }
+
+    .visual-card {
+      padding: 14px;
+      margin-inline: -4px;
+    }
+
+    .step {
+      min-height: auto;
+      padding-bottom: 22px;
+    }
+
+    .step-num {
+      margin-bottom: 28px;
+    }
+
+    .cta-band {
+      padding-block: 40px;
+    }
+
+    .footer-links {
+      gap: 30px;
+    }
+  }
+  /*
+    Simpler, sharper pass.
+    Keeps the current copy untouched while reducing monotony, curves, and SaaS-card styling.
+  */
+  :root {
+    --bg: #11110f;
+    --surface: #191916;
+    --surface-2: #141411;
+    --surface-3: #1f1f1a;
+    --border: rgb(255 255 255 / 0.14);
+    --border-soft: rgb(255 255 255 / 0.08);
+    --r-sm: 3px;
+    --r-md: 4px;
+    --r-lg: 6px;
+    --r-full: 4px;
+  }
+
+  body {
+    background: var(--bg);
+  }
+
+  .wrap {
+    width: min(100%, 1280px);
+  }
+
+  header.nav {
+    background: #10100e;
+    backdrop-filter: none;
+  }
+
+  .brand img {
+    border-radius: 3px;
+  }
+
+  .btn,
+  .nav-cta .btn,
+  .hero-actions .btn,
+  .cta-band .btn,
+  .price-card .btn {
+    border-radius: 4px;
+    box-shadow: none;
+  }
+
+  .btn:hover,
+  .feature-card:hover,
+  .pain-card:hover,
+  .price-card:hover,
+  .step:hover {
+    transform: none;
+  }
+
+  .hero {
+    background: #11110f;
+    padding-block: clamp(54px, 6.2vw, 88px) clamp(42px, 5vw, 68px);
+  }
+
+  .hero h1 {
+    font-size: clamp(3.8rem, 5.5vw, 5.35rem);
+    line-height: 0.96;
+  }
+
+  .hero p.lead {
+    max-width: 31rem;
+    font-size: clamp(1rem, 1.2vw, 1.12rem);
+  }
+
+  .hero-grid > .mock {
+    margin-top: clamp(24px, 3vw, 42px);
+  }
+
+  section {
+    position: relative;
+    padding-block: clamp(82px, 10vw, 142px);
+    border-top-color: var(--border-soft);
+  }
+
+  section:nth-of-type(2),
+  section:nth-of-type(5),
+  section:nth-of-type(8) {
+    background: var(--surface-2) !important;
+  }
+
+  section:nth-of-type(4),
+  section:nth-of-type(6) {
+    background: #181814 !important;
+  }
+
+  .section-head {
+    margin-bottom: clamp(38px, 5vw, 64px);
+  }
+
+  .section-head h2,
+  .split-copy h3,
+  .cta-band h2 {
+    max-width: 13ch;
+    line-height: 1.04;
+  }
+
+  .eyebrow {
+    color: var(--gold-strong);
+  }
+
+  .eyebrow-dot {
+    width: 20px;
+  }
+
+  .mock,
+  .visual-card,
+  .price-card {
+    border-radius: 6px;
+  }
+
+  .mock {
+    background: #151511;
+  }
+
+  .hero .mock {
+    min-height: clamp(330px, 34vw, 460px);
+  }
+
+  .mock-bar {
+    min-height: 48px;
+  }
+
+  .mock-pill,
+  .mock-avatar,
+  .mock-row .mock-avatar,
+  .swatch {
+    border-radius: 3px;
+  }
+
+  .mock-row {
+    min-height: 68px;
+  }
+
+  .features,
+  .pain-grid {
+    row-gap: clamp(28px, 4vw, 54px);
+  }
+
+  .feature-card,
+  .pain-card {
+    min-height: 0;
+    padding-block: 20px 22px;
+    border-top-color: var(--border);
+  }
+
+  .feature-card:nth-child(3),
+  .feature-card:nth-child(4),
+  .feature-card:nth-child(5),
+  .feature-card:nth-child(6),
+  .pain-card:nth-child(3),
+  .pain-card:nth-child(4) {
+    margin-top: 24px;
+  }
+
+  .feature-icon,
+  .pain-icon {
+    color: var(--gold);
+  }
+
+  .visual-card {
+    padding: clamp(12px, 1.5vw, 18px);
+    background: var(--surface);
+  }
+
+  .split + .split {
+    margin-top: clamp(82px, 10vw, 132px);
+  }
+
+  .split-list li,
+  .price-list li,
+  .privacy-row,
+  .visual-card .mock-light-row,
+  .faq-item {
+    border-color: var(--border-soft);
+  }
+
+  .toggle {
+    border-radius: 12px;
+  }
+
+  .toggle::after {
+    border-radius: 50%;
+  }
+
+  .steps {
+    align-items: start;
+  }
+
+  .step {
+    min-height: 190px;
+    border-top-color: var(--border);
+  }
+
+  .step:nth-child(2),
+  .step:nth-child(3) {
+    margin-top: 36px;
+  }
+
+  .step-num {
+    margin-bottom: 30px;
+  }
+
+  .pricing-grid {
+    max-width: none;
+    margin: 0;
+  }
+
+  .price-card,
+  .price-card:nth-child(1),
+  .price-card:nth-child(2) {
+    display: block;
+    grid-column: span 6;
+    min-height: 0;
+    margin-top: 0;
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .price-card.featured {
+    border-color: rgb(230 190 92 / 0.45);
+  }
+
+  .price-badge {
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+
+  .price-list {
+    margin-top: 24px;
+  }
+
+  .price-card .btn {
+    width: auto;
+  }
+
+  .faq-item,
+  .faq-item:nth-child(odd) {
+    grid-column: 3 / 11;
+  }
+
+  .cta-band {
+    padding-block: clamp(34px, 5vw, 64px);
+    border-color: var(--border);
+  }
+
+  footer {
+    background: #10100e;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .feature-card:hover,
+    .pain-card:hover,
+    .price-card:hover,
+    .step:hover {
+      border-color: rgb(230 190 92 / 0.34);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .hero h1 {
+      font-size: clamp(3.05rem, 10vw, 4.8rem);
+    }
+
+    .hero .mock {
+      min-height: 330px;
+    }
+
+    .feature-card:nth-child(3),
+    .feature-card:nth-child(4),
+    .feature-card:nth-child(5),
+    .feature-card:nth-child(6),
+    .pain-card:nth-child(3),
+    .pain-card:nth-child(4) {
+      margin-top: 0;
+    }
+
+    .price-card,
+    .price-card:nth-child(1),
+    .price-card:nth-child(2) {
+      grid-column: span 3;
+    }
+
+    .faq-item,
+    .faq-item:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: clamp(2.5rem, 13vw, 3.05rem);
+    }
+
+    section {
+      padding-block: 68px;
+    }
+
+    .hero .mock {
+      min-height: auto;
+    }
+
+    .feature-card,
+    .pain-card,
+    .price-card,
+    .price-card:nth-child(1),
+    .price-card:nth-child(2) {
+      grid-column: 1;
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
-<main>
-  <div class="logo">
-    <div class="logo-mark">D</div>
-    <h1>Difmeil</h1>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/">
+      <img src="/assets/logo-mark.png" alt="" width="30" height="30" />
+      Difmeil
+    </a>
+    <nav class="nav-links">
+      <a href="#funciones">Funciones</a>
+      <a href="#precios">Precios</a>
+      <a href="#faq">Dudas</a>
+      <a href="#privacidad">Privacidad</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-gold" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Añadir a Chrome</a>
+    </div>
   </div>
-  <p class="tagline">Todas tus cuentas de Gmail en un solo sitio.</p>
+</header>
 
-  <p>Difmeil es una extensión de navegador que unifica tus cuentas de Gmail
-  en una sola bandeja de entrada, con notificaciones y apariencia
-  completamente bajo tu control. Sin saltar entre pestañas ni perfiles de
-  Chrome.</p>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Extensión de Chrome · Gratis</span>
+      <h1>Cinco pestañas de Gmail abiertas.<br /><span>Y aún se te escapa un correo.</span></h1>
+      <p class="lead">No es que no prestes atención — es que la tienes repartida en demasiados sitios. Difmeil junta todas tus cuentas de Gmail en una sola bandeja, con avisos que de verdad ves y sin cambiar de perfil de Chrome cien veces al día.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Añadir a Chrome — gratis</a>
+        <a class="btn btn-ghost-light" href="#problema">¿Te suena esto?</a>
+      </div>
+      <p class="hero-note">Gratis hasta 5 cuentas. Sin tarjeta. Un minuto y estás dentro.</p>
+    </div>
 
-  <h2>Qué hace</h2>
-  <ul>
-    <li>Bandeja unificada de todas tus cuentas de Gmail, con vista individual por cuenta.</li>
-    <li>Notificaciones y contador de no leídos por cuenta.</li>
-    <li>Lectura, búsqueda y acciones rápidas (marcar como leído, archivar, eliminar, enviar) sin salir de la extensión.</li>
-    <li>Personalización de colores, iconos y modo claro/oscuro.</li>
-  </ul>
+    <div class="mock" aria-hidden="true">
+      <div class="mock-bar">
+        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+        <span class="mock-title">Bandeja unificada · Difmeil</span>
+      </div>
+      <div class="mock-accounts">
+        <span class="mock-pill active"><span class="mock-avatar" style="background:#c6a15b"></span>Todas</span>
+        <span class="mock-pill"><span class="mock-avatar" style="background:#6b9bd1"></span>Personal</span>
+        <span class="mock-pill"><span class="mock-avatar" style="background:#7fbf7f"></span>Trabajo</span>
+        <span class="mock-pill"><span class="mock-avatar" style="background:#c98bd6"></span>Freelance</span>
+      </div>
+      <div class="mock-list">
+        <div class="mock-row">
+          <span class="mock-avatar" style="background:#6b9bd1"></span>
+          <div class="mock-row-text">
+            <div class="mock-sender">Laura Gómez</div>
+            <div class="mock-subject">Propuesta revisada — necesitamos tu ok antes del jueves</div>
+          </div>
+          <span class="mock-unread-dot"></span>
+          <span class="mock-time">09:14</span>
+        </div>
+        <div class="mock-row">
+          <span class="mock-avatar" style="background:#7fbf7f"></span>
+          <div class="mock-row-text">
+            <div class="mock-sender">Equipo de Producto</div>
+            <div class="mock-subject">Resumen semanal · 3 tareas pendientes de revisión</div>
+          </div>
+          <span class="mock-unread-dot"></span>
+          <span class="mock-time">08:47</span>
+        </div>
+        <div class="mock-row read">
+          <span class="mock-avatar" style="background:#c98bd6"></span>
+          <div class="mock-row-text">
+            <div class="mock-sender">Cliente — Estudio Norte</div>
+            <div class="mock-subject">Gracias, todo perfecto por nuestra parte</div>
+          </div>
+          <span class="mock-time">ayer</span>
+        </div>
+        <div class="mock-row read">
+          <span class="mock-avatar" style="background:#6b9bd1"></span>
+          <div class="mock-row-text">
+            <div class="mock-sender">Banco</div>
+            <div class="mock-subject">Tu resumen de movimientos ya está disponible</div>
+          </div>
+          <span class="mock-time">ayer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <h2>Privacidad</h2>
-  <p>Difmeil no tiene servidores propios que almacenen tu correo. Tus cuentas,
-  tokens y preferencias se guardan solo en tu navegador.</p>
-  <a class="cta" href="/privacidad/">Ver política de privacidad</a>
+<section id="problema">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">El problema</span>
+      <h2>Si vives entre varias cuentas de Gmail, esto te suena</h2>
+      <p>Nada de esto es culpa tuya. Es que Gmail no está pensado para gestionar varias cuentas a la vez — y tú llevas cinco.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14.6-4.6M20 12a8 8 0 0 1-14.6 4.6"/><path d="M18.6 3v4.4H14.2M5.4 21v-4.4h4.4"/></svg>
+        </div>
+        <div>
+          <h3>Cambias de perfil de Chrome sin parar</h3>
+          <p>Cada cuenta vive en su propia ventana, así que saltas de una a otra decenas de veces al día.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 18a6.3 6.3 0 0 0 5.6 0"/><path d="M6 8a6 6 0 0 1 8.4-5.5M18 8c0 4.6 1.5 6.4 2 7H4c.5-.6 2-2.4 2-7"/><path d="m3 3 18 18"/></svg>
+        </div>
+        <div>
+          <h3>No sabes cuál cuenta te está avisando</h3>
+          <p>Todas las notificaciones se ven igual, así que acabas ignorándolas o mirando la pestaña equivocada.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        </div>
+        <div>
+          <h3>Respondes tarde a lo importante</h3>
+          <p>Un correo urgente se queda esperando en la cuenta que menos revisas ese día.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </div>
+        <div>
+          <h3>Pierdes minutos buscando en qué cuenta estaba</h3>
+          <p>Cliente, banco, trabajo, personal — cuatro sitios distintos donde podría estar ese correo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <h2>Contacto</h2>
-  <p>¿Un fallo o una sugerencia? Escríbenos a
-  <a href="mailto:hola@difmeil.com">hola@difmeil.com</a>.</p>
+<section id="funciones">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">La solución</span>
+      <h2>Todo lo que haces en Gmail, sin salir de Difmeil</h2>
+      <p>Una sola bandeja, un solo lugar donde mirar. Así de simple.</p>
+    </div>
 
-  <footer>
-    <p>&copy; 2026 Difmeil · <a href="/privacidad/">Privacidad</a></p>
-  </footer>
-</main>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 14l9-5.5"/><rect x="3" y="5" width="18" height="14" rx="3"/></svg>
+        </div>
+        <h3>Bandeja unificada</h3>
+        <p>Los correos de todas tus cuentas, mezclados por fecha en un único lugar, con vista individual por cuenta cuando la necesitas.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3.2"/><path d="M2.5 19.5c0-3.3 2.9-6 6.5-6s6.5 2.7 6.5 6"/><circle cx="17.5" cy="8" r="2.4"/><path d="M15.3 13.6c2.9.4 5.2 2.7 5.2 5.9"/></svg>
+        </div>
+        <h3>Multicuenta sin límites técnicos</h3>
+        <p>Conecta las cuentas de Gmail que necesites y sigue usándolas normalmente, sin cambiar de perfil de Chrome.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 6.5-2.5 8-2.5 8h17S18 14.5 18 8Z"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
+        </div>
+        <h3>Notificaciones a tu medida</h3>
+        <p>Avisos nativos por cuenta, reglas por remitente o asunto, y horarios de no molestar que cruzan la medianoche si hace falta.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17.25V20h2.75L17.8 8.94l-2.75-2.75L4 17.25Z"/><path d="M16.1 5.1 18.9 7.9"/></svg>
+        </div>
+        <h3>Redactar, responder, reenviar</h3>
+        <p>Compón, responde, responde a todos y reenvía con adjuntos sin salir de la extensión, desde la cuenta correcta cada vez.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M4.9 4.9l1.55 1.55M17.55 17.55 19.1 19.1M3 12h2.2M18.8 12H21M4.9 19.1l1.55-1.55M17.55 6.45 19.1 4.9"/></svg>
+        </div>
+        <h3>Apariencia bajo tu control</h3>
+        <p>Colores y alias por cuenta, tema claro, oscuro o automático, y densidad de la lista ajustable a tu gusto.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v6c0 4.6 3 8 7 9 4-1 7-4.4 7-9V6l-7-2.8Z"/><path d="m9.3 12.2 1.9 1.9 3.6-3.9"/></svg>
+        </div>
+        <h3>Privacidad primero</h3>
+        <p>Sin servidores propios que guarden tu correo: las peticiones van directas de tu navegador a Google.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bandeja" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow">Bandeja unificada</span>
+        <h3>Deja de repartir tu atención entre pestañas</h3>
+        <p>Todos los correos de todas tus cuentas aparecen ordenados por fecha en una sola lista. Cuando quieras enfocarte en una cuenta, cambia de vista con un clic sin perder el resto.</p>
+        <ul class="split-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Búsqueda local y búsqueda real contra Gmail, combinando todas las cuentas a la vez</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Selección múltiple y acciones en lote: archivar, marcar leído, enviar a la papelera</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ventana rápida para vistazos, y una página completa con barra lateral para el día a día</li>
+        </ul>
+      </div>
+      <div class="split-visual">
+        <div class="visual-card">
+          <div class="mock" style="box-shadow:none">
+            <div class="mock-bar" style="border-color:var(--border)">
+              <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+              <span class="mock-title">3 cuentas conectadas</span>
+            </div>
+            <div class="mock-list">
+              <div class="mock-row" style="border-color:var(--border)">
+                <span class="mock-avatar" style="background:#7fbf7f"></span>
+                <div class="mock-row-text">
+                  <div class="mock-sender" style="color:var(--text)">Recursos Humanos</div>
+                  <div class="mock-subject">Nueva política de vacaciones 2026</div>
+                </div>
+                <span class="mock-unread-dot"></span>
+              </div>
+              <div class="mock-row" style="border-color:var(--border)">
+                <span class="mock-avatar" style="background:#c98bd6"></span>
+                <div class="mock-row-text">
+                  <div class="mock-sender" style="color:var(--text)">Estudio Norte</div>
+                  <div class="mock-subject">Factura de septiembre adjunta</div>
+                </div>
+                <span class="mock-unread-dot"></span>
+              </div>
+              <div class="mock-row read" style="border-color:var(--border)">
+                <span class="mock-avatar" style="background:#6b9bd1"></span>
+                <div class="mock-row-text">
+                  <div class="mock-sender" style="color:var(--muted)">Newsletter</div>
+                  <div class="mock-subject">Lo mejor de la semana en 5 minutos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split reverse">
+      <div class="split-copy">
+        <span class="eyebrow">Notificaciones y apariencia</span>
+        <h3>Avisos útiles, no una alarma constante</h3>
+        <p>Elige qué cuentas te notifican, con qué reglas y en qué horario. El resto del tiempo, Difmeil se queda callado hasta que tú decides mirar.</p>
+        <ul class="split-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reglas de notificación por categoría, remitente o asunto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No molestar con tramos horarios, incluso los que cruzan la medianoche</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Un color y un alias por cuenta, para reconocerlas de un vistazo</li>
+        </ul>
+      </div>
+      <div class="split-visual">
+        <div class="visual-card">
+          <div class="mock-light-row">
+            <div>
+              <div class="mock-light-label">Notificaciones — Personal</div>
+              <div class="mock-light-sub">Correo nuevo y menciones directas</div>
+            </div>
+            <span class="toggle on"></span>
+          </div>
+          <div class="mock-light-row">
+            <div>
+              <div class="mock-light-label">No molestar</div>
+              <div class="mock-light-sub">22:00 – 08:00, todos los días</div>
+            </div>
+            <span class="toggle on"></span>
+          </div>
+          <div class="mock-light-row">
+            <div>
+              <div class="mock-light-label">Newsletters silenciadas</div>
+              <div class="mock-light-sub">Sin aviso, se marcan al abrir la bandeja</div>
+            </div>
+            <span class="toggle"></span>
+          </div>
+          <div class="mock-light-row">
+            <div>
+              <div class="mock-light-label">Colores por cuenta</div>
+              <div class="mock-light-sub">Personal · Trabajo · Freelance</div>
+            </div>
+            <span class="swatches">
+              <span class="swatch" style="background:#6b9bd1"></span>
+              <span class="swatch" style="background:#7fbf7f"></span>
+              <span class="swatch" style="background:#c98bd6"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split" id="privacidad">
+      <div class="split-copy">
+        <span class="eyebrow">Privacidad</span>
+        <h3>Tu correo no pasa por nuestros servidores</h3>
+        <p>Difmeil no aloja servidores propios que almacenen tu correo. Las cuentas, los tokens y tus preferencias se guardan solo en tu navegador, y las peticiones para leer o gestionar tu correo van directas de tu navegador a Google.</p>
+        <a class="btn btn-outline" href="/privacidad/">Leer la política de privacidad completa</a>
+      </div>
+      <div class="split-visual">
+        <div class="visual-card privacy-visual">
+          <div class="privacy-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v6c0 4.6 3 8 7 9 4-1 7-4.4 7-9V6l-7-2.8Z"/></svg>
+            Cuentas y tokens guardados solo en tu navegador
+          </div>
+          <div class="privacy-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v6c0 4.6 3 8 7 9 4-1 7-4.4 7-9V6l-7-2.8Z"/></svg>
+            El cuerpo de tus correos nunca se guarda en un servidor
+          </div>
+          <div class="privacy-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v6c0 4.6 3 8 7 9 4-1 7-4.4 7-9V6l-7-2.8Z"/></svg>
+            Bloqueo de imágenes remotas y píxeles de seguimiento
+          </div>
+          <div class="privacy-row blocked">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m5 5 14 14"/></svg>
+            Difmeil vendiendo o compartiendo tus datos con terceros
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Tres pasos y ya estás dentro</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Instala la extensión</h3>
+        <p>Añade Difmeil a Chrome y ábrela desde el icono de la barra de herramientas.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Autoriza tu cuenta de Google</h3>
+        <p>Conecta tu primera cuenta de Gmail con el flujo oficial de Google — Difmeil nunca ve tu contraseña.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Repite por cada cuenta</h3>
+        <p>Añade el resto de tus cuentas y ya tienes tu bandeja unificada, lista para el día a día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precios" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Precios</span>
+      <h2>Empieza gratis. Mejora cuando lo necesites.</h2>
+      <p>Precios sin impuestos — se añade el de tu país al pagar.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">Gratis</div>
+        <div class="price-amount">0 €</div>
+        <div class="price-period">para siempre</div>
+        <ul class="price-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Hasta 5 cuentas conectadas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bandeja unificada y página completa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Leer, archivar y enviar a la papelera</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Búsqueda local y en Gmail</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Notificaciones básicas y tema claro/oscuro</li>
+        </ul>
+        <a class="btn btn-outline" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Añadir a Chrome — gratis</a>
+      </div>
+
+      <div class="price-card featured">
+        <span class="price-badge">Próximamente</span>
+        <div class="price-plan">Pro</div>
+        <div class="price-amount">2 €<span style="font-size:1rem;font-weight:500">/mes</span></div>
+        <div class="price-period">o 27,43 € en pago único</div>
+        <ul class="price-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Todo lo de Gratis, sin límite de cuentas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Personalización completa: colores, densidad, escala</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Horarios de no molestar</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reglas de notificación por remitente y asunto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Plantillas de respuesta y ajustes propios por cuenta</li>
+        </ul>
+        <a class="btn btn-gold" href="mailto:hola@difmeil.com?subject=Inter%C3%A9s%20en%20Difmeil%20Pro">Avísame cuando esté disponible</a>
+      </div>
+    </div>
+    <p class="pricing-note">Si cancelas Pro, tus cuentas siguen conectadas — nunca cortamos el acceso al correo que ya tenías.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Dudas frecuentes</span>
+      <h2>Antes de que preguntes</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>¿Es seguro dar acceso a mi Gmail?</h3>
+        <p>Sí. Autorizas con el flujo oficial de Google (OAuth) — Difmeil nunca ve ni guarda tu contraseña, y puedes revocar el acceso desde tu cuenta de Google cuando quieras.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Guardáis mis correos en algún servidor?</h3>
+        <p>No. Difmeil no tiene servidores propios que almacenen tu correo: las peticiones van directas de tu navegador a Google, y el cuerpo de un correo se descarga solo al abrirlo, sin persistirse en ningún sitio.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Cuántas cuentas puedo conectar gratis?</h3>
+        <p>Hasta 5. Si necesitas más, o quieres personalización avanzada y reglas de notificación, ahí es donde entra Pro.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Funciona con cuentas de Google Workspace?</h3>
+        <p>Con cuentas personales de Gmail funciona hoy mismo. El soporte para Workspace está terminando de validarse.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Qué pasa si dejo de pagar Pro?</h3>
+        <p>Vuelves al plan Gratis. Las cuentas que ya tenías conectadas siguen funcionando — nunca se corta el acceso al correo por dejar de pagar.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Funciona en otros navegadores además de Chrome?</h3>
+        <p>Sí, en cualquier navegador basado en Chromium — Edge, Brave, Opera — que admita extensiones de la Chrome Web Store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <span class="eyebrow" style="background:rgb(214 180 107 / 0.14); color:var(--gold-strong)">Empieza ahora</span>
+      <h2 style="margin-top:16px">Deja de perder correos entre pestañas</h2>
+      <p>Cada minuto que pasas cambiando de cuenta es un minuto que no dedicas a lo que de verdad importa. Instala Difmeil y únelas todas, hoy.</p>
+      <a class="btn btn-gold" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Añadir a Chrome — gratis</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="/assets/logo-mark.png" alt="" width="26" height="26" />
+          Difmeil
+        </div>
+        <p class="footer-tagline">Todas tus cuentas de Gmail en un solo sitio, sin servidores propios de por medio.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Producto</h4>
+          <a href="#funciones">Funciones</a>
+          <a href="#precios">Precios</a>
+          <a href="#faq">Dudas frecuentes</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacidad/">Privacidad</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="mailto:hola@difmeil.com">hola@difmeil.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Difmeil</span>
+      <span>Hecho para quien vive entre varias bandejas de entrada.</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
