@@ -1,30 +1,18 @@
 <!doctype html>
-<html lang="es">
+<html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Te han invitado a Difmeil</title>
-<meta name="description" content="Alguien te ha invitado a Difmeil: todas tus cuentas de Gmail en una sola bandeja. Instala la extensión y canjea el código." />
+<title>Vous avez été invité(e) à rejoindre Difmeil</title>
+<meta name="description" content="Quelqu’un vous a invité(e) sur Difmeil : tous vos comptes Gmail dans une seule boîte de réception. Installez l’extension et utilisez le code." />
 <meta name="robots" content="noindex,follow" />
 <link rel="icon" type="image/png" href="/assets/logo-mark.png" />
-<link rel="canonical" href="https://difmeil.com/r/" />
+<link rel="canonical" href="https://difmeil.com/fr/r/" />
 <link rel="alternate" hreflang="es" href="https://difmeil.com/r/" />
 <link rel="alternate" hreflang="en" href="https://difmeil.com/en/r/" />
 <link rel="alternate" hreflang="fr" href="https://difmeil.com/fr/r/" />
 <link rel="alternate" hreflang="de" href="https://difmeil.com/de/r/" />
 <link rel="alternate" hreflang="pt" href="https://difmeil.com/pt/r/" />
-<script>
-  // Este enlace lo genera la extensión siempre en español (SITE + '/r/?c=...'),
-  // así que aquí es donde hace falta detectar el idioma a mano: manda a la
-  // variante local conservando el código de invitación de la query.
-  (function () {
-    var supported = { en: 1, fr: 1, de: 1, pt: 1 };
-    var short = (navigator.language || '').slice(0, 2).toLowerCase();
-    if (supported[short]) {
-      location.replace('/' + short + '/r/' + location.search);
-    }
-  })();
-</script>
 <style>
   :root {
     color-scheme: light dark;
@@ -105,31 +93,31 @@
 <body>
 <main class="card">
   <img src="/assets/logo-mark.png" alt="" />
-  <h1>Te han invitado a Difmeil</h1>
-  <p>Todas tus cuentas de Gmail en una sola bandeja, con notificaciones que sí ves.</p>
+  <h1>Vous avez été invité(e) à rejoindre Difmeil</h1>
+  <p>Tous vos comptes Gmail dans une seule boîte de réception, avec des notifications que vous voyez vraiment.</p>
 
-  <!-- El código se enseña para copiarlo a mano: una página web y una extensión
-       no comparten almacenamiento, y la alternativa sería rastrear al visitante.
-       Ver §3.5 de MONETIZATION_IMPLEMENTATION_PLAN.md en el repo de la extensión. -->
+  <!-- Le code est affiché pour être copié à la main : un site web et une extension
+       ne partagent pas de stockage, et l'alternative serait de pister le visiteur.
+       Voir §3.5 de MONETIZATION_IMPLEMENTATION_PLAN.md dans le dépôt de l'extension. -->
   <div class="code" id="code">—</div>
 
   <div>
-    <a class="btn" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Instalar Difmeil</a>
+    <a class="btn" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Installer Difmeil</a>
   </div>
 
   <ol>
-    <li>Instala la extensión y conecta tu primera cuenta de Gmail.</li>
-    <li>Abre <strong>Ajustes → Cuenta</strong>.</li>
-    <li>Pega el código de arriba en «¿Te ha invitado alguien?».</li>
+    <li>Installez l’extension et connectez votre premier compte Gmail.</li>
+    <li>Ouvrez <strong>Réglages → Compte</strong>.</li>
+    <li>Collez le code ci-dessus dans « Quelqu’un vous a invité ? ».</li>
   </ol>
 
   <p class="fine">
-    Difmeil es gratis hasta 5 cuentas. Pro cuesta 2 €/mes o 20 € en pago único,
-    con 7 días de prueba. <a class="plain" href="/">Más información</a>.
+    Difmeil est gratuit jusqu’à 5 comptes. Pro coûte 2 €/mois ou 20 € en paiement unique,
+    avec 7 jours d’essai. <a class="plain" href="/fr/">En savoir plus</a>.
   </p>
   <p class="fine">
+    <a class="plain" href="/r/">Español</a> ·
     <a class="plain" href="/en/r/">English</a> ·
-    <a class="plain" href="/fr/r/">Français</a> ·
     <a class="plain" href="/de/r/">Deutsch</a> ·
     <a class="plain" href="/pt/r/">Português</a>
   </p>
