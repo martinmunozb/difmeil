@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QR de creador — Difmeil</title>
+<meta name="robots" content="noindex,nofollow" />
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f8fafd;
+    --surface: #ffffff;
+    --text: #1f1f1f;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --gold: #c6a15b;
+    --on-gold: #1f1f1f;
+    --r-md: 16px;
+    --r-full: 999px;
+    --shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 24px -8px rgb(20 20 20 / 0.16);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f0f;
+      --surface: #181818;
+      --text: #f1f1f1;
+      --muted: #aaaaaa;
+      --border: #2b2b2b;
+      --gold: #d6b46b;
+      --on-gold: #121212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  .card {
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  h1 { margin: 0 0 4px; font-size: 1.25rem; }
+  p.hint { margin: 0 0 20px; color: var(--muted); font-size: 0.875rem; }
+  label { display: block; text-align: left; font-size: 0.8125rem; color: var(--muted); margin-bottom: 6px; }
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font: 600 1rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: none;
+    border-radius: var(--r-full);
+    background: var(--gold);
+    color: var(--on-gold);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #result { margin-top: 24px; display: none; }
+  canvas { max-width: 100%; border-radius: 8px; }
+  .link { margin: 12px 0; word-break: break-all; font-size: 0.8125rem; color: var(--muted); }
+  a.download {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--text);
+    text-decoration: underline;
+    font-size: 0.875rem;
+  }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>QR de creador</h1>
+  <p class="hint">Genera el QR del enlace de invitación para un código de contrato con un creador.</p>
+
+  <label for="code">Código (el de creator_codes)</label>
+  <input id="code" type="text" placeholder="EJ: MRPRO23" maxlength="32" autocomplete="off" />
+  <button id="generate">Generar QR</button>
+
+  <div id="result">
+    <canvas id="canvas"></canvas>
+    <p class="link" id="link"></p>
+    <a class="download" id="download" download="difmeil-qr.png">Descargar PNG</a>
+  </div>
+</main>
+
+<script>
+  var input = document.getElementById('code');
+  var result = document.getElementById('result');
+  var canvas = document.getElementById('canvas');
+  var linkEl = document.getElementById('link');
+  var downloadEl = document.getElementById('download');
+
+  function generate() {
+    var code = input.value.trim().toUpperCase();
+    if (!code) return;
+
+    var url = 'https://difmeil.com/r/?c=' + encodeURIComponent(code);
+    QRCode.toCanvas(canvas, url, { width: 320, margin: 2 }, function (err) {
+      if (err) return;
+      result.style.display = 'block';
+      linkEl.textContent = url;
+      downloadEl.href = canvas.toDataURL('image/png');
+      downloadEl.download = 'difmeil-qr-' + code.toLowerCase() + '.png';
+    });
+  }
+
+  document.getElementById('generate').addEventListener('click', generate);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') generate();
+  });
+</script>
+</body>
+</html>

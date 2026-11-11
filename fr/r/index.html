@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vous avez été invité(e) à rejoindre Difmeil</title>
+<meta name="description" content="Quelqu’un vous a invité(e) sur Difmeil : tous vos comptes Gmail dans une seule boîte de réception. Installez l’extension et utilisez le code." />
+<meta name="robots" content="noindex,follow" />
+<link rel="icon" type="image/png" href="/assets/logo-mark.png" />
+<link rel="canonical" href="https://difmeil.com/fr/r/" />
+<link rel="alternate" hreflang="es" href="https://difmeil.com/r/" />
+<link rel="alternate" hreflang="en" href="https://difmeil.com/en/r/" />
+<link rel="alternate" hreflang="fr" href="https://difmeil.com/fr/r/" />
+<link rel="alternate" hreflang="de" href="https://difmeil.com/de/r/" />
+<link rel="alternate" hreflang="pt" href="https://difmeil.com/pt/r/" />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f8fafd;
+    --surface: #ffffff;
+    --text: #1f1f1f;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --gold: #c6a15b;
+    --gold-soft: #f6efe1;
+    --on-gold: #1f1f1f;
+    --r-md: 16px;
+    --r-full: 999px;
+    --shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 24px -8px rgb(20 20 20 / 0.16);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f0f;
+      --surface: #181818;
+      --text: #f1f1f1;
+      --muted: #aaaaaa;
+      --border: #2b2b2b;
+      --gold: #d6b46b;
+      --gold-soft: #2a2416;
+      --on-gold: #121212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  .card {
+    max-width: 480px;
+    padding: 40px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  img { width: 56px; height: 56px; }
+  h1 { margin: 16px 0 8px; font-size: 1.5rem; letter-spacing: -0.02em; }
+  p { margin: 0 0 16px; color: var(--muted); }
+  .code {
+    display: inline-block;
+    margin: 8px 0 24px;
+    padding: 12px 24px;
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold);
+    border-radius: var(--r-full);
+    font: 600 1.25rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--gold);
+    color: var(--on-gold);
+    border-radius: var(--r-full);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  ol { margin: 24px 0 0; padding-left: 20px; text-align: left; color: var(--muted); font-size: 0.9375rem; }
+  li { margin-bottom: 8px; }
+  .fine { margin-top: 24px; font-size: 0.8125rem; }
+  a.plain { color: inherit; }
+</style>
+</head>
+<body>
+<main class="card">
+  <img src="/assets/logo-mark.png" alt="" />
+  <h1>Vous avez été invité(e) à rejoindre Difmeil</h1>
+  <p>Tous vos comptes Gmail dans une seule boîte de réception, avec des notifications que vous voyez vraiment.</p>
+
+  <!-- Le code est affiché pour être copié à la main : un site web et une extension
+       ne partagent pas de stockage, et l'alternative serait de pister le visiteur.
+       Voir §3.5 de MONETIZATION_IMPLEMENTATION_PLAN.md dans le dépôt de l'extension. -->
+  <div class="code" id="code">—</div>
+
+  <div>
+    <a class="btn" href="https://chromewebstore.google.com/search/Difmeil" target="_blank" rel="noopener">Installer Difmeil</a>
+  </div>
+
+  <ol>
+    <li>Installez l’extension et connectez votre premier compte Gmail.</li>
+    <li>Ouvrez <strong>Réglages → Compte</strong>.</li>
+    <li>Collez le code ci-dessus dans « Quelqu’un vous a invité ? ».</li>
+  </ol>
+
+  <p class="fine">
+    Difmeil est gratuit jusqu’à 3 comptes. Pro coûte 2 €/mois ou 20 € en paiement unique,
+    avec 7 jours d’essai sur le mensuel. <a class="plain" href="/fr/">En savoir plus</a>.
+  </p>
+  <p class="fine">
+    <a class="plain" href="/r/">Español</a> ·
+    <a class="plain" href="/en/r/">English</a> ·
+    <a class="plain" href="/de/r/">Deutsch</a> ·
+    <a class="plain" href="/pt/r/">Português</a>
+  </p>
+</main>
+
+<script>
+  // GitHub Pages no reescribe rutas, así que el código viaja en la query.
+  var code = new URLSearchParams(location.search).get('c');
+  var box = document.getElementById('code');
+  if (code) {
+    box.textContent = code.toUpperCase().slice(0, 32);
+  } else {
+    box.remove();
+  }
+</script>
+</body>
+</html>
