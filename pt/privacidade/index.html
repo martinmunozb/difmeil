@@ -79,7 +79,7 @@
 <body>
 <main>
   <h1>Política de Privacidade do Difmeil</h1>
-  <p class="updated">Última atualização: 7 de setembro de 2026 ·
+  <p class="updated">Última atualização: 12 de novembro de 2026 ·
     <a href="/privacidad/">Español</a> ·
     <a href="/en/privacy/">English</a> ·
     <a href="/fr/confidentialite/">Français</a> ·
@@ -176,7 +176,49 @@
     <li>Prestar o serviço solicitado pelo usuário.</li>
     <li>Manter a segurança técnica da extensão.</li>
     <li>Usar provedores técnicos necessários para o funcionamento do serviço, sempre sob medidas adequadas de proteção.</li>
+    <li>Medir a eficácia das nossas próprias campanhas publicitárias, nos termos da seção “Medição da publicidade”.</li>
   </ul>
+
+  <h2>Medição da publicidade</h2>
+  <p>O Difmeil promove a extensão com anúncios da OpenAI (OpenAI Ads). Para
+  saber se esses anúncios funcionam, quando uma pessoa conecta a sua primeira
+  conta do Gmail no Difmeil, o nosso servidor envia à OpenAI um único aviso de
+  “cadastro concluído” (uma conversão). Para isso, o Difmeil cria também uma
+  conta própria vinculada à sua identidade do Google, que usa para gerenciar a
+  assinatura e lembrar que essa conexão já foi medida.</p>
+  <p>O aviso contém apenas:</p>
+  <ul>
+    <li>Um identificador de evento gerado aleatoriamente, que evita que a OpenAI conte duas vezes a mesma conversão.</li>
+    <li>A data e a hora, e o tipo de evento (“cadastro concluído”).</li>
+    <li>Uma marca indicando que o evento não deve ser usado para personalização de anúncios.</li>
+  </ul>
+  <p>O aviso não contém o seu e-mail (nem uma versão criptografada dele), o seu
+  nome, o seu endereço IP ou dados do seu navegador, o identificador da sua
+  conta do Difmeil, e-mails, contatos, tokens de acesso, dados obtidos das APIs
+  do Google nem qualquer identificador de clique publicitário. Como é enviado
+  a partir do nosso servidor, a OpenAI recebe o endereço IP desse servidor, e
+  não o seu.</p>
+  <p><strong>Identificadores.</strong> O identificador do evento é um
+  pseudônimo, não um dado anônimo: o Difmeil o guarda, junto com o estado do
+  envio e a data, associado à sua conta do Difmeil, e por isso o tratamos como
+  dado pessoal. Não damos à OpenAI nada que a permita identificá-lo
+  diretamente, mas não podemos descartar que ela o combine com outras
+  informações que já possua. A OpenAI trata os dados recebidos conforme os seus
+  próprios termos e a sua política de privacidade, e pode fazê-lo fora do
+  Espaço Econômico Europeu. O Difmeil não coleta nem envia o identificador de
+  clique da OpenAI (<code>oppref</code>): os anúncios levam à Chrome Web Store,
+  que não o transmite à extensão. Por isso a conversão não é vinculada a um
+  clique específico.</p>
+  <p><strong>Base jurídica e direitos.</strong> Este tratamento baseia-se no
+  nosso interesse legítimo (art. 6.º, n.º 1, alínea f, do RGPD) em medir a
+  eficácia das nossas campanhas com o mínimo de dados possível. Você pode se
+  opor escrevendo para <a href="mailto:support@difmeil.com">support@difmeil.com</a>: removeremos da nossa base de dados o registro
+  associado à sua conta e, se o aviso já tiver sido enviado, indicaremos como
+  exercer os seus direitos perante a OpenAI.</p>
+  <p><strong>Retenção.</strong> O registro é mantido enquanto existir a sua
+  conta do Difmeil e é removido com ela. A extensão também guarda uma marca
+  local no seu navegador (<code>chrome.storage.local</code>) até que o
+  servidor considere o envio resolvido; depois a apaga.</p>
 
   <h2>Segurança</h2>
   <p>O Difmeil aplica medidas razoáveis para proteger os dados do usuário
