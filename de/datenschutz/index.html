@@ -79,7 +79,7 @@
 <body>
 <main>
   <h1>Datenschutzerklärung von Difmeil</h1>
-  <p class="updated">Letzte Aktualisierung: 7. September 2026 ·
+  <p class="updated">Letzte Aktualisierung: 12. November 2026 ·
     <a href="/privacidad/">Español</a> ·
     <a href="/en/privacy/">English</a> ·
     <a href="/fr/confidentialite/">Français</a> ·
@@ -178,7 +178,51 @@
     <li>Den vom Nutzer angeforderten Dienst zu erbringen.</li>
     <li>Die technische Sicherheit der Erweiterung aufrechtzuerhalten.</li>
     <li>Technische Dienstleister einzusetzen, die für den Betrieb des Dienstes notwendig sind, stets unter angemessenen Schutzmaßnahmen.</li>
+    <li>Die Wirksamkeit unserer eigenen Werbekampagnen zu messen, wie im Abschnitt „Werbemessung“ beschrieben.</li>
   </ul>
+
+  <h2>Werbemessung</h2>
+  <p>Difmeil bewirbt die Erweiterung mit Anzeigen von OpenAI (OpenAI Ads). Um zu
+  erfahren, ob diese Anzeigen wirken, sendet unser Server an OpenAI eine
+  einzelne Meldung „Registrierung abgeschlossen“ (eine Conversion), sobald
+  eine Person ihr erstes Gmail-Konto in Difmeil verbindet. Dafür legt Difmeil
+  außerdem ein eigenes Konto an, das mit Ihrer Google-Identität verknüpft ist
+  und mit dem das Abonnement verwaltet und gespeichert wird, dass diese
+  Verbindung bereits gemessen wurde.</p>
+  <p>Die Meldung enthält ausschließlich:</p>
+  <ul>
+    <li>Eine zufällig erzeugte Ereignis-ID, die verhindert, dass OpenAI dieselbe Conversion doppelt zählt.</li>
+    <li>Datum und Uhrzeit sowie die Ereignisart („Registrierung abgeschlossen“).</li>
+    <li>Eine Kennzeichnung, dass das Ereignis nicht zur Personalisierung von Werbung verwendet werden darf.</li>
+  </ul>
+  <p>Die Meldung enthält weder Ihre E-Mail-Adresse (auch nicht als Hash-Wert)
+  noch Ihren Namen, Ihre IP-Adresse oder Browserdaten, die Kennung Ihres
+  Difmeil-Kontos, E-Mails, Kontakte, Zugriffstoken, über Google-APIs erhaltene
+  Daten oder eine Werbeklick-Kennung. Da sie von unserem Server gesendet wird,
+  erhält OpenAI die IP-Adresse dieses Servers, nicht Ihre.</p>
+  <p><strong>Kennungen.</strong> Die Ereignis-ID ist ein Pseudonym und keine
+  anonymen Daten: Difmeil speichert sie zusammen mit dem Sendestatus und dem
+  Datum Ihrem Difmeil-Konto zugeordnet und behandelt sie daher als
+  personenbezogenes Datum. OpenAI erhält nichts, womit Sie direkt identifiziert
+  werden könnten; wir können jedoch nicht ausschließen, dass OpenAI sie mit
+  anderen bereits vorhandenen Informationen verknüpft. OpenAI verarbeitet die
+  erhaltenen Daten nach eigenen Bedingungen und Datenschutzerklärung und kann
+  dies auch außerhalb des Europäischen Wirtschaftsraums tun. Difmeil erfasst
+  und sendet die Klick-Kennung von OpenAI (<code>oppref</code>) nicht: Die
+  Anzeigen führen zum Chrome Web Store, der sie nicht an die Erweiterung
+  weitergibt. Die Conversion wird daher keinem bestimmten Klick zugeordnet.</p>
+  <p><strong>Rechtsgrundlage und Rechte.</strong> Diese Verarbeitung beruht auf
+  unserem berechtigten Interesse (Art. 6 Abs. 1 lit. f DSGVO), die Wirksamkeit
+  unserer Kampagnen mit möglichst wenigen Daten zu messen. Sie können
+  widersprechen, indem Sie an <a href="mailto:support@difmeil.com">support@difmeil.com</a> schreiben: Wir löschen den Ihrem Konto
+  zugeordneten Datensatz aus unserer Datenbank und teilen Ihnen, falls die
+  Meldung bereits gesendet wurde, mit, wie Sie Ihre Rechte gegenüber OpenAI
+  ausüben können.</p>
+  <p><strong>Aufbewahrung.</strong> Der Datensatz wird aufbewahrt, solange Ihr
+  Difmeil-Konto besteht, und mit diesem gelöscht. Die Erweiterung speichert
+  zudem eine lokale Markierung in Ihrem Browser
+  (<code>chrome.storage.local</code>), bis der Server den Versand als erledigt
+  betrachtet; danach löscht sie die Markierung.</p>
 
   <h2>Sicherheit</h2>
   <p>Difmeil wendet angemessene Maßnahmen an, um die Daten des Nutzers vor
