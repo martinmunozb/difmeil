@@ -911,6 +911,50 @@ h3 {
   align-items: stretch;
 }
 
+.plan-comparison-section { margin-block-start: 3rem; }
+.plan-comparison-section h3 { margin-block-end: 0.5rem; font-size: 1.45rem; }
+.plan-comparison-section > p { max-width: 72ch; color: var(--muted); }
+.plan-comparison-scroll {
+  max-inline-size: 100%;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.plan-comparison-scroll:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
+.plan-comparison {
+  inline-size: 100%;
+  min-inline-size: 32rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.88rem;
+}
+.plan-comparison caption {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.plan-comparison th, .plan-comparison td {
+  padding: 1rem 1.25rem;
+  border-block-end: 1px solid var(--line);
+  text-align: start;
+  vertical-align: middle;
+}
+.plan-comparison thead th { font-size: 0.95rem; background: var(--card); }
+.plan-comparison tbody th {
+  position: sticky;
+  inset-inline-start: 0;
+  inline-size: 50%;
+  font-weight: 620;
+  background: var(--card);
+}
+.plan-comparison td { inline-size: 25%; }
+.plan-comparison th:last-child, .plan-comparison td:last-child { background: #faf0eb; }
+.plan-comparison tr:last-child > * { border-block-end: 0; }
+
 .price-card {
   position: relative;
   display: flex;

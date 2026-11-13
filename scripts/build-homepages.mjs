@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { planComparison } from './plan-comparison.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const storeUrl = 'https://chromewebstore.google.com/detail/difmeil/eojoffejiddgjbjgkkgkfhccgofjejad';
@@ -69,8 +70,8 @@ const shared = {
       tag: 'Pago único', monthlySuffix: '/mes', onceSuffix: 'una vez', forever: 'para siempre',
       plans: [
         ['Gratis', '0 €', 'Hasta 3 cuentas', ['Bandeja unificada y página completa', 'Leer, buscar, responder y organizar', 'Notificaciones básicas', 'Tema claro y oscuro'], 'Añadir a Chrome — gratis'],
-        ['Pro mensual', '2 €', '7 días gratis; después 2 €/mes', ['Cuentas ilimitadas', 'Personalización completa', 'No molestar y reglas de notificación', 'Ajustes propios por cuenta'], 'Probar 7 días gratis'],
-        ['Pro permanente', '20 €', 'Un solo pago para la línea Pro 1.x', ['Todo lo incluido en Pro mensual', 'Sin suscripción ni renovaciones', 'Cuentas ilimitadas', 'Plantillas y acciones avanzadas'], 'Añadir a Chrome'],
+        ['Pro mensual', '2 €', '7 días gratis; después 2 €/mes', ['Cuentas ilimitadas', 'Personalización completa', 'No molestar y reglas de notificación', 'Ajustes propios por cuenta', 'Firmas automáticas e importación de Gmail'], 'Probar 7 días gratis'],
+        ['Pro permanente', '20 €', 'Un solo pago para la línea Pro 1.x', ['Todo lo incluido en Pro mensual', 'Sin suscripción ni renovaciones', 'Cuentas ilimitadas', 'Firmas automáticas e importación de Gmail'], 'Añadir a Chrome'],
       ],
       note: 'Importes mostrados para la zona euro, sin impuestos; el precio local exacto y el impuesto de tu país aparecen al pagar. La prueba de 7 días requiere tarjeta y solo se aplica al plan mensual; te avisamos antes del primer cobro.',
     },
@@ -135,8 +136,8 @@ const shared = {
       tag: 'One-time payment', monthlySuffix: '/month', onceSuffix: 'once', forever: 'forever',
       plans: [
         ['Free', '€0', 'Up to 3 accounts', ['Unified inbox and full page', 'Read, search, reply and organize', 'Basic notifications', 'Light and dark themes'], 'Add to Chrome — free'],
-        ['Pro monthly', '€2', '7 days free; then €2/month', ['Unlimited accounts', 'Full personalization', 'Do not disturb and notification rules', 'Per-account settings'], 'Try 7 days free'],
-        ['Pro permanent', '€20', 'One payment for the Pro 1.x line', ['Everything in Pro monthly', 'No subscription or renewals', 'Unlimited accounts', 'Templates and advanced actions'], 'Add to Chrome'],
+        ['Pro monthly', '€2', '7 days free; then €2/month', ['Unlimited accounts', 'Full personalization', 'Do not disturb and notification rules', 'Per-account settings', 'Automatic signatures and Gmail import'], 'Try 7 days free'],
+        ['Pro permanent', '€20', 'One payment for the Pro 1.x line', ['Everything in Pro monthly', 'No subscription or renewals', 'Unlimited accounts', 'Automatic signatures and Gmail import'], 'Add to Chrome'],
       ],
       note: 'Amounts shown are euro-area reference prices before tax; your exact local price and tax appear at checkout. The 7-day trial requires a card and applies only to the monthly plan; we email you before the first charge.',
     },
@@ -188,7 +189,7 @@ const shared = {
     pricing: {
       eyebrow: 'Des tarifs clairs', title: 'Commencez gratuitement. Payez seulement si vous avez besoin de plus.', lead: 'Le forfait gratuit inclut jusqu’à 3 comptes et toutes les fonctions essentielles.',
       tag: 'Paiement unique', monthlySuffix: '/mois', onceSuffix: 'une fois', forever: 'pour toujours',
-      plans: [['Gratuit', '0 €', 'Jusqu’à 3 comptes', ['Boîte unifiée et page complète', 'Lire, rechercher, répondre et organiser', 'Notifications de base', 'Thèmes clair et sombre'], 'Ajouter à Chrome — gratuit'], ['Pro mensuel', '2 €', '7 jours gratuits puis 2 €/mois', ['Comptes illimités', 'Personnalisation complète', 'Ne pas déranger et règles de notification', 'Réglages par compte'], 'Essayer 7 jours gratuitement'], ['Pro permanent', '20 €', 'Un paiement pour la gamme Pro 1.x', ['Tout le forfait Pro mensuel', 'Sans abonnement ni renouvellement', 'Comptes illimités', 'Modèles et actions avancées'], 'Ajouter à Chrome']],
+      plans: [['Gratuit', '0 €', 'Jusqu’à 3 comptes', ['Boîte unifiée et page complète', 'Lire, rechercher, répondre et organiser', 'Notifications de base', 'Thèmes clair et sombre'], 'Ajouter à Chrome — gratuit'], ['Pro mensuel', '2 €', '7 jours gratuits puis 2 €/mois', ['Comptes illimités', 'Personnalisation complète', 'Ne pas déranger et règles de notification', 'Réglages par compte', 'Signatures automatiques et import depuis Gmail'], 'Essayer 7 jours gratuitement'], ['Pro permanent', '20 €', 'Un paiement pour la gamme Pro 1.x', ['Tout le forfait Pro mensuel', 'Sans abonnement ni renouvellement', 'Comptes illimités', 'Signatures automatiques et import depuis Gmail'], 'Ajouter à Chrome']],
       note: 'Montants affichés à titre de référence pour la zone euro, hors taxes ; votre prix local exact et la taxe apparaissent au paiement. L’essai de 7 jours nécessite une carte et ne concerne que le forfait mensuel.',
     },
     faq: {
@@ -233,7 +234,7 @@ const shared = {
     pricing: {
       eyebrow: 'Klare Preise', title: 'Kostenlos starten. Nur zahlen, wenn du mehr brauchst.', lead: 'Der kostenlose Tarif enthält bis zu 3 Konten und alle wichtigen Funktionen.',
       tag: 'Einmalzahlung', monthlySuffix: '/Monat', onceSuffix: 'einmalig', forever: 'dauerhaft',
-      plans: [['Kostenlos', '0 €', 'Bis zu 3 Konten', ['Gemeinsamer Posteingang und Vollansicht', 'Lesen, suchen, antworten und organisieren', 'Grundlegende Benachrichtigungen', 'Helles und dunkles Design'], 'Zu Chrome hinzufügen — kostenlos'], ['Pro monatlich', '2 €', '7 Tage kostenlos, danach 2 €/Monat', ['Unbegrenzte Konten', 'Vollständige Personalisierung', 'Nicht stören und Benachrichtigungsregeln', 'Einstellungen pro Konto'], '7 Tage kostenlos testen'], ['Pro permanent', '20 €', 'Eine Zahlung für die Pro-1.x-Reihe', ['Alles aus Pro monatlich', 'Kein Abo und keine Verlängerung', 'Unbegrenzte Konten', 'Vorlagen und erweiterte Aktionen'], 'Zu Chrome hinzufügen']],
+      plans: [['Kostenlos', '0 €', 'Bis zu 3 Konten', ['Gemeinsamer Posteingang und Vollansicht', 'Lesen, suchen, antworten und organisieren', 'Grundlegende Benachrichtigungen', 'Helles und dunkles Design'], 'Zu Chrome hinzufügen — kostenlos'], ['Pro monatlich', '2 €', '7 Tage kostenlos, danach 2 €/Monat', ['Unbegrenzte Konten', 'Vollständige Personalisierung', 'Nicht stören und Benachrichtigungsregeln', 'Einstellungen pro Konto', 'Automatische Signaturen und Gmail-Import'], '7 Tage kostenlos testen'], ['Pro permanent', '20 €', 'Eine Zahlung für die Pro-1.x-Reihe', ['Alles aus Pro monatlich', 'Kein Abo und keine Verlängerung', 'Unbegrenzte Konten', 'Automatische Signaturen und Gmail-Import'], 'Zu Chrome hinzufügen']],
       note: 'Die angezeigten Beträge sind Referenzpreise für den Euroraum ohne Steuern; dein genauer lokaler Preis und die Steuer erscheinen beim Bezahlen. Die 7-Tage-Testphase erfordert eine Karte und gilt nur für den Monatstarif.',
     },
     faq: {
@@ -278,7 +279,7 @@ const shared = {
     pricing: {
       eyebrow: 'Preços claros', title: 'Comece grátis. Pague só quando precisar de mais.', lead: 'O plano grátis inclui até 3 contas e todos os recursos essenciais.',
       tag: 'Pagamento único', monthlySuffix: '/mês', onceSuffix: 'uma vez', forever: 'para sempre',
-      plans: [['Grátis', '0 €', 'Até 3 contas', ['Caixa unificada e página completa', 'Ler, buscar, responder e organizar', 'Notificações básicas', 'Tema claro e escuro'], 'Adicionar ao Chrome — grátis'], ['Pro mensal', '2 €', '7 dias grátis; depois 2 €/mês', ['Contas ilimitadas', 'Personalização completa', 'Não perturbe e regras de notificação', 'Configurações por conta'], 'Testar 7 dias grátis'], ['Pro permanente', '20 €', 'Um pagamento para a linha Pro 1.x', ['Tudo do Pro mensal', 'Sem assinatura nem renovação', 'Contas ilimitadas', 'Modelos e ações avançadas'], 'Adicionar ao Chrome']],
+      plans: [['Grátis', '0 €', 'Até 3 contas', ['Caixa unificada e página completa', 'Ler, buscar, responder e organizar', 'Notificações básicas', 'Tema claro e escuro'], 'Adicionar ao Chrome — grátis'], ['Pro mensal', '2 €', '7 dias grátis; depois 2 €/mês', ['Contas ilimitadas', 'Personalização completa', 'Não perturbe e regras de notificação', 'Configurações por conta', 'Assinaturas automáticas e importação do Gmail'], 'Testar 7 dias grátis'], ['Pro permanente', '20 €', 'Um pagamento para a linha Pro 1.x', ['Tudo do Pro mensal', 'Sem assinatura nem renovação', 'Contas ilimitadas', 'Assinaturas automáticas e importação do Gmail'], 'Adicionar ao Chrome']],
       note: 'Os valores exibidos são referências para a zona do euro, sem impostos; o preço local exato e o imposto aparecem no pagamento. O teste de 7 dias exige cartão e vale apenas para o plano mensal.',
     },
     faq: {
@@ -449,6 +450,7 @@ function documentFor(d) {
         <header class="section-heading centered"><p class="eyebrow">${d.pricing.eyebrow}</p><h2>${d.pricing.title}</h2><p>${d.pricing.lead}</p></header>
         <div class="pricing-grid">${prices}</div>
         <p class="pricing-note">${d.pricing.note}</p>
+        ${planComparison(d.lang)}
       </div>
     </section>
 

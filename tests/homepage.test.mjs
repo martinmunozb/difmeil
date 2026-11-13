@@ -57,6 +57,18 @@ for (const page of pages) {
     }
     assert.match(html, /<details[\s>]/, 'las dudas deben usar disclosures nativos y accesibles');
   });
+
+  test(`${page.lang}: compara Gratis y Pro con límites y funciones reales`, () => {
+    const html = htmlFor(page.file);
+    const comparison = html.match(/<table class="plan-comparison" aria-describedby="plan-comparison-note">([\s\S]*?)<\/table>/)?.[1];
+    assert.ok(comparison, 'debe haber una comparativa junto a los precios');
+    assert.equal((comparison.match(/scope="col"/g) ?? []).length, 3);
+    assert.equal((comparison.match(/scope="row"/g) ?? []).length, 11);
+    assert.match(comparison, /Pro/);
+    assert.match(html, /id="plan-comparison-note"/);
+    assert.doesNotMatch(comparison, /billing\.|undefined/);
+    assert.doesNotMatch(html, /Plantillas y acciones avanzadas|Templates and advanced actions|Modèles et actions avancées|Vorlagen und erweiterte Aktionen|Modelos e ações avançadas/);
+  });
 }
 
 test('los recursos compartidos y las capturas optimizadas existen', () => {
