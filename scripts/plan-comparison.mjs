@@ -1,7 +1,7 @@
-// Keep the public comparison aligned with the extension's licensed features.
+// Prices and feature availability share one visual comparison in all languages.
 export const planComparisonCopy = {
   "es": {
-    "title": "Qué incluye cada plan",
+    "title": "Planes y precios",
     "note": "Pro mensual y Pro permanente incluyen las mismas funciones. Solo cambia la forma de pago; el permanente cubre Pro 1.x.",
     "feature": "Función",
     "free": "Gratis",
@@ -22,10 +22,15 @@ export const planComparisonCopy = {
     "signatures": "Firmas generales y por cuenta, automáticas e importadas de Gmail",
     "dnd": "Horarios de no molestar",
     "rules": "Filtros de notificación por remitente, asunto y categoría",
-    "perAccount": "Sonido y horarios propios por cuenta"
+    "perAccount": "Sonido y horarios propios por cuenta",
+    "includes": "Incluye",
+    "excludes": "Solo con Pro",
+    "extraViews": "Vistas Compacta y Visual",
+    "taxNote": "Precios base sin impuestos. Stripe muestra el total antes de pagar.",
+    "trialDetails": "Cómo funciona la prueba gratuita"
   },
   "en": {
-    "title": "What each plan includes",
+    "title": "Plans and pricing",
     "note": "Pro monthly and Pro permanent include the same features. Only the payment option differs; permanent covers Pro 1.x.",
     "feature": "Feature",
     "free": "Free",
@@ -46,10 +51,15 @@ export const planComparisonCopy = {
     "signatures": "Global and per-account signatures, automatic insertion and Gmail import",
     "dnd": "Do not disturb schedules",
     "rules": "Notification filters by sender, subject and category",
-    "perAccount": "Custom sound and schedules per account"
+    "perAccount": "Custom sound and schedules per account",
+    "includes": "Included",
+    "excludes": "Only with Pro",
+    "extraViews": "Compact and Visual views",
+    "taxNote": "Base prices exclude tax. Stripe shows the total before payment.",
+    "trialDetails": "How the free trial works"
   },
   "fr": {
-    "title": "Ce que comprend chaque forfait",
+    "title": "Forfaits et tarifs",
     "note": "Pro mensuel et Pro permanent comprennent les mêmes fonctions. Seul le mode de paiement change ; le permanent couvre Pro 1.x.",
     "feature": "Fonction",
     "free": "Gratuit",
@@ -70,10 +80,15 @@ export const planComparisonCopy = {
     "signatures": "Signatures générales et par compte, automatiques et importées de Gmail",
     "dnd": "Horaires Ne pas déranger",
     "rules": "Filtres de notification par expéditeur, objet et catégorie",
-    "perAccount": "Son et horaires propres à chaque compte"
+    "perAccount": "Son et horaires propres à chaque compte",
+    "includes": "Inclus",
+    "excludes": "Uniquement avec Pro",
+    "extraViews": "Vues Compacte et Visuelle",
+    "taxNote": "Prix de base hors taxes. Stripe affiche le total avant le paiement.",
+    "trialDetails": "Comment fonctionne l’essai gratuit"
   },
   "de": {
-    "title": "Was jeder Tarif enthält",
+    "title": "Tarife und Preise",
     "note": "Pro monatlich und Pro permanent bieten dieselben Funktionen. Nur die Zahlungsart ist anders; permanent gilt für Pro 1.x.",
     "feature": "Funktion",
     "free": "Kostenlos",
@@ -94,10 +109,15 @@ export const planComparisonCopy = {
     "signatures": "Allgemeine und kontospezifische Signaturen, automatisch und aus Gmail importiert",
     "dnd": "Nicht-stören-Zeiten",
     "rules": "Benachrichtigungsfilter nach Absender, Betreff und Kategorie",
-    "perAccount": "Eigener Ton und eigene Zeiten pro Konto"
+    "perAccount": "Eigener Ton und eigene Zeiten pro Konto",
+    "includes": "Enthalten",
+    "excludes": "Nur mit Pro",
+    "extraViews": "Kompakte und visuelle Ansicht",
+    "taxNote": "Grundpreise ohne Steuern. Stripe zeigt den Gesamtpreis vor der Zahlung.",
+    "trialDetails": "So funktioniert die kostenlose Testphase"
   },
   "pt": {
-    "title": "O que cada plano inclui",
+    "title": "Planos e preços",
     "note": "Pro mensal e Pro permanente incluem as mesmas funções. Só muda a forma de pagamento; o permanente cobre Pro 1.x.",
     "feature": "Função",
     "free": "Grátis",
@@ -118,7 +138,12 @@ export const planComparisonCopy = {
     "signatures": "Assinaturas gerais e por conta, automáticas e importadas do Gmail",
     "dnd": "Horários de Não perturbe",
     "rules": "Filtros de notificação por remetente, assunto e categoria",
-    "perAccount": "Som e horários próprios por conta"
+    "perAccount": "Som e horários próprios por conta",
+    "includes": "Incluído",
+    "excludes": "Só com Pro",
+    "extraViews": "Visualizações Compacta e Visual",
+    "taxNote": "Preços base sem impostos. O Stripe mostra o total antes do pagamento.",
+    "trialDetails": "Como funciona o teste grátis"
   }
 };
 
@@ -149,9 +174,9 @@ const rows = [
     "included"
   ],
   [
-    "views",
-    "current",
-    "allViews"
+    "extraViews",
+    "notIncluded",
+    "included"
   ],
   [
     "customization",
@@ -180,7 +205,22 @@ const rows = [
   ]
 ];
 
-export function planComparison(lang) {
+function statusIcon(included) {
+  return `<span class="plan-feature-status" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">${included ? '<path d="m5 12 4 4L19 6"/>' : '<path d="m7 7 10 10M17 7 7 17"/>'}</svg></span>`;
+}
+
+function features(d, pro) {
+  const features = rows.map(([feature, free, paid]) => ({ feature, value: pro ? paid : free }));
+  return `<div class="plan-feature-groups">${[true, false].map(included => {
+    const group = features.filter(row => (row.value !== 'notIncluded') === included);
+    if (!group.length) return '';
+    return `<div class="${included ? 'plan-included' : 'plan-excluded'}"><h4>${d[included ? 'includes' : 'excludes']}</h4><ul class="plan-feature-list">${group.map(({feature, value}) => `<li data-feature="${feature}" data-included="${included}">${statusIcon(included)}<span><span class="plan-feature-label">${d[feature]}</span>${value !== 'included' && value !== 'notIncluded' ? `<small>${d[value]}</small>` : ''}<span class="plan-sr-only"> — ${d[included ? 'included' : 'notIncluded']}</span></span></li>`).join('')}</ul></div>`;
+  }).join('')}</div>`;
+}
+
+export function planComparison(lang, pricing, installButton) {
   const d = planComparisonCopy[lang];
-  return `<div class="plan-comparison-section"><h3 id="plan-comparison-title">${d.title}</h3><p id="plan-comparison-note">${d.note}</p><div class="plan-comparison-scroll" role="region" aria-labelledby="plan-comparison-title" tabindex="0"><table class="plan-comparison" aria-describedby="plan-comparison-note"><caption>${d.title}</caption><thead><tr><th scope="col">${d.feature}</th><th scope="col">${d.free}</th><th scope="col">${d.pro}</th></tr></thead><tbody>${rows.map(([feature, free, pro]) => `<tr><th scope="row">${d[feature]}</th><td>${d[free]}</td><td>${d[pro]}</td></tr>`).join('')}</tbody></table></div></div>`;
+  const [free, monthly, permanent] = pricing.plans;
+  const payments = [monthly, permanent].map((plan, i) => `<div class="payment-option${i ? ' recommended' : ''}"><h4>${plan[0]}</h4><div class="payment-price">${plan[1]}<small>${i ? pricing.onceSuffix : pricing.monthlySuffix}</small></div><p>${plan[2]}</p>${installButton(plan[4], i ? 'btn btn-primary' : 'btn btn-outline')}</div>`).join('');
+  return `<div class="pricing-comparison" aria-labelledby="plan-comparison-title"><h3 id="plan-comparison-title" class="plan-sr-only">${d.title}</h3><p id="plan-comparison-note">${d.note}</p><div class="plan-comparison-cards"><article class="price-card plan-tier" data-plan="free" aria-labelledby="plan-free-title"><h3 id="plan-free-title">${d.free}</h3><div class="plan-tier-pricing"><div class="price">${free[1]}</div><p>${d.upToThree} · ${d.current}</p>${installButton(free[4], 'btn btn-outline')}</div>${features(d, false)}</article><article class="price-card plan-tier plan-tier-pro" data-plan="pro" aria-labelledby="plan-pro-title"><h3 id="plan-pro-title">Difmeil Pro<span class="price-tag">${d.pro}</span></h3><div class="plan-tier-pricing payment-options">${payments}</div>${features(d, true)}</article></div><p class="pricing-note">${pricing.note}</p></div><!-- end-pricing-comparison -->`;
 }

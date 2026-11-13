@@ -60,11 +60,14 @@ for (const page of pages) {
 
   test(`${page.lang}: compara Gratis y Pro con límites y funciones reales`, () => {
     const html = htmlFor(page.file);
-    const comparison = html.match(/<table class="plan-comparison" aria-describedby="plan-comparison-note">([\s\S]*?)<\/table>/)?.[1];
-    assert.ok(comparison, 'debe haber una comparativa junto a los precios');
-    assert.equal((comparison.match(/scope="col"/g) ?? []).length, 3);
-    assert.equal((comparison.match(/scope="row"/g) ?? []).length, 11);
-    assert.match(comparison, /Pro/);
+    const comparison = html.match(/<div class="pricing-comparison"([\s\S]*?)<!-- end-pricing-comparison -->/)?.[1];
+    assert.ok(comparison, 'precios y funciones deben compartir las mismas tarjetas');
+    assert.equal((comparison.match(/data-plan="/g) ?? []).length, 2);
+    assert.equal((comparison.match(/data-included="false"/g) ?? []).length, 6);
+    assert.equal((comparison.match(/data-included="true"/g) ?? []).length, 16);
+    assert.equal((comparison.match(/class="payment-option/g) ?? []).length, 2);
+    assert.match(comparison, /<svg/);
+    assert.doesNotMatch(comparison, /<table/);
     assert.match(html, /id="plan-comparison-note"/);
     assert.doesNotMatch(comparison, /billing\.|undefined/);
     assert.doesNotMatch(html, /Plantillas y acciones avanzadas|Templates and advanced actions|Modèles et actions avancées|Vorlagen und erweiterte Aktionen|Modelos e ações avançadas/);

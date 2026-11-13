@@ -22,6 +22,8 @@ responsivo para la entrega normal del navegador.
 La comparativa Gratis/Pro se define en `scripts/plan-comparison.mjs` y se incluye
 al generar las cinco portadas. Mantenerla alineada con las restricciones de
 licencia de la extensión; no anunciar funciones futuras como incluidas.
+Precios y funciones comparten dos tarjetas: Gratis separa incluidas y exclusivas
+de Pro con ticks/cruces SVG; Pro ofrece mensual/permanente y una sola lista.
 
 GitHub Pages sirve la raíz de `main` bajo el dominio definido en `CNAME`.
 Después de publicar, comprueba `/`, `/en/`, `/fr/`, `/de/` y `/pt/`.

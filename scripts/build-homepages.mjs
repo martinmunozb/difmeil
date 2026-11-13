@@ -337,7 +337,6 @@ function documentFor(d) {
 
   const cards = d.features.cards.map((card, index) => `<article class="bento-card"><div class="bento-icon">${[icons.search, icons.reply, icons.bell, icons.layers][index]}</div><h3>${card[0]}</h3><p>${card[1]}</p></article>`).join('');
   const steps = d.steps.items.map((item) => `<article class="step"><h3>${item[0]}</h3><p>${item[1]}</p></article>`).join('');
-  const prices = d.pricing.plans.map((plan, index) => `<article class="price-card${index === 2 ? ' featured' : ''}">${index === 2 ? `<span class="price-tag">${d.pricing.tag}</span>` : ''}<div class="price-name">${plan[0]}</div><div class="price">${plan[1]}${index === 1 ? `<small>${d.pricing.monthlySuffix}</small>` : index === 2 ? `<small>${d.pricing.onceSuffix}</small>` : ''}</div><div class="price-sub">${plan[2]}</div>${featureList(plan[3])}${installButton(plan[4], index === 2 ? 'btn btn-primary' : 'btn btn-outline')}</article>`).join('');
   const faqs = d.faq.items.map((item) => `<details><summary>${item[0]}</summary><p>${item[1]}</p></details>`).join('');
 
   return `<!DOCTYPE html>
@@ -448,9 +447,7 @@ function documentFor(d) {
     <section class="section section-soft" id="precios">
       <div class="wrap">
         <header class="section-heading centered"><p class="eyebrow">${d.pricing.eyebrow}</p><h2>${d.pricing.title}</h2><p>${d.pricing.lead}</p></header>
-        <div class="pricing-grid">${prices}</div>
-        <p class="pricing-note">${d.pricing.note}</p>
-        ${planComparison(d.lang)}
+        ${planComparison(d.lang, d.pricing, installButton)}
       </div>
     </section>
 

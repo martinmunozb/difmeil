@@ -911,49 +911,36 @@ h3 {
   align-items: stretch;
 }
 
-.plan-comparison-section { margin-block-start: 3rem; }
-.plan-comparison-section h3 { margin-block-end: 0.5rem; font-size: 1.45rem; }
-.plan-comparison-section > p { max-width: 72ch; color: var(--muted); }
-.plan-comparison-scroll {
-  max-inline-size: 100%;
-  overflow: auto;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--card);
-  box-shadow: var(--shadow-sm);
-}
-.plan-comparison-scroll:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
-.plan-comparison {
-  inline-size: 100%;
-  min-inline-size: 32rem;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 0.88rem;
-}
-.plan-comparison caption {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-.plan-comparison th, .plan-comparison td {
-  padding: 1rem 1.25rem;
-  border-block-end: 1px solid var(--line);
-  text-align: start;
-  vertical-align: middle;
-}
-.plan-comparison thead th { font-size: 0.95rem; background: var(--card); }
-.plan-comparison tbody th {
-  position: sticky;
-  inset-inline-start: 0;
-  inline-size: 50%;
-  font-weight: 620;
-  background: var(--card);
-}
-.plan-comparison td { inline-size: 25%; }
-.plan-comparison th:last-child, .plan-comparison td:last-child { background: #faf0eb; }
-.plan-comparison tr:last-child > * { border-block-end: 0; }
+.pricing-comparison { container: pricing / inline-size; }
+#plan-comparison-note { max-inline-size: 66ch; margin: -1rem auto 2rem; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.plan-comparison-cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 1.25rem; align-items: start; }
+.plan-tier { min-inline-size: 0; }
+.plan-tier h3 { margin: 0 0 1.25rem; font-size: 1.4rem; letter-spacing: -0.035em; }
+.plan-tier.plan-tier-pro { border-color: var(--coral); background: linear-gradient(#fff4ef, var(--card) 22rem); }
+.plan-tier .price-tag { position: static; font-size: 0.65rem; margin-inline-start: 0.7rem; vertical-align: middle; }
+.plan-tier-pricing { margin-block-end: 2rem; }
+.plan-tier-pricing > p { color: var(--muted); font-size: 0.85rem; margin-block: 0.75rem 1.25rem; }
+.payment-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.payment-option { padding: 1.1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); display: flex; flex-direction: column; align-items: start; }
+.payment-option.recommended { border-color: var(--coral); }
+.payment-option h4 { margin: 0 0 0.8rem; font-size: 0.85rem; }
+.payment-price { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 850; line-height: 1.1; letter-spacing: -0.05em; }
+.payment-price small { display: block; margin-block-start: 0.3rem; font-size: 0.75rem; letter-spacing: 0; font-weight: 550; color: var(--muted); }
+.payment-option p { margin-block: 0.8rem 1.1rem; font-size: 0.75rem; color: var(--muted); flex: 1; }
+.payment-option .btn { padding-inline: 0.7rem; font-size: 0.75rem; min-height: 44px; }
+.plan-feature-groups { display: grid; gap: 1.75rem; }
+.plan-feature-groups h4 { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.75rem; font-weight: 750; letter-spacing: 0.04em; text-transform: uppercase; }
+.plan-feature-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.9rem; }
+.plan-feature-list li { display: flex; gap: 0.7rem; align-items: start; font-size: 0.86rem; line-height: 1.45; }
+.plan-feature-list small { display: block; color: var(--muted); margin-block-start: 0.25rem; }
+.plan-feature-status { flex: none; display: grid; place-items: center; inline-size: 23px; block-size: 23px; background: #e8f2ed; color: #276247; border-radius: 50%; }
+.plan-feature-status svg { inline-size: 15px; block-size: 15px; }
+.plan-excluded .plan-feature-status { background: #efede8; color: #716c64; }
+.plan-excluded .plan-feature-label { color: var(--muted); }
+.plan-sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@container pricing (max-width: 760px) { .plan-comparison-cards { grid-template-columns: minmax(0, 1fr); } }
+@container pricing (max-width: 440px) { .payment-options { grid-template-columns: minmax(0, 1fr); } .payment-option .btn { inline-size: auto; } }
+@media (forced-colors: active) { .plan-feature-status { border: 1px solid currentColor; } }
 
 .price-card {
   position: relative;
