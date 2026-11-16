@@ -27,3 +27,22 @@ de Pro con ticks/cruces SVG; Pro ofrece mensual/permanente y una sola lista.
 
 GitHub Pages sirve la raíz de `main` bajo el dominio definido en `CNAME`.
 Después de publicar, comprueba `/`, `/en/`, `/fr/`, `/de/` y `/pt/`.
+
+## Instalación desde OpenAI Ads (preparada, sin publicar)
+
+`/instalar/` conserva `oppref` con consentimiento explícito antes de abrir la
+tienda. El usuario instala, vuelve/recarga la página y pulsa Continuar antes
+de conectar Gmail. `assets/ads-install.mjs` transfiere la referencia mediante
+la API externa de Chrome a `eojoffejiddgjbjgkkgkfhccgofjejad`. Requiere una
+versión de la extensión que acepte ese puente. No hay claves, Pixel ni correos
+en esta página. La referencia caduca para su uso a los 30 días.
+
+Destino del anuncio: `https://difmeil.com/instalar/`. Parámetros:
+`utm_source=chatgpt&utm_medium=cpc&utm_campaign=difmeil_launch&utm_content=ad_es&oppref={oppref}`.
+Publicar esta web y la extensión antes de cambiar el destino del anuncio.
+Detalle de backend, deduplicación, pruebas y limitaciones: `docs/OPENAI_ADS.md`
+en el repositorio de la extensión. No se ha cambiado la portada ni su generador.
+
+```powershell
+node --test tests/*.test.mjs
+```

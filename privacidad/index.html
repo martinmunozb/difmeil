@@ -125,6 +125,7 @@
     <li>Ejecutar acciones solicitadas por el usuario, como marcar correos como leídos, archivarlos, eliminarlos o enviarlos.</li>
     <li>Mejorar la experiencia de uso dentro de la extensión.</li>
     <li>Mantener la seguridad y el correcto funcionamiento del servicio.</li>
+    <li>Medir las primeras activaciones de Difmeil y, con el consentimiento descrito abajo, su relación con anuncios de OpenAI.</li>
   </ul>
 
   <h2>Uso de datos de Google</h2>
@@ -192,11 +193,12 @@
     <li>Un identificador de evento generado al azar, que evita que OpenAI cuente dos veces la misma conversión.</li>
     <li>La fecha y la hora, y el tipo de evento («registro completado»).</li>
     <li>Una marca que indica que el evento no debe usarse para personalización publicitaria.</li>
+    <li>Solo con tu consentimiento en la página de instalación: la referencia opaca del clic de OpenAI (<code>oppref</code>), que permite intentar atribuir la activación al anuncio.</li>
   </ul>
   <p>El aviso no contiene tu correo electrónico (ni una versión cifrada de él),
   tu nombre, tu dirección IP ni datos de tu navegador, el identificador de tu
   cuenta de Difmeil, correos, contactos, tokens de acceso, datos obtenidos de
-  las APIs de Google ni ningún identificador de clic publicitario. Como se
+  las APIs de Google. Como se
   envía desde nuestro servidor, OpenAI recibe la dirección IP de ese servidor,
   no la tuya.</p>
   <p><strong>Identificadores.</strong> El identificador del evento es un
@@ -206,20 +208,32 @@
   directamente, pero no podemos descartar que lo combine con otra información
   de la que ya disponga. OpenAI trata los datos recibidos conforme a sus
   propias condiciones y política de privacidad, y puede hacerlo fuera del
-  Espacio Económico Europeo. Difmeil no recoge ni envía el identificador de
-  clic de OpenAI (<code>oppref</code>): los anuncios llevan a Chrome Web
-  Store, que no lo transmite a la extensión. Por eso la conversión no se
-  vincula a un clic concreto.</p>
+  Espacio Económico Europeo. La referencia del anuncio se recoge únicamente
+  en nuestra página de instalación con tu permiso. Para transferirla, vuelve
+  a esa página tras instalar y pulsa Continuar antes de conectar Gmail.
+  Si accedes directamente a Chrome Web Store, no obtenemos esa referencia de
+  la tienda. No utilizamos direcciones de Gmail ni sus hashes para atribuir anuncios.</p>
   <p><strong>Base jurídica y derechos.</strong> Este tratamiento se basa en
   nuestro interés legítimo (art. 6.1.f del RGPD) en medir la eficacia de
-  nuestras campañas con el mínimo de datos posible. Puedes oponerte
+  nuestras campañas con el mínimo de datos posible. La recogida y transferencia
+  de la referencia del clic desde la página de instalación se realiza solo si
+  marcas su casilla de consentimiento; es opcional y no condiciona el uso de Difmeil.
+  Puedes desmarcarla antes de continuar para omitir la referencia. La retirada
+  local no cancela un envío ya iniciado ni elimina datos ya recibidos por OpenAI.
+  Puedes oponerte
   escribiendo a <a href="mailto:support@difmeil.com">support@difmeil.com</a>: eliminaremos de nuestra base de datos el registro
   asociado a tu cuenta y, si el aviso ya se hubiera enviado, te indicaremos
   cómo ejercer tus derechos ante OpenAI.</p>
   <p><strong>Conservación.</strong> El registro se conserva mientras exista tu
   cuenta de Difmeil y se elimina con ella. La extensión guarda además una marca
   local en tu navegador (<code>chrome.storage.local</code>) hasta que el
-  servidor da el envío por resuelto; después la borra.</p>
+  servidor da el envío por resuelto; después la borra. La referencia del clic
+  caduca para su uso local a los 30 días, comprobándose al volver a utilizarla.
+  En el servidor solo se conserva durante los reintentos pendientes y se borra
+  al resolverlos; los eventos pendientes caducan a los siete días al procesarse
+  de nuevo. El identificador mínimo de deduplicación permanece con tu cuenta.
+  Una reinstalación con la misma identidad no crea otro evento. No podemos
+  reconocer que dos identidades de Google distintas sean la misma persona.</p>
 
   <h2>Seguridad</h2>
   <p>Difmeil aplica medidas razonables para proteger los datos del usuario
