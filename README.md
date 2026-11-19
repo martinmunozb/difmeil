@@ -58,6 +58,30 @@ El envío del sitemap no garantiza la indexación.
 Referencias: [Google Search Central](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
 y [publicación en GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
+## SEO técnico y descubrimiento
+
+Consulta [SEO_AUDIT.md](SEO_AUDIT.md) para el diagnóstico, inventario de archivos,
+pruebas, comprobaciones reales de producción y pasos de despliegue.
+
+Las portadas incluyen `SoftwareApplication` sin ofertas ni valoraciones; sus
+funciones deben coincidir con el contenido visible y la extensión publicada.
+Conservar los dos grupos hreflang recíprocos (portadas y privacidad), canonical
+propia y x-default inglés. Las páginas auxiliares mantienen noindex.
+
+`llms.txt` es un resumen experimental complementario, no un requisito de
+buscadores ni una garantía de citas. Mantenerlo actualizado con las funciones y
+enlaces públicos; no añadir datos privados ni precios que puedan quedar obsoletos.
+
+Después de cambiar el generador, reconstruir y verificar:
+
+```powershell
+node scripts/build-homepages.mjs
+node --test tests/*.test.mjs
+```
+
+La auditoría deja pendientes la redirección HTTP a HTTPS en GitHub Pages y la
+revisión del contraste de un enlace en las políticas; ver detalle en el informe.
+
 ## Instalación desde OpenAI Ads (preparada, sin publicar)
 
 `/instalar/` conserva `oppref` con consentimiento explícito antes de abrir la

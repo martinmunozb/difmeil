@@ -31,7 +31,7 @@ const shared = {
     trust: ['Vista unificada de verdad', 'Correo directo entre tu navegador y Google', 'Español, English, Français, Deutsch y Português'],
     product: {
       eyebrow: 'Mira Difmeil por dentro', title: 'Menos saltos. Más control sobre tu correo.',
-      lead: 'No es otra capa encima de Gmail. Es una bandeja clara para trabajar con todas tus cuentas desde el mismo sitio.',
+      lead: 'Para quienes gestionan varias cuentas de Gmail y quieren leer, buscar y responder desde una misma bandeja, sin cambiar de perfil.',
       mainTitle: 'Todo el correo, ordenado por fecha',
       mainText: 'La bandeja unificada mezcla los mensajes de tus cuentas y conserva el color de cada una para que siempre sepas dónde estás.',
       bullets: ['Busca en todas las cuentas a la vez', 'Lee, responde, reenvía, archiva o elimina', 'Cambia a la vista de una sola cuenta cuando quieras'],
@@ -82,7 +82,8 @@ const shared = {
         ['¿Guardáis mis correos en algún servidor?', 'No. Difmeil no almacena tu correo en servidores propios. El cuerpo de un mensaje se descarga al abrirlo y no se persiste.'],
         ['¿Cuántas cuentas puedo conectar gratis?', 'Hasta 3. Puedes usar la bandeja unificada, leer, buscar, responder y organizar sin pagar.'],
         ['¿Qué pasa si dejo de pagar Pro?', 'Vuelves al plan Gratis. Las cuentas que ya estaban conectadas siguen accesibles, pero no puedes añadir otra mientras tengas 3 o más. Nunca bloqueamos tu correo por dejar de pagar.'],
-        ['¿Funciona fuera de Chrome?', 'Difmeil se distribuye en Chrome Web Store y puede instalarse en navegadores Chromium compatibles con esa tienda, como Edge, Brave u Opera.'],
+        ['¿Cómo instalo Difmeil?', 'Pulsa Añadir a Chrome para abrir la ficha oficial en Chrome Web Store. Instala la extensión, ábrela desde la barra del navegador y conecta tus cuentas con la autorización de Google.'],
+        ['¿Para quién está pensado Difmeil?', 'Para personas que gestionan varias cuentas de Gmail, por ejemplo personales y de trabajo, y necesitan consultar y organizar su correo desde una sola bandeja.'],
       ],
     },
     closing: { title: 'Tu correo ya está repartido. Tu atención no tiene por qué estarlo.', text: 'Reúne tus cuentas de Gmail y vuelve a tener claro qué ha llegado, dónde y cuándo.', cta: 'Añadir a Chrome — gratis' },
@@ -102,7 +103,7 @@ const shared = {
     trust: ['A genuinely unified inbox', 'Mail goes directly between your browser and Google', 'Español, English, Français, Deutsch and Português'],
     product: {
       eyebrow: 'See Difmeil in action', title: 'Fewer jumps. More control over your email.',
-      lead: 'Not another layer on top of Gmail. A clear inbox where you can work with every account from one place.',
+      lead: 'For people managing several Gmail accounts who want to read, search and reply from one inbox without switching profiles.',
       mainTitle: 'Every message, ordered by date', mainText: 'The unified inbox combines messages from all your accounts and keeps each account color visible, so you always know where you are.',
       bullets: ['Search every account at once', 'Read, reply, forward, archive or delete', 'Switch to a single-account view whenever you need it'],
       alts: ['Difmeil unified inbox with messages from several Gmail accounts', 'Difmeil quick window showing several connected accounts', 'Difmeil appearance settings with language, theme and density controls'],
@@ -148,7 +149,8 @@ const shared = {
         ['Do you store my emails on a server?', 'No. Difmeil does not store your mail on its own servers. A message body downloads when you open it and is not persisted.'],
         ['How many accounts can I connect for free?', 'Up to 3. You can use the unified inbox, read, search, reply and organize without paying.'],
         ['What happens if I stop paying for Pro?', 'You return to the Free plan. Accounts that were already connected remain accessible, but you cannot add another while you have 3 or more. We never block your email because you stopped paying.'],
-        ['Does it work outside Chrome?', 'Difmeil is distributed through Chrome Web Store and can be installed in Chromium browsers that support the store, such as Edge, Brave or Opera.'],
+        ['How do I install Difmeil?', 'Select Add to Chrome to open the official Chrome Web Store listing. Install the extension, open it from your browser toolbar and connect your accounts through Google authorization.'],
+        ['Who is Difmeil for?', 'People managing several Gmail accounts, such as personal and work accounts, who need to check and organize their email from one inbox.'],
       ],
     },
     closing: { title: 'Your email is already scattered. Your attention does not have to be.', text: 'Bring your Gmail accounts together and know what arrived, where and when.', cta: 'Add to Chrome — free' },
@@ -168,7 +170,7 @@ const shared = {
     trust: ['Une vraie boîte unifiée', 'Le courrier va directement de votre navigateur à Google', 'Español, English, Français, Deutsch et Português'],
     product: {
       eyebrow: 'Découvrez Difmeil', title: 'Moins d’allers-retours. Plus de contrôle sur vos e-mails.',
-      lead: 'Pas une couche de plus sur Gmail. Une boîte claire pour travailler avec tous vos comptes au même endroit.',
+      lead: 'Pour les personnes qui gèrent plusieurs comptes Gmail et souhaitent lire, rechercher et répondre depuis une seule boîte, sans changer de profil.',
       mainTitle: 'Tous les messages, classés par date', mainText: 'La boîte unifiée rassemble les messages de vos comptes tout en conservant la couleur de chacun pour que vous sachiez toujours où vous êtes.',
       bullets: ['Recherchez dans tous les comptes à la fois', 'Lisez, répondez, transférez, archivez ou supprimez', 'Passez à la vue d’un seul compte quand vous le souhaitez'],
       alts: ['Boîte de réception unifiée Difmeil avec plusieurs comptes Gmail', 'Fenêtre rapide Difmeil affichant plusieurs comptes connectés', 'Réglages d’apparence Difmeil avec langue, thème et densité'],
@@ -194,7 +196,7 @@ const shared = {
     },
     faq: {
       eyebrow: 'Sans petite ligne cachée', title: 'Questions avant l’installation',
-      items: [['Est-il sûr de donner accès à Gmail ?', 'La connexion utilise le parcours OAuth officiel de Google. Difmeil ne voit jamais votre mot de passe et vous pouvez révoquer l’accès à tout moment.'], ['Stockez-vous mes e-mails sur un serveur ?', 'Non. Difmeil ne stocke pas votre courrier sur ses propres serveurs. Le corps d’un message est téléchargé à l’ouverture puis n’est pas conservé.'], ['Combien de comptes puis-je connecter gratuitement ?', 'Jusqu’à 3. La boîte unifiée, la lecture, la recherche, les réponses et l’organisation restent gratuites.'], ['Que se passe-t-il si j’arrête Pro ?', 'Vous revenez au forfait Gratuit. Les comptes déjà connectés restent accessibles, mais vous ne pouvez pas en ajouter si vous en avez 3 ou plus. Votre courrier n’est jamais bloqué.'], ['Cela fonctionne-t-il en dehors de Chrome ?', 'Difmeil est distribué via le Chrome Web Store et peut être installé sur les navigateurs Chromium compatibles, comme Edge, Brave ou Opera.']],
+      items: [['Est-il sûr de donner accès à Gmail ?', 'La connexion utilise le parcours OAuth officiel de Google. Difmeil ne voit jamais votre mot de passe et vous pouvez révoquer l’accès à tout moment.'], ['Stockez-vous mes e-mails sur un serveur ?', 'Non. Difmeil ne stocke pas votre courrier sur ses propres serveurs. Le corps d’un message est téléchargé à l’ouverture puis n’est pas conservé.'], ['Combien de comptes puis-je connecter gratuitement ?', 'Jusqu’à 3. La boîte unifiée, la lecture, la recherche, les réponses et l’organisation restent gratuites.'], ['Que se passe-t-il si j’arrête Pro ?', 'Vous revenez au forfait Gratuit. Les comptes déjà connectés restent accessibles, mais vous ne pouvez pas en ajouter si vous en avez 3 ou plus. Votre courrier n’est jamais bloqué.'], ['Comment installer Difmeil ?', 'Cliquez sur Ajouter à Chrome pour ouvrir la fiche officielle du Chrome Web Store. Installez l’extension, ouvrez-la depuis la barre du navigateur et connectez vos comptes avec l’autorisation de Google.'], ['À qui s’adresse Difmeil ?', 'Aux personnes qui gèrent plusieurs comptes Gmail, par exemple personnels et professionnels, et souhaitent consulter et organiser leurs e-mails depuis une seule boîte.']],
     },
     closing: { title: 'Vos e-mails sont déjà dispersés. Votre attention n’a pas à l’être.', text: 'Réunissez vos comptes Gmail et sachez ce qui est arrivé, où et quand.', cta: 'Ajouter à Chrome — gratuit' },
     footer: { tagline: 'Tous vos comptes Gmail dans une seule boîte, avec notifications et apparence sous votre contrôle.', product: 'Produit', legal: 'Mentions légales', contact: 'Contact', privacy: 'Confidentialité', support: 'Assistance', made: 'Pensé pour celles et ceux qui vivent entre plusieurs boîtes.' },
@@ -213,7 +215,7 @@ const shared = {
     trust: ['Ein wirklich gemeinsamer Posteingang', 'E-Mails gehen direkt zwischen deinem Browser und Google', 'Español, English, Français, Deutsch und Português'],
     product: {
       eyebrow: 'Difmeil von innen', title: 'Weniger Wechsel. Mehr Kontrolle über deine E-Mails.',
-      lead: 'Keine weitere Ebene über Gmail. Ein klarer Posteingang für alle Konten an einem Ort.',
+      lead: 'Für alle, die mehrere Gmail-Konten verwalten und E-Mails in einem Posteingang lesen, suchen und beantworten möchten, ohne das Profil zu wechseln.',
       mainTitle: 'Alle Nachrichten nach Datum sortiert', mainText: 'Der gemeinsame Posteingang vereint Nachrichten aus allen Konten und behält deren Farben bei, damit du immer weißt, wo du bist.',
       bullets: ['Alle Konten gleichzeitig durchsuchen', 'Lesen, antworten, weiterleiten, archivieren oder löschen', 'Bei Bedarf zur Ansicht eines einzelnen Kontos wechseln'],
       alts: ['Gemeinsamer Difmeil-Posteingang mit mehreren Gmail-Konten', 'Difmeil-Schnellfenster mit mehreren verbundenen Konten', 'Difmeil-Darstellungseinstellungen mit Sprache, Design und Dichte'],
@@ -239,7 +241,7 @@ const shared = {
     },
     faq: {
       eyebrow: 'Kein verstecktes Kleingedrucktes', title: 'Fragen vor der Installation',
-      items: [['Ist der Zugriff auf Gmail sicher?', 'Die Verbindung nutzt Googles offiziellen OAuth-Ablauf. Difmeil sieht dein Passwort nie und du kannst den Zugriff jederzeit im Google-Konto widerrufen.'], ['Speichert ihr meine E-Mails auf einem Server?', 'Nein. Difmeil speichert deine E-Mails nicht auf eigenen Servern. Ein Nachrichtentext wird erst beim Öffnen geladen und nicht dauerhaft gespeichert.'], ['Wie viele Konten sind kostenlos?', 'Bis zu 3. Gemeinsamer Posteingang, Lesen, Suche, Antworten und Organisation bleiben kostenlos.'], ['Was passiert, wenn ich Pro kündige?', 'Du kehrst zum kostenlosen Tarif zurück. Bereits verbundene Konten bleiben erreichbar, aber mit 3 oder mehr kannst du kein weiteres hinzufügen. Deine E-Mails werden nie blockiert.'], ['Funktioniert es außerhalb von Chrome?', 'Difmeil wird über den Chrome Web Store verteilt und kann in kompatiblen Chromium-Browsern wie Edge, Brave oder Opera installiert werden.']],
+      items: [['Ist der Zugriff auf Gmail sicher?', 'Die Verbindung nutzt Googles offiziellen OAuth-Ablauf. Difmeil sieht dein Passwort nie und du kannst den Zugriff jederzeit im Google-Konto widerrufen.'], ['Speichert ihr meine E-Mails auf einem Server?', 'Nein. Difmeil speichert deine E-Mails nicht auf eigenen Servern. Ein Nachrichtentext wird erst beim Öffnen geladen und nicht dauerhaft gespeichert.'], ['Wie viele Konten sind kostenlos?', 'Bis zu 3. Gemeinsamer Posteingang, Lesen, Suche, Antworten und Organisation bleiben kostenlos.'], ['Was passiert, wenn ich Pro kündige?', 'Du kehrst zum kostenlosen Tarif zurück. Bereits verbundene Konten bleiben erreichbar, aber mit 3 oder mehr kannst du kein weiteres hinzufügen. Deine E-Mails werden nie blockiert.'], ['Wie installiere ich Difmeil?', 'Klicke auf Zu Chrome hinzufügen, um den offiziellen Eintrag im Chrome Web Store zu öffnen. Installiere die Erweiterung, öffne sie über die Browserleiste und verbinde deine Konten mit der Autorisierung von Google.'], ['Für wen ist Difmeil gedacht?', 'Für Personen mit mehreren Gmail-Konten, etwa privaten und beruflichen Konten, die ihre E-Mails in einem Posteingang lesen und organisieren möchten.']],
     },
     closing: { title: 'Deine E-Mails sind schon verteilt. Deine Aufmerksamkeit muss es nicht sein.', text: 'Vereine deine Gmail-Konten und behalte im Blick, was wann und wo angekommen ist.', cta: 'Zu Chrome hinzufügen — kostenlos' },
     footer: { tagline: 'Alle deine Gmail-Konten in einem Posteingang – mit Benachrichtigungen und Darstellung unter deiner Kontrolle.', product: 'Produkt', legal: 'Rechtliches', contact: 'Kontakt', privacy: 'Datenschutz', support: 'Support', made: 'Für Menschen, die zwischen mehreren Posteingängen leben.' },
@@ -258,7 +260,7 @@ const shared = {
     trust: ['Uma caixa realmente unificada', 'O correio vai direto entre seu navegador e o Google', 'Español, English, Français, Deutsch e Português'],
     product: {
       eyebrow: 'Veja o Difmeil por dentro', title: 'Menos trocas. Mais controle sobre seu correio.',
-      lead: 'Não é outra camada em cima do Gmail. É uma caixa clara para trabalhar com todas as contas no mesmo lugar.',
+      lead: 'Para quem gerencia várias contas do Gmail e quer ler, buscar e responder em uma só caixa de entrada, sem trocar de perfil.',
       mainTitle: 'Todas as mensagens por data', mainText: 'A caixa unificada combina mensagens das suas contas e mantém a cor de cada uma para você sempre saber onde está.',
       bullets: ['Busque em todas as contas de uma vez', 'Leia, responda, encaminhe, arquive ou exclua', 'Mude para a visão de uma conta quando quiser'],
       alts: ['Caixa unificada do Difmeil com mensagens de várias contas do Gmail', 'Janela rápida do Difmeil mostrando várias contas conectadas', 'Configurações de aparência do Difmeil com idioma, tema e densidade'],
@@ -284,7 +286,7 @@ const shared = {
     },
     faq: {
       eyebrow: 'Sem letras pequenas escondidas', title: 'Dúvidas antes de instalar',
-      items: [['É seguro dar acesso ao Gmail?', 'A conexão usa o fluxo oficial do Google OAuth. O Difmeil nunca vê sua senha e você pode revogar o acesso pela conta do Google quando quiser.'], ['Vocês guardam meus e-mails em um servidor?', 'Não. O Difmeil não armazena seu correio em servidores próprios. O corpo da mensagem é baixado ao abrir e não fica salvo.'], ['Quantas contas posso conectar grátis?', 'Até 3. Você pode usar a caixa unificada, ler, buscar, responder e organizar sem pagar.'], ['O que acontece se eu parar de pagar o Pro?', 'Você volta ao plano Grátis. As contas conectadas continuam acessíveis, mas não é possível adicionar outra enquanto houver 3 ou mais. O correio nunca é bloqueado.'], ['Funciona fora do Chrome?', 'O Difmeil é distribuído pela Chrome Web Store e pode ser instalado em navegadores Chromium compatíveis, como Edge, Brave ou Opera.']],
+      items: [['É seguro dar acesso ao Gmail?', 'A conexão usa o fluxo oficial do Google OAuth. O Difmeil nunca vê sua senha e você pode revogar o acesso pela conta do Google quando quiser.'], ['Vocês guardam meus e-mails em um servidor?', 'Não. O Difmeil não armazena seu correio em servidores próprios. O corpo da mensagem é baixado ao abrir e não fica salvo.'], ['Quantas contas posso conectar grátis?', 'Até 3. Você pode usar a caixa unificada, ler, buscar, responder e organizar sem pagar.'], ['O que acontece se eu parar de pagar o Pro?', 'Você volta ao plano Grátis. As contas conectadas continuam acessíveis, mas não é possível adicionar outra enquanto houver 3 ou mais. O correio nunca é bloqueado.'], ['Como instalo o Difmeil?', 'Clique em Adicionar ao Chrome para abrir a página oficial na Chrome Web Store. Instale a extensão, abra pela barra do navegador e conecte suas contas com a autorização do Google.'], ['Para quem é o Difmeil?', 'Para pessoas que gerenciam várias contas do Gmail, como contas pessoais e de trabalho, e precisam consultar e organizar seus e-mails em uma só caixa de entrada.']],
     },
     closing: { title: 'Seu correio já está espalhado. Sua atenção não precisa estar.', text: 'Reúna suas contas do Gmail e volte a saber o que chegou, onde e quando.', cta: 'Adicionar ao Chrome — grátis' },
     footer: { tagline: 'Todas as suas contas do Gmail em uma caixa, com notificações e aparência sob seu controle.', product: 'Produto', legal: 'Legal', contact: 'Contato', privacy: 'Privacidade', support: 'Suporte', made: 'Feito para quem vive entre várias caixas de entrada.' },
@@ -311,7 +313,7 @@ function installButton(label, className = 'btn btn-primary') {
 }
 
 function languages(current, mobile = false) {
-  return languageLinks.map((item) => `<a href="${item.href}" hreflang="${item.code}"${item.code === current ? ' aria-current="page"' : ''}>${mobile ? item.short : item.label}</a>`).join('');
+  return languageLinks.map((item) => `<a href="${item.href}" hreflang="${item.code}" lang="${item.code}"${item.code === current ? ' aria-current="page"' : ''}>${mobile ? item.short : item.label}</a>`).join('');
 }
 
 function featureList(items) {
@@ -326,13 +328,11 @@ function documentFor(d) {
   const navHrefs = ['#producto', '#funciones', '#privacidad', '#precios', '#faq'];
   const alternates = languageLinks.map((item) => `<link rel="alternate" hreflang="${item.code}" href="https://difmeil.com${item.href}" />`).join('\n');
   const jsonLd = JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Difmeil', applicationCategory: 'ProductivityApplication', operatingSystem: 'Chrome, Chromium',
-    description: d.description, url: d.canonical, downloadUrl: storeUrl, image: 'https://difmeil.com/assets/product/unified-inbox.png',
-    offers: [
-      { '@type': 'Offer', name: d.pricing.plans[0][0], price: '0', priceCurrency: 'EUR' },
-      { '@type': 'Offer', name: d.pricing.plans[1][0], price: '2', priceCurrency: 'EUR' },
-      { '@type': 'Offer', name: d.pricing.plans[2][0], price: '20', priceCurrency: 'EUR' },
-    ],
+    '@context': 'https://schema.org', '@type': 'SoftwareApplication', '@id': 'https://difmeil.com/#software',
+    name: 'Difmeil', applicationCategory: 'ProductivityApplication', softwareRequirements: 'Google Chrome',
+    description: d.description, url: d.canonical, installUrl: storeUrl, inLanguage: d.lang,
+    image: 'https://difmeil.com/assets/product/unified-inbox.png',
+    featureList: d.features.cards.map(([title]) => title),
   }, null, 2).replaceAll('<', '\\u003c');
 
   const cards = d.features.cards.map((card, index) => `<article class="bento-card"><div class="bento-icon">${[icons.search, icons.reply, icons.bell, icons.layers][index]}</div><h3>${card[0]}</h3><p>${card[1]}</p></article>`).join('');
@@ -376,7 +376,7 @@ function documentFor(d) {
     <div class="wrap header-inner">
       <a class="brand" href="${d.lang === 'es' ? '/' : `/${d.lang}/`}" aria-label="Difmeil"><img src="/assets/logo-mark.png" width="32" height="32" alt="" />Difmeil</a>
       <nav class="desktop-nav" aria-label="Difmeil">${d.nav.map((label, i) => `<a href="${navHrefs[i]}">${label}</a>`).join('')}</nav>
-      <div class="header-actions"><a class="language-link" href="#idiomas">${icons.globe}<span>${d.language}</span></a>${installButton(d.install, 'btn btn-primary btn-small')}<button class="menu-button" type="button" popovertarget="mobile-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="${d.menu}">${icons.menu}</button></div>
+      <div class="header-actions"><a class="language-link" href="#idiomas">${icons.globe}<span>${d.language}</span></a>${installButton(d.install, 'btn btn-primary btn-small')}<button class="menu-button" type="button" popovertarget="mobile-menu" aria-controls="mobile-menu" aria-label="${d.menu}">${icons.menu}</button></div>
     </div>
     <div class="mobile-menu" id="mobile-menu" popover>
       <nav aria-label="${d.menu}">${d.nav.map((label, i) => `<a href="${navHrefs[i]}">${label}</a>`).join('')}${installButton(d.install, 'btn btn-primary')}</nav>

@@ -1,0 +1,38 @@
+# Difmeil
+
+> Difmeil is a Chrome extension that brings multiple Gmail accounts into one inbox.
+
+It is intended for people managing several Gmail accounts, such as personal and
+work accounts. The extension provides a quick popup and a full-page inbox inside
+the browser. It is not a separate webmail service.
+
+Features include reading, composing, replying, forwarding with attachments,
+searching across accounts, notifications and bulk mail actions. Some notification
+and personalization options require Pro; the product pages describe plan limits.
+This summary does not replace those pages or the privacy policies.
+
+Install from the official Chrome Web Store listing, open the extension from the
+browser toolbar and authorize each Gmail account through Google OAuth. Requests
+to read and manage mail go directly between the browser and Google. An
+authorization service exchanges and refreshes tokens without storing them.
+
+This file is an experimental, complementary product summary. It is not an official
+search-engine requirement, an indexing guarantee or a guarantee of AI citations.
+It does not change the site's robots.txt policy.
+
+## Product and installation
+
+- [Español](https://difmeil.com/): Product, features, installation, plans and FAQ.
+- [English](https://difmeil.com/en/): Product, features, installation, plans and FAQ.
+- [Français](https://difmeil.com/fr/): Product, features, installation, plans and FAQ.
+- [Deutsch](https://difmeil.com/de/): Product, features, installation, plans and FAQ.
+- [Português](https://difmeil.com/pt/): Product, features, installation, plans and FAQ.
+- [Official Chrome Web Store listing](https://chromewebstore.google.com/detail/difmeil/eojoffejiddgjbjgkkgkfhccgofjejad): Install Difmeil.
+
+## Privacy
+
+- [Política de privacidad](https://difmeil.com/privacidad/): Español.
+- [Privacy policy](https://difmeil.com/en/privacy/): English.
+- [Politique de confidentialité](https://difmeil.com/fr/confidentialite/): Français.
+- [Datenschutzerklärung](https://difmeil.com/de/datenschutz/): Deutsch.
+- [Política de privacidade](https://difmeil.com/pt/privacidade/): Português.

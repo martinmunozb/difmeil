@@ -7,6 +7,7 @@ if (mobileMenu && menuButton) {
   if (!hasPopover) {
     mobileMenu.hidden = true;
     menuButton.removeAttribute('popovertarget');
+    menuButton.setAttribute('aria-expanded', 'false');
     menuButton.addEventListener('click', () => {
       const willOpen = mobileMenu.hidden;
       mobileMenu.hidden = !willOpen;
@@ -20,17 +21,15 @@ if (mobileMenu && menuButton) {
         menuButton.focus();
       }
     });
-  } else {
-    mobileMenu.addEventListener('toggle', (event) => {
-      menuButton.setAttribute('aria-expanded', String(event.newState === 'open'));
-    });
   }
 
   mobileMenu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       if (hasPopover && mobileMenu.matches(':popover-open')) mobileMenu.hidePopover();
-      if (!hasPopover) mobileMenu.hidden = true;
-      menuButton.setAttribute('aria-expanded', 'false');
+      if (!hasPopover) {
+        mobileMenu.hidden = true;
+        menuButton.setAttribute('aria-expanded', 'false');
+      }
     });
   });
 }
