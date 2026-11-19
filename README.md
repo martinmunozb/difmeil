@@ -28,6 +28,36 @@ de Pro con ticks/cruces SVG; Pro ofrece mensual/permanente y una sola lista.
 GitHub Pages sirve la raíz de `main` bajo el dominio definido en `CNAME`.
 Después de publicar, comprueba `/`, `/en/`, `/fr/`, `/de/` y `/pt/`.
 
+## Sitemap e indexación
+
+`sitemap.xml` y `robots.txt` son archivos estáticos en la raíz que publica
+GitHub Pages (`main`, `/`), junto a `CNAME`. No dependen de ejecutar Node en
+GitHub ni de copiar archivos a `dist`. El generador de portadas no los modifica.
+
+El sitemap incluye las cinco portadas y las cinco políticas de privacidad,
+con HTTPS, dominio canónico y barra final. Excluye instalación, referidos,
+QR, partners, URLs de la extensión, parámetros y fragmentos. Al añadir o retirar
+una página pública indexable, actualizar `sitemap.xml` y ejecutar:
+
+```powershell
+node scripts/build-homepages.mjs
+node --test tests/*.test.mjs
+[xml]$sitemap = Get-Content -Raw -Encoding UTF8 sitemap.xml
+```
+
+Para publicar estos cambios, incluir `sitemap.xml`, `robots.txt`,
+`tests/sitemap.test.mjs` y esta documentación en un commit y subirlo a `main`.
+Esperar a que termine correctamente el despliegue de Pages y comprobar que
+`https://difmeil.com/sitemap.xml` responde HTTP 200 con XML (no HTML/404), y que
+`https://difmeil.com/robots.txt` responde 200 con la referencia al sitemap.
+En Google Search Console, seleccionar la propiedad verificada de `difmeil.com`,
+abrir **Sitemaps** y enviar `https://difmeil.com/sitemap.xml`. Revisar después
+su procesamiento y usar **Inspección de URLs** para las páginas prioritarias.
+El envío del sitemap no garantiza la indexación.
+
+Referencias: [Google Search Central](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+y [publicación en GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
 ## Instalación desde OpenAI Ads (preparada, sin publicar)
 
 `/instalar/` conserva `oppref` con consentimiento explícito antes de abrir la
