@@ -21,6 +21,7 @@
     --muted: #5f6368;
     --border: #e8eaed;
     --link: #1a73e8;
+    --link-strong: #185abc;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -29,6 +30,7 @@
       --muted: #9aa0a6;
       --border: #3c4043;
       --link: #8ab4f8;
+      --link-strong: #8ab4f8;
     }
   }
   * { box-sizing: border-box; }
@@ -76,6 +78,7 @@
     margin: 12px 0 24px;
   }
   .responsable p { margin: 4px 0; }
+  .responsable a { color: var(--link-strong); }
 </style>
 </head>
 <body>
