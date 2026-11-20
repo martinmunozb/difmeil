@@ -29,6 +29,19 @@ It does not change the site's robots.txt policy.
 - [Português](https://difmeil.com/pt/): Product, features, installation, plans and FAQ.
 - [Official Chrome Web Store listing](https://chromewebstore.google.com/detail/difmeil/eojoffejiddgjbjgkkgkfhccgofjejad): Install Difmeil.
 
+## Gmail guides
+
+- [Cómo gestionar varias cuentas de Gmail en una sola bandeja](https://difmeil.com/guias/gestionar-varias-cuentas-gmail/): Español.
+- [Cómo recibir notificaciones de varias cuentas de Gmail](https://difmeil.com/guias/notificaciones-varias-cuentas-gmail/): Español.
+- [How to Manage Multiple Gmail Accounts in One Inbox](https://difmeil.com/en/guides/manage-multiple-gmail-accounts/): English.
+- [How to Get Notifications from Multiple Gmail Accounts](https://difmeil.com/en/guides/notifications-multiple-gmail-accounts/): English.
+- [Gérer plusieurs comptes Gmail dans une seule boîte de réception](https://difmeil.com/fr/guides/gerer-plusieurs-comptes-gmail/): Français.
+- [Recevoir les notifications de plusieurs comptes Gmail](https://difmeil.com/fr/guides/notifications-plusieurs-comptes-gmail/): Français.
+- [Mehrere Gmail-Konten in einem Posteingang verwalten](https://difmeil.com/de/ratgeber/mehrere-gmail-konten-verwalten/): Deutsch.
+- [Benachrichtigungen von mehreren Gmail-Konten erhalten](https://difmeil.com/de/ratgeber/benachrichtigungen-mehrere-gmail-konten/): Deutsch.
+- [Como gerenciar várias contas do Gmail em uma só caixa de entrada](https://difmeil.com/pt/guias/gerenciar-varias-contas-gmail/): Português.
+- [Como receber notificações de várias contas do Gmail](https://difmeil.com/pt/guias/notificacoes-varias-contas-gmail/): Português.
+
 ## Privacy
 
 - [Política de privacidad](https://difmeil.com/privacidad/): Español.

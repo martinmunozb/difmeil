@@ -32,9 +32,9 @@ Después de publicar, comprueba `/`, `/en/`, `/fr/`, `/de/` y `/pt/`.
 
 `sitemap.xml` y `robots.txt` son archivos estáticos en la raíz que publica
 GitHub Pages (`main`, `/`), junto a `CNAME`. No dependen de ejecutar Node en
-GitHub ni de copiar archivos a `dist`. El generador de portadas no los modifica.
+GitHub ni de copiar archivos a `dist`. El generador de portadas no los modifica. El generador de guías añade sus URLs al sitemap sin eliminar las existentes y actualiza su sección de llms.txt; no cambia robots.txt.
 
-El sitemap incluye las cinco portadas y las cinco políticas de privacidad,
+El sitemap incluye las cinco portadas, las cinco políticas de privacidad y diez guías de Gmail,
 con HTTPS, dominio canónico y barra final. Excluye instalación, referidos,
 QR, partners, URLs de la extensión, parámetros y fragmentos. Al añadir o retirar
 una página pública indexable, actualizar `sitemap.xml` y ejecutar:
@@ -78,6 +78,39 @@ Después de cambiar el generador, reconstruir y verificar:
 node scripts/build-homepages.mjs
 node --test tests/*.test.mjs
 ```
+
+## Guías editoriales en cinco idiomas
+
+Las dos guías de Gmail se mantienen en `scripts/guides/{es,en,fr,de,pt}.json`.
+Cada fichero contiene todos los textos del idioma: interfaz, metadatos, artículos,
+tablas, FAQs, pies y textos alternativos. No hay traducción en tiempo de ejecución
+ni contenido principal dependiente de JavaScript.
+
+`scripts/guides/config.mjs` define rutas, idiomas y páginas de privacidad.
+`scripts/guides/render.mjs` mantiene el HTML común y las tarjetas de portada.
+`scripts/build-guides.mjs` genera las diez páginas, añade las rutas que falten al
+sitemap sin eliminar las anteriores y actualiza la sección de guías de llms.txt.
+No cambia robots.txt. Las cinco portadas enlazan ambas guías mediante su generador.
+No editar directamente los HTML generados.
+
+```powershell
+node scripts/build-guides.mjs
+node scripts/build-homepages.mjs
+node --test tests/*.test.mjs
+python -m http.server 8766 --bind 127.0.0.1
+```
+
+Abrir `http://127.0.0.1:8766/guias/gestionar-varias-cuentas-gmail/` o la portada
+del idioma deseado y su sección de guías. El selector de idioma conserva el
+artículo que se está leyendo. La URL inglesa original y sus fragmentos permanecen.
+
+Consultar [GMAIL_GUIDE_REVIEW.md](GMAIL_GUIDE_REVIEW.md) para las diez URLs,
+fuentes, archivos, validaciones y capturas. Al cambiar funciones o instalación,
+contrastar primero con documentación y código de `../difmeil`; actualizar todas
+las versiones y la fecha de revisión visible solo después de verificarlas.
+Las capturas actuales reutilizan únicamente la imagen segura de Ajustes,
+identificada como interfaz en español en cada idioma. No inventar capturas ni
+utilizar mensajes o datos personales. El servidor de vista previa no publica.
 
 La auditoría deja pendientes la redirección HTTP a HTTPS en GitHub Pages y la
 revisión del contraste de un enlace en las políticas; ver detalle en el informe.

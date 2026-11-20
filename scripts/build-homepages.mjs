@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { planComparison } from './plan-comparison.mjs';
+import { guideCards } from './guides/render.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const storeUrl = 'https://chromewebstore.google.com/detail/difmeil/eojoffejiddgjbjgkkgkfhccgofjejad';
@@ -458,6 +459,8 @@ function documentFor(d) {
       </div>
     </section>
 
+    ${guideCards(d.lang)}
+
     <section class="closing">
       <div class="wrap closing-card"><div><h2>${d.closing.title}</h2><p>${d.closing.text}</p></div>${installButton(d.closing.cta, 'btn btn-dark')}</div>
     </section>
@@ -467,7 +470,7 @@ function documentFor(d) {
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-intro"><a class="brand" href="${d.lang === 'es' ? '/' : `/${d.lang}/`}"><img src="/assets/logo-mark.png" width="32" height="32" alt="" />Difmeil</a><p>${d.footer.tagline}</p></div>
-        <div class="footer-col"><h2>${d.footer.product}</h2>${d.nav.slice(0, 4).map((label, i) => `<a href="${navHrefs[i]}">${label}</a>`).join('')}</div>
+        <div class="footer-col"><h2>${d.footer.product}</h2>${d.nav.slice(0, 4).map((label, i) => `<a href="${navHrefs[i]}">${label}</a>`).join('')}<a href="#guides">${({ es: 'Guías de Gmail', en: 'Gmail guides', fr: 'Guides Gmail', de: 'Gmail-Ratgeber', pt: 'Guias do Gmail' })[d.lang]}</a></div>
         <div class="footer-col"><h2>${d.footer.legal}</h2><a href="${d.privacyUrl}">${d.footer.privacy}</a><a href="mailto:support@difmeil.com">${d.footer.support}</a></div>
         <div class="footer-col" id="idiomas"><h2>${d.language}</h2>${languages(d.lang)}</div>
       </div>

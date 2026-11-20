@@ -24,7 +24,7 @@ function indexablePages(directory = '') {
 test('el sitemap publicado contiene todas y solo las páginas reales, canónicas e indexables', () => {
   const xml = read('sitemap.xml');
   // Gramática deliberadamente limitada al formato estático usado por este sitio.
-  assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">\s*(?:<url><loc>https:\/\/difmeil\.com\/[a-z/]*<\/loc><\/url>\s*)+<\/urlset>\s*$/);
+  assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">\s*(?:<url><loc>https:\/\/difmeil\.com\/[a-z/-]*<\/loc><\/url>\s*)+<\/urlset>\s*$/);
   const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
   assert.equal(urls.length, new Set(urls).size, 'URLs duplicadas');
   assert.deepEqual(urls.sort(), indexablePages().sort());

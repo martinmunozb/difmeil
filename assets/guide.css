@@ -1,0 +1,80 @@
+/* Article layout; the site's existing stylesheet owns brand and controls. */
+.guide-hero { padding-block: 2rem 3.5rem; }
+.guide-breadcrumb { display: flex; flex-wrap: wrap; gap: .7rem; margin-block-end: 3rem; color: var(--muted); font-size: .9rem; }
+.guide-breadcrumb a { text-underline-offset: .2em; }
+.guide-hero h1 { max-width: 20ch; margin-block: 1rem 1.5rem; font-size: clamp(2.35rem, 5vw, 4.5rem); line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
+.guide-lead { max-width: 66ch; font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--muted); }
+.guide-meta { color: var(--muted); font-size: .9rem; }
+.guide-answer { max-width: 74ch; margin-block-start: 2rem; padding: 1.5rem 1.75rem; background: var(--gold-soft); border: 1px solid var(--gold); border-radius: var(--radius-md); }
+.guide-answer > strong { font-size: 1.1rem; }
+.guide-answer p { margin-block: .6rem; }
+.guide-answer a { display: inline-block; padding-block: .35rem; font-weight: 700; text-underline-offset: .2em; }
+.guide-layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-block-end: 5rem; }
+.guide-toc { position: sticky; top: 6.5rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+.guide-toc h2 { margin: 0 0 .75rem; font-size: 1rem; }
+.guide-toc ol { list-style: none; margin: 0; padding: 0; }
+.guide-toc a { display: block; padding-block: .5rem; font-size: .95rem; color: var(--muted); text-decoration: none; }
+.guide-toc a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.guide-body { min-width: 0; max-width: 76ch; font-size: 1.0625rem; line-height: 1.8; overflow-wrap: break-word; }
+.guide-body section { padding-block: .5rem 2rem; }
+.guide-body h2 { margin: 0 0 1.2rem; font-size: clamp(1.6rem, 3vw, 2.15rem); line-height: 1.2; letter-spacing: -.03em; text-wrap: balance; hyphens: auto; }
+.guide-body h3 { margin-block: 1.6rem .6rem; font-size: 1.2rem; line-height: 1.4; }
+.guide-body p { margin-block: 0 1.2rem; }
+.guide-body li { margin-block: .65rem; }
+.guide-body ul, .guide-steps { padding-inline-start: 1.5rem; }
+.guide-body a:not(.btn) { text-underline-offset: .2em; text-decoration-thickness: 1px; }
+.guide-body a { overflow-wrap: anywhere; }
+.guide-source, .guide-table-hint { color: var(--muted); font-size: .9375rem; }
+.guide-note { margin-block: 1.5rem; padding: 1.25rem; background: var(--blue-soft); border-inline-start: 4px solid var(--blue); border-radius: var(--radius-sm); }
+.guide-note p { margin-block: .6rem 0; }
+.guide-table { max-width: 100%; overflow-x: auto; margin-block: 1rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--card); }
+.guide-table table { width: 100%; min-width: 42rem; border-collapse: collapse; font-size: .95rem; line-height: 1.6; }
+.guide-table caption { text-align: start; font-weight: 700; padding: 1rem; background: var(--paper-deep); }
+.guide-table th, .guide-table td { padding: 1rem; text-align: start; vertical-align: top; border-block-start: 1px solid var(--line); }
+.guide-table thead th { background: var(--paper); }
+.guide-table th[scope="row"] { width: 23%; }
+.guide-steps > li { padding-inline-start: .5rem; margin-block: 1.5rem; }
+.guide-steps > li::marker { color: var(--coral-dark); font-weight: 800; }
+.guide-steps h3 { margin-block-start: 0; }
+.guide-body .faq-list { max-width: none; }
+.guide-cta { padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--gold-soft); }
+.guide-cta .btn { max-width: 100%; white-space: normal; text-align: center; }
+.guide-cta .guide-meta { margin-block: 1rem 0; }
+.guide-topline { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 1rem 2rem; margin-block-end: 2rem; }
+.guide-topline .guide-breadcrumb { margin-block-end: 0; }
+.guide-languages { display: flex; flex-wrap: wrap; gap: .25rem .8rem; font-size: .9rem; }
+.guide-languages a { display: inline-flex; align-items: center; min-height: 2rem; text-underline-offset: .25em; }
+.guide-languages [aria-current="page"] { font-weight: 800; text-decoration: none; }
+.guide-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 4vw, 4rem); }
+.guide-hero-copy { min-width: 0; }
+.guide-hero-grid h1 { max-width: 24ch; font-size: clamp(2.1rem, 3.3vw, 3.4rem); overflow-wrap: break-word; }
+.guide-hero-cta { margin-block: 1.5rem; }
+.guide-hero-cta .btn, .guide-body .btn { max-width: 100%; white-space: normal; text-align: center; overflow-wrap: normal; }
+.guide-hero-image { margin: 0; min-width: 0; }
+.guide-hero-image picture { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
+.guide-hero-image img { width: 100%; height: auto; }
+.guide-hero-image figcaption { padding-block-start: .8rem; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+.guide-related { border-block-start: 1px solid var(--line); padding-block: 2rem; }
+.guide-related > a { font-size: 1.2rem; font-weight: 700; }
+.guide-page :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+@media (max-width: 980px) {
+  .guide-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .guide-hero-grid h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); max-width: 28ch; }
+  .guide-hero-image { max-width: 46rem; }
+  .guide-layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .guide-toc { position: static; }
+  .guide-toc ol { columns: 2; column-gap: 2rem; }
+  .guide-toc li { break-inside: avoid; }
+  .guide-body { max-width: none; }
+}
+@media (max-width: 540px) {
+  .guide-hero { padding-block: 1.25rem 2rem; }
+  .guide-breadcrumb { margin-block-end: 2rem; }
+  .guide-answer { padding: 1.25rem; }
+  .guide-toc ol { columns: 1; }
+  .guide-toc a { min-height: 2.75rem; }
+  .guide-page .header-inner { gap: .5rem; }
+  .guide-page .header-actions { gap: .4rem; }
+  .guide-page .header-actions .btn { padding-inline: .7rem; font-size: .875rem; }
+  .guide-languages a { min-height: 2.75rem; }
+}

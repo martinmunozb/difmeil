@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://difmeil.com/</loc></url>
   <url><loc>https://difmeil.com/en/</loc></url>
+  <url><loc>https://difmeil.com/en/guides/manage-multiple-gmail-accounts/</loc></url>
   <url><loc>https://difmeil.com/fr/</loc></url>
   <url><loc>https://difmeil.com/de/</loc></url>
   <url><loc>https://difmeil.com/pt/</loc></url>
@@ -10,4 +11,13 @@
   <url><loc>https://difmeil.com/fr/confidentialite/</loc></url>
   <url><loc>https://difmeil.com/de/datenschutz/</loc></url>
   <url><loc>https://difmeil.com/pt/privacidade/</loc></url>
+  <url><loc>https://difmeil.com/guias/gestionar-varias-cuentas-gmail/</loc></url>
+  <url><loc>https://difmeil.com/guias/notificaciones-varias-cuentas-gmail/</loc></url>
+  <url><loc>https://difmeil.com/en/guides/notifications-multiple-gmail-accounts/</loc></url>
+  <url><loc>https://difmeil.com/fr/guides/gerer-plusieurs-comptes-gmail/</loc></url>
+  <url><loc>https://difmeil.com/fr/guides/notifications-plusieurs-comptes-gmail/</loc></url>
+  <url><loc>https://difmeil.com/de/ratgeber/mehrere-gmail-konten-verwalten/</loc></url>
+  <url><loc>https://difmeil.com/de/ratgeber/benachrichtigungen-mehrere-gmail-konten/</loc></url>
+  <url><loc>https://difmeil.com/pt/guias/gerenciar-varias-contas-gmail/</loc></url>
+  <url><loc>https://difmeil.com/pt/guias/notificacoes-varias-contas-gmail/</loc></url>
 </urlset>
