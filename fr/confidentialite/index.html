@@ -84,7 +84,7 @@
 <body>
 <main>
   <h1>Politique de confidentialité de Difmeil</h1>
-  <p class="updated">Dernière mise à jour : 12 novembre 2026 ·
+  <p class="updated">Dernière mise à jour : 22 novembre 2026 ·
     <a href="/privacidad/" lang="es" hreflang="es">Español</a> ·
     <a href="/en/privacy/" lang="en" hreflang="en">English</a> ·
     <a href="/de/datenschutz/" lang="de" hreflang="de">Deutsch</a> ·
@@ -119,6 +119,7 @@
     <li>Statut de lecture, suivi, archivage ou autres actions d’organisation.</li>
     <li>Le contenu des e-mails, uniquement lorsque c’est nécessaire pour l’afficher à l’utilisateur dans l’extension.</li>
     <li>Des données techniques de base nécessaires au fonctionnement de l’extension.</li>
+    <li>Quelques données d’utilisation liées à votre compte Difmeil, décrites dans « Statistiques d’utilisation » ; les facultatives uniquement avec votre consentement.</li>
   </ul>
   <p>Difmeil ne vend pas les données personnelles de l’utilisateur et ne les
   utilise pas à des fins de publicité tierce.</p>
@@ -227,6 +228,79 @@
   aussi un indicateur local dans votre navigateur
   (<code>chrome.storage.local</code>) jusqu’à ce que le serveur considère
   l’envoi comme réglé ; elle le supprime ensuite.</p>
+
+  <h2>Compte Difmeil, abonnement et paiements</h2>
+  <p>Lorsque vous connectez votre premier compte Gmail, Difmeil crée son
+  propre compte lié à votre identité Google. Il y conserve votre adresse
+  e-mail, votre formule et l’état de l’abonnement (dates d’essai, de
+  renouvellement ou d’annulation), les identifiants client et d’abonnement
+  Stripe, votre code de parrainage et la personne qui vous a parrainé, et, si
+  vous les envoyez, vos réponses au formulaire d’avis.</p>
+  <p>Les paiements sont traités par Stripe selon sa propre politique de
+  confidentialité. Les données de votre carte sont traitées par Stripe et ne
+  parviennent jamais à Difmeil. Stripe nous envoie des notifications sur vos
+  paiements et votre abonnement (montants, dates, état et données de
+  facturation qu’elles contiennent, comme l’e-mail ou le pays), que nous
+  conservons comme justificatifs.</p>
+  <p><strong>Conservation.</strong> Les justificatifs de facturation
+  (notifications de Stripe et enregistrements de paiements, d’abonnements, de
+  commissions et d’octrois de Pro) sont conservés six ans (art. 30 du Code de
+  commerce espagnol) et ne sont pas supprimés pour ancienneté tant que vous
+  avez Lifetime, un abonnement en cours ou Pro offert. Les autres données du
+  compte sont conservées tant que votre compte Difmeil existe.</p>
+
+  <h2 id="usage-metrics">Statistiques d’utilisation</h2>
+  <p>Difmeil associe quelques données d’utilisation à votre compte Difmeil.
+  Elles n’incluent jamais d’e-mails, d’objets, d’expéditeurs, de contenu, de
+  contacts, d’adresses e-mail, de noms de comptes, de jetons, de pages
+  visitées ni aucune autre donnée obtenue via les API de Google.</p>
+  <p><strong>Toujours, car le service en a besoin :</strong></p>
+  <ul>
+    <li>Le nombre de comptes Gmail connectés. Il est envoyé lorsqu’il change et sert à vérifier que Difmeil a été utilisé avant d’accorder la récompense pour avis et à éviter les abus de cette récompense. Si vous avez connecté Gmail et que notre serveur l’a vérifié auprès de Google, la condition est considérée comme remplie même si votre version de l’extension ne l’a pas envoyé.</li>
+    <li>Les enregistrements générés par notre serveur lorsque vous choisissez une formule, envoyez votre avis ou utilisez un parrainage, ainsi que celui du rappel de fin d’essai (pour ne pas l’envoyer deux fois).</li>
+  </ul>
+  <p><strong>Uniquement avec votre consentement.</strong> Après la connexion
+  de Gmail, Difmeil vous demande, au plus sur trois jours différents, si vous
+  souhaitez partager des statistiques d’utilisation. Accepter et refuser sont
+  aussi simples l’un que l’autre, vous pouvez continuer à utiliser Difmeil
+  sans répondre, et ne pas répondre équivaut à ne pas accepter. Vous pouvez
+  changer d’avis à tout moment dans les Réglages. Si vous acceptez, Difmeil
+  enregistre :</p>
+  <ul>
+    <li>Les jours où vous ouvrez Difmeil et si c'était depuis la fenêtre ou depuis la boîte de réception (une marque par jour, avec la date mais sans l'heure, pas à chaque ouverture).</li>
+    <li>La première fois que vous ouvrez la boîte de réception complète.</li>
+    <li>Le fait que vous avez de nouveau utilisé Difmeil entre le 7e et le 13e jour après avoir connecté votre premier compte Gmail.</li>
+    <li>Le fait que l’invitation à laisser un avis vous a été montrée et que vous l’avez cliquée.</li>
+  </ul>
+  <p>Difmeil n’envoie ni le nombre d’e-mails que vous ouvrez ni le nombre de
+  démarrages de l’extension ; les valeurs envoyées par les versions
+  précédentes ont été supprimées. Ces décomptes n’existent que dans votre
+  navigateur, pour décider quand afficher l’invitation à laisser un avis.</p>
+  <p>Les statistiques sont analysées de manière agrégée (par exemple, combien
+  de personnes ont utilisé Difmeil une semaine donnée). Elles ne servent ni à
+  la publicité ni au profilage, ne sont envoyées ni à OpenAI ni à d’autres
+  annonceurs et ne sont pas vendues. Elles sont stockées chez notre
+  prestataire technique de base de données.</p>
+  <p><strong>Base juridique.</strong> Le nombre de comptes connectés et les
+  enregistrements du serveur sont traités pour fournir le service et gérer
+  l’abonnement et les récompenses (art. 6, par. 1, point b, du RGPD) et pour
+  notre intérêt légitime à éviter les abus de récompenses (point f). Les
+  statistiques facultatives reposent sur votre consentement (point a du RGPD
+  et art. 22.2 de la LSSI espagnole).</p>
+  <p><strong>Retrait et suppression.</strong> Si vous désactivez l’option dans
+  les Réglages, Difmeil cesse d’envoyer des statistiques facultatives,
+  abandonne celles en attente dans votre navigateur et supprime de notre base
+  de données celles déjà enregistrées pour votre compte. Vous pouvez aussi
+  demander leur suppression en écrivant à <a href="mailto:support@difmeil.com">support@difmeil.com</a>.</p>
+  <p><strong>Conservation.</strong> Les statistiques facultatives et les
+  enregistrements du serveur sont supprimés automatiquement au bout de 12 mois
+  et, dans tous les cas, à la suppression de votre compte Difmeil. Le nombre
+  de comptes connectés et votre décision de consentement (comme preuve de
+  votre choix) sont conservés tant que votre compte Difmeil existe. Votre
+  navigateur (<code>chrome.storage.local</code>) conserve votre décision, le
+  nombre de fois où la question vous a été posée et l'état des envois (le
+  dernier jour et le dernier nombre de comptes envoyés, et les marques déjà
+  enregistrées).</p>
 
   <h2>Sécurité</h2>
   <p>Difmeil applique des mesures raisonnables pour protéger les données de

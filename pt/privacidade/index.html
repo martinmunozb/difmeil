@@ -84,7 +84,7 @@
 <body>
 <main>
   <h1>Política de Privacidade do Difmeil</h1>
-  <p class="updated">Última atualização: 12 de novembro de 2026 ·
+  <p class="updated">Última atualização: 22 de novembro de 2026 ·
     <a href="/privacidad/" lang="es" hreflang="es">Español</a> ·
     <a href="/en/privacy/" lang="en" hreflang="en">English</a> ·
     <a href="/fr/confidentialite/" lang="fr" hreflang="fr">Français</a> ·
@@ -119,6 +119,7 @@
     <li>Status de leitura, favoritos, arquivamento ou outras ações de organização.</li>
     <li>Conteúdo dos e-mails, apenas quando necessário para exibi-lo ao usuário dentro da extensão.</li>
     <li>Dados técnicos básicos necessários para o funcionamento da extensão.</li>
+    <li>Alguns dados de uso associados à sua conta do Difmeil, descritos em “Métricas de uso”; os opcionais somente com o seu consentimento.</li>
   </ul>
   <p>O Difmeil não vende dados pessoais do usuário nem os utiliza para
   publicidade de terceiros.</p>
@@ -224,6 +225,76 @@
   conta do Difmeil e é removido com ela. A extensão também guarda uma marca
   local no seu navegador (<code>chrome.storage.local</code>) até que o
   servidor considere o envio resolvido; depois a apaga.</p>
+
+  <h2>Conta do Difmeil, assinatura e pagamentos</h2>
+  <p>Ao conectar sua primeira conta do Gmail, o Difmeil cria uma conta própria
+  vinculada à sua identidade do Google. Nela guarda seu endereço de e-mail,
+  seu plano e o status da assinatura (datas de teste, renovação ou
+  cancelamento), os identificadores de cliente e de assinatura do Stripe, seu
+  código de indicação e quem indicou você e, se você enviar, suas respostas ao
+  formulário de opinião.</p>
+  <p>Os pagamentos são processados pelo Stripe conforme sua própria política
+  de privacidade. Os dados do seu cartão são tratados pelo Stripe e nunca
+  chegam ao Difmeil. O Stripe nos envia avisos sobre seus pagamentos e sua
+  assinatura (valores, datas, status e os dados de faturamento que contenham,
+  como e-mail ou país), que guardamos como comprovante.</p>
+  <p><strong>Conservação.</strong> Os comprovantes de faturamento (avisos do
+  Stripe e registros de pagamentos, assinaturas, comissões e concessões de
+  Pro) são mantidos por seis anos (art. 30 do Código Comercial espanhol) e não
+  são excluídos por antiguidade enquanto você tiver Lifetime, uma assinatura
+  em vigor ou Pro de presente. Os demais dados da conta são mantidos enquanto
+  sua conta do Difmeil existir.</p>
+
+  <h2 id="usage-metrics">Métricas de uso</h2>
+  <p>O Difmeil associa alguns poucos dados de uso à sua conta do Difmeil. Eles
+  nunca incluem e-mails, assuntos, remetentes, conteúdo, contatos, endereços
+  de e-mail, nomes de contas, tokens, páginas visitadas nem nenhum outro dado
+  obtido das APIs do Google.</p>
+  <p><strong>Sempre, porque o serviço precisa deles:</strong></p>
+  <ul>
+    <li>O número de contas do Gmail conectadas. É enviado quando muda e serve para verificar que o Difmeil foi usado antes de conceder a recompensa por opinião e para evitar abusos dessa recompensa. Se você conectou o Gmail e nosso servidor verificou isso com o Google, consideramos o requisito cumprido mesmo que sua versão da extensão não o tenha enviado.</li>
+    <li>Registros gerados pelo nosso servidor quando você escolhe um plano, envia sua opinião ou usa uma indicação, e o do aviso de fim do teste gratuito (para não enviá-lo duas vezes).</li>
+  </ul>
+  <p><strong>Somente com o seu consentimento.</strong> Depois de conectar o
+  Gmail, o Difmeil pergunta, no máximo em três dias diferentes, se você quer
+  compartilhar métricas de uso. Aceitar e recusar são igualmente simples,
+  você pode continuar usando o Difmeil sem responder, e não responder
+  equivale a não aceitar. Você pode mudar sua decisão quando quiser nas
+  Configurações. Se você aceitar, o Difmeil registra:</p>
+  <ul>
+    <li>Os dias em que você abre o Difmeil e se foi pelo popup ou pela caixa de entrada (uma marca por dia, com a data e sem a hora, não cada abertura).</li>
+    <li>A primeira vez que você abre a caixa de entrada completa.</li>
+    <li>Se você voltou a usar o Difmeil entre o dia 7 e o dia 13 depois de conectar sua primeira conta do Gmail.</li>
+    <li>Se o convite para deixar uma avaliação foi mostrado a você e se você clicou nele.</li>
+  </ul>
+  <p>O Difmeil não envia o número de e-mails que você abre nem o de
+  inicializações da extensão; os valores enviados por versões anteriores foram
+  excluídos. Essas contagens existem apenas no seu navegador, para decidir
+  quando mostrar o convite para deixar uma avaliação.</p>
+  <p>As métricas são analisadas de forma agregada (por exemplo, quantas
+  pessoas usaram o Difmeil em uma semana). Não são usadas para publicidade nem
+  para criação de perfis, não são enviadas à OpenAI nem a outros anunciantes e
+  não são vendidas. São armazenadas em nosso fornecedor técnico de banco de
+  dados.</p>
+  <p><strong>Base legal.</strong> O número de contas conectadas e os
+  registros do servidor são tratados para prestar o serviço e gerenciar a
+  assinatura e as recompensas (art. 6.º, n.º 1, alínea b, do RGPD) e por nosso
+  interesse legítimo em evitar abusos das recompensas (alínea f). As métricas
+  opcionais se baseiam no seu consentimento (alínea a do RGPD e art. 22.2 da
+  LSSI espanhola).</p>
+  <p><strong>Retirada e exclusão.</strong> Se você desativar a opção nas
+  Configurações, o Difmeil deixa de enviar métricas opcionais, descarta as
+  pendentes no seu navegador e exclui do nosso banco de dados as já
+  registradas da sua conta. Você também pode pedir a exclusão escrevendo para
+  <a href="mailto:support@difmeil.com">support@difmeil.com</a>.</p>
+  <p><strong>Conservação.</strong> As métricas opcionais e os registros do
+  servidor são excluídos automaticamente após 12 meses e, em qualquer caso,
+  quando sua conta do Difmeil é excluída. O número de contas conectadas e sua
+  decisão sobre o consentimento (como prova da sua escolha) são mantidos
+  enquanto sua conta do Difmeil existir. Seu navegador
+  (<code>chrome.storage.local</code>) guarda sua decisão, quantas vezes você
+  foi perguntado e o estado dos envios (o último dia e o último número de
+  contas enviados, e quais marcas já constam).</p>
 
   <h2>Segurança</h2>
   <p>O Difmeil aplica medidas razoáveis para proteger os dados do usuário
