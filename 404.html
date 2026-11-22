@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Página no encontrada · Difmeil</title>
+<link rel="icon" type="image/png" href="/assets/logo-mark.png" />
+<script>
+  // GitHub Pages solo sirve ficheros: /partners/growth no existe como fichero
+  // y acaba aquí (solo usa el 404.html de la raíz). El panel es una app de una
+  // sola página, así que se le devuelve la ruta en `?ruta=` y la restaura al
+  // arrancar (partners/src/lib/deepLink.ts). Cualquier otra ruta es un 404 de
+  // verdad y se queda en esta página.
+  (function () {
+    var base = '/partners/';
+    var path = location.pathname;
+    if (path.indexOf(base) === 0 && path.length > base.length) {
+      location.replace(base + '?ruta=' + encodeURIComponent(path.slice(base.length) + location.search) + location.hash);
+    }
+  })();
+</script>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #faf9f7;
+    --text: #1a1a18;
+    --muted: #6b6a66;
+    --accent: #8a6728;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #131211; --text: #f0efec; --muted: #a3a09a; --accent: #d1ad68; }
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  main { max-width: 420px; padding: 32px 24px; text-align: center; }
+  img { width: 48px; height: 48px; }
+  h1 { margin: 16px 0 8px; font-size: 22px; letter-spacing: -0.01em; }
+  p { margin: 0 0 4px; color: var(--muted); }
+  a { display: inline-block; margin-top: 20px; color: var(--accent); font-weight: 600; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <main>
+    <img src="/assets/logo-mark.png" alt="" />
+    <h1>Página no encontrada</h1>
+    <p>Esta dirección no existe o ha cambiado.</p>
+    <p lang="en">This page does not exist or has moved.</p>
+    <a href="/">Ir a Difmeil</a>
+  </main>
+</body>
+</html>
