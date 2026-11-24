@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy policy for Microsoft Edge — Difmeil</title>
+<meta name="description" content="What data Difmeil processes in Microsoft Edge, who it is shared with, and the controls you have." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://difmeil.com/en/privacy/edge/" />
+<link rel="alternate" hreflang="es" href="https://difmeil.com/privacidad/edge/" />
+<link rel="alternate" hreflang="en" href="https://difmeil.com/en/privacy/edge/" />
+<link rel="alternate" hreflang="x-default" href="https://difmeil.com/en/privacy/edge/" />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #202124;
+    --muted: #5f6368;
+    --border: #e8eaed;
+    --link: #1a73e8;
+    --link-strong: #185abc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1b1b;
+      --fg: #e8eaed;
+      --muted: #9aa0a6;
+      --border: #3c4043;
+      --link: #8ab4f8;
+      --link-strong: #8ab4f8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 "Google Sans", Roboto, Arial, sans-serif;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 36px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  p, li { color: var(--fg); }
+  ul { padding-left: 22px; }
+  a { color: var(--link); }
+  code {
+    overflow-wrap: anywhere;
+    background: var(--border);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .responsable {
+    background: var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0 24px;
+  }
+  .responsable p { margin: 4px 0; }
+  .responsable a { color: var(--link-strong); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Difmeil privacy policy for Microsoft Edge</h1>
+  <p class="updated">Last updated: November 24, 2026 ·
+    <a href="/privacidad/edge/" lang="es" hreflang="es">Español</a></p>
+
+  <p>This policy applies to the Difmeil extension installed from Microsoft
+  Edge Add-ons. Difmeil brings several Gmail accounts into one inbox inside
+  Microsoft Edge, so you can read, reply to and get notified about all of
+  them without switching tabs or profiles.</p>
+
+  <h2>Controller</h2>
+  <p>Martín Muñoz Bastida · Tax ID 58453962Z · Plaza Aparejos, 4, 30319
+  Cartagena, Murcia, Spain · <a href="mailto:support@difmeil.com">support@difmeil.com</a></p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Your emails never pass through Difmeil servers: every request to read, send or organize mail goes directly from Microsoft Edge to Google.</li>
+    <li>Difmeil does not sell data, does not engage in data brokering and does not share data with third parties for advertising.</li>
+    <li>In Microsoft Edge there is no advertising measurement of any kind: nothing is sent to OpenAI or any other advertiser.</li>
+    <li>Usage metrics are optional, can be withdrawn at any time in Settings, and are deleted when you withdraw.</li>
+  </ul>
+
+  <h2>Data stored in your browser</h2>
+  <p>The extension's local storage in Microsoft Edge holds: your connected
+  Gmail accounts (email address, name and profile photo), their Google access
+  and refresh tokens, your settings, the email you are composing until you
+  send or discard it or Gmail saves it as a draft, and a few local counters
+  used to decide when to show the review invitation. The message list on
+  screen is kept in a session cache that Edge clears when it closes. Email
+  bodies are not stored: they are fetched from Google when you open them.</p>
+  <p>Uninstalling the extension deletes all of this data from the browser.</p>
+
+  <h2>Google data</h2>
+  <p>Difmeil requests these permissions through Google OAuth, only for the
+  features you use:</p>
+  <ul>
+    <li><code>gmail.modify</code>: read and organize your mail (mark as read, archive, label, move to trash).</li>
+    <li><code>gmail.send</code>: send mail only when you ask it to.</li>
+    <li><code>contacts.other.readonly</code>: suggest recipients and show sender photos.</li>
+    <li><code>openid</code>, <code>email</code> and <code>profile</code>: identify each connected account.</li>
+  </ul>
+  <p>Difmeil's use and transfer of information received from Google APIs
+  adheres to the
+  <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+  including the Limited Use requirements. That data is not used for
+  advertising or profiling and is not transferred to anyone except as
+  described here.</p>
+  <p>To show a sender's logo when there is no photo, Edge requests the image
+  for the sender's domain (for example, <code>example.com</code>) from
+  Google.</p>
+
+  <h2>Account detection in Gmail</h2>
+  <p>On <code>mail.google.com</code> tabs, Difmeil reads which account is open
+  from the page title and the account button label, and asks Google which
+  accounts are signed in to the browser, so it can offer to connect them. All
+  of this happens in your browser: neither page content nor the account list
+  is sent to Difmeil.</p>
+
+  <h2>Difmeil server</h2>
+  <p>Difmeil uses its own server, hosted on Supabase (database and functions
+  provider), for:</p>
+  <ul>
+    <li>Obtaining and refreshing your Google tokens. Google requires a client secret that cannot live in the extension; the server returns the tokens to your browser and does not store them.</li>
+    <li>Your Difmeil account, created when you connect your first Gmail account and linked to your Google identity: email address, plan and subscription status, Stripe customer and subscription IDs, the date of your first Gmail connection, the number of connected accounts, your referral code and who referred you, and, if you submit it, your answers to the feedback form.</li>
+  </ul>
+
+  <h2>Payments</h2>
+  <p>Difmeil has a free plan and an optional paid Pro plan. Payments are
+  processed by Stripe on its own page under its
+  <a href="https://stripe.com/privacy">privacy policy</a>; your card details
+  never reach Difmeil. From the notices Stripe sends about your payments,
+  Difmeil keeps amounts, dates, statuses and identifiers as records, and the
+  billing country to support VAT; it does not keep your name, email or
+  address.</p>
+
+  <h2>Notice emails</h2>
+  <p>If you start the monthly plan's free trial, Difmeil emails you the day
+  before it ends. That email is sent through Resend, which receives your email
+  address only to deliver it.</p>
+
+  <h2>Usage metrics (optional)</h2>
+  <p>After you connect Gmail, Difmeil asks whether you want to share usage
+  metrics. Accepting and declining are equally easy, and not answering means
+  not accepting. If you accept, the following is recorded with your Difmeil
+  account: the days you open Difmeil (date only) and where from (quick window
+  or inbox), the first time you open the full inbox, whether you used it again
+  between days 7 and 13 after your first Gmail connection, and whether the
+  review invitation was shown and clicked. They never include emails,
+  subjects, senders, contacts or email addresses.</p>
+  <p>They are used only to improve Difmeil, in aggregate. You can withdraw
+  consent in Settings → Account: Difmeil stops sending them, discards pending
+  ones and deletes those already recorded from our database. They are deleted
+  automatically after 12 months.</p>
+
+  <h2>Advertising</h2>
+  <p>Difmeil does not show ads. In Microsoft Edge, advertising is not
+  measured: the extension does not receive ad references, does not accept
+  messages from web pages, and the server does not send conversions or any
+  other data to OpenAI or any other advertiser for accounts connected from
+  Edge.</p>
+
+  <h2>IP address</h2>
+  <p>Like any internet service, Google, Supabase and Stripe receive your
+  connection's IP address when Edge talks to them, and may keep it in their
+  technical logs under their own policies. Difmeil does not store it in its
+  database or use it for any purpose.</p>
+
+  <h2>Who data is shared with</h2>
+  <ul>
+    <li><strong>Google</strong>: the mail service you connect.</li>
+    <li><strong>Supabase</strong>: hosts Difmeil's server and database, as a processor.</li>
+    <li><strong>Stripe</strong>: processes payments if you subscribe to Pro.</li>
+    <li><strong>Resend</strong>: delivers the free-trial ending notice.</li>
+  </ul>
+  <p>Outside these cases and legal obligations, Difmeil does not share, sell
+  or transfer data to third parties.</p>
+
+  <h2>Security</h2>
+  <p>All communication uses HTTPS. Google access uses OAuth 2.0 with PKCE, and
+  the client secret is never in the extension. Email HTML is sanitized and
+  displayed in isolation, with no access to the extension or its data.</p>
+
+  <h2>Retention</h2>
+  <p>Your Difmeil account data is kept while the account exists. Billing
+  records are kept for six years (Spanish Commercial Code, art. 30). Optional
+  metrics and server records are deleted after 12 months or when you withdraw
+  consent.</p>
+
+  <h2>Your controls and rights</h2>
+  <ul>
+    <li>Disconnecting an account in Settings revokes its Google access and deletes its data from the browser.</li>
+    <li>You can remove Difmeil's access in your <a href="https://myaccount.google.com/permissions">Google Account security settings</a>.</li>
+    <li>You can turn usage metrics on or off in Settings → Account.</li>
+    <li>You can exercise your rights of access, rectification, erasure, objection, restriction and portability, or ask us to delete your Difmeil account, by writing to <a href="mailto:support@difmeil.com">support@difmeil.com</a>. You can also complain to the Spanish Data Protection Agency (AEPD) or your local authority.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>Difmeil is not directed at minors. A minor who uses it must do so with the authorization of their parents or guardians where required.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>Any change will be published on this page with its update date.</p>
+
+  <h2>Contact</h2>
+  <p><a href="mailto:support@difmeil.com">support@difmeil.com</a></p>
+</main>
+</body>
+</html>

@@ -37,3 +37,12 @@ if (mobileMenu && menuButton) {
 document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
+
+// En Microsoft Edge, con la ficha de Edge Add-ons publicada, los botones de
+// instalación y la política de privacidad pasan a los de Edge (assets/stores.mjs).
+// Solo se carga el módulo en Edge: el resto de navegadores no hace nada más.
+if (typeof navigator !== 'undefined' && /\bEdg\//.test(navigator.userAgent ?? '')) {
+  import('/assets/stores.mjs')
+    .then((stores) => { if (stores.edgeStoreActive()) stores.applyEdgeStore(document); })
+    .catch(() => undefined);
+}

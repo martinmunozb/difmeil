@@ -34,7 +34,7 @@ Después de publicar, comprueba `/`, `/en/`, `/fr/`, `/de/` y `/pt/`.
 GitHub Pages (`main`, `/`), junto a `CNAME`. No dependen de ejecutar Node en
 GitHub ni de copiar archivos a `dist`. El generador de portadas no los modifica. El generador de guías añade sus URLs al sitemap sin eliminar las existentes y actualiza su sección de llms.txt; no cambia robots.txt.
 
-El sitemap incluye las cinco portadas, las cinco políticas de privacidad y diez guías de Gmail,
+El sitemap incluye las cinco portadas, las cinco políticas de privacidad, las dos de Microsoft Edge (`/privacidad/edge/`, `/en/privacy/edge/`) y diez guías de Gmail,
 con HTTPS, dominio canónico y barra final. Excluye instalación, referidos,
 QR, partners, URLs de la extensión, parámetros y fragmentos. Al añadir o retirar
 una página pública indexable, actualizar `sitemap.xml` y ejecutar:

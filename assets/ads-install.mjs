@@ -1,3 +1,5 @@
+import { applyEdgeStore, edgeLabel, edgeStoreActive, isEdge } from './stores.mjs';
+
 const KEY = 'difmeilAdsClick';
 export const EXTENSION_ID = 'eojoffejiddgjbjgkkgkfhccgofjejad';
 function valid(value, now) {
@@ -36,7 +38,27 @@ export function createInstallFlow({storage, send, now = Date.now}) {
   };
 }
 
-if (typeof document !== 'undefined') {
+/**
+ * Microsoft Edge: sin medición de anuncios (política 1.5.3 de Edge Add-ons).
+ * Se borra cualquier referencia guardada, se quita de la URL y desaparecen la
+ * casilla y el paso «Continuar», que solo existen para transferirla.
+ */
+export function setUpEdge(doc, storage, location, history, storeActive) {
+  try { storage.removeItem(KEY); } catch {}
+  const clean = new URL(location.href);
+  clean.searchParams.delete('oppref');
+  history.replaceState(null, '', clean.pathname + clean.search + clean.hash);
+  doc.querySelectorAll('[data-ads-measurement]').forEach((el) => el.remove());
+  if (storeActive) {
+    applyEdgeStore(doc);
+    const title = doc.querySelector('#install-title');
+    if (title) title.textContent = edgeLabel(title.textContent);
+  }
+}
+
+if (typeof document !== 'undefined' && isEdge()) {
+  setUpEdge(document, localStorage, location, history, edgeStoreActive());
+} else if (typeof document !== 'undefined') {
   const checkbox = document.querySelector('#measurement');
   const status = document.querySelector('#status');
   const button = document.querySelector('#continue');
