@@ -106,7 +106,8 @@ for (const [index, path] of clusters[0].entries()) {
 }
 
 test('llms.txt es complementario y enlaza las diez páginas canónicas y la instalación oficial', () => {
-  const content = read('llms.txt');
+  // Git en Windows (core.autocrlf) lo saca con CRLF; lo publicado es LF.
+  const content = read('llms.txt').replace(/\r\n/g, '\n');
   assert.match(content, /^# Difmeil\n/);
   assert.match(content, /experimental/i);
   for (const path of clusters.flat()) assert.ok(content.includes(`](${origin + path})`));
