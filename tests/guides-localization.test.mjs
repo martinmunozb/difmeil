@@ -77,7 +77,10 @@ for (const [lang, paths] of Object.entries(routes)) {
       const crumbs = graph['@graph'].find(d => d['@type'] === 'BreadcrumbList');
       assert.equal(article.inLanguage, lang);
       assert.equal(article.mainEntityOfPage, origin + path);
-      assert.equal(article.headline, html.match(/<h1>(.*?)<\/h1>/)[1]);
+      const source = JSON.parse(read(`scripts/guides/${lang}.json`)).guides[index];
+      assert.equal(article.headline, source.seoTitle ?? source.title);
+      assert.equal(article.description, source.seoDescription ?? source.description);
+      assert.equal(html.match(/<h1>(.*?)<\/h1>/)[1], source.title);
       assert.equal(crumbs.itemListElement.at(-1).item, origin + path);
       assert.equal(article.image, origin + '/assets/product/appearance.png');
     });

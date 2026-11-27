@@ -17,6 +17,8 @@ export function guideDocument(lang, guide) {
   const config = locales[lang];
   const route = config.routes[guide.key];
   const url = origin + route;
+  const seoTitle = guide.seoTitle ?? guide.title;
+  const seoDescription = guide.seoDescription ?? guide.description;
   const other = guides.find(g => g.key !== guide.key);
   const resolve = (html) => html.replace(/\{\{(home|privacy|store|inbox|notifications)\}\}/g, (_, key) => ({ home: config.home, privacy: config.privacy, store: storeUrl, ...config.routes })[key]);
   const install = (label, cls = 'btn btn-primary') => `<a class="${cls}" href="${storeUrl}" target="_blank" rel="noopener noreferrer">${escape(label)}</a>`;
@@ -25,7 +27,7 @@ export function guideDocument(lang, guide) {
   const data = {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'Article', '@id': url + '#article', headline: guide.title, description: guide.description, mainEntityOfPage: url, inLanguage: lang, image: origin + '/assets/product/appearance.png', dateModified: '2026-11-20', author: { '@type': 'Organization', name: 'Difmeil', url: origin + config.home }, publisher: { '@type': 'Organization', name: 'Difmeil', url: origin + config.home } },
+      { '@type': 'Article', '@id': url + '#article', headline: seoTitle, description: seoDescription, mainEntityOfPage: url, inLanguage: lang, image: origin + '/assets/product/appearance.png', dateModified: '2026-11-20', author: { '@type': 'Organization', name: 'Difmeil', url: origin + config.home }, publisher: { '@type': 'Organization', name: 'Difmeil', url: origin + config.home } },
       { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: ui.home, item: origin + config.home }, { '@type': 'ListItem', position: 2, name: guide.title, item: url }] },
     ],
   };
@@ -34,8 +36,8 @@ export function guideDocument(lang, guide) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escape(guide.title)} | Difmeil</title>
-  <meta name="description" content="${escape(guide.description)}">
+  <title>${escape(guide.seoTitle ?? `${guide.title} | Difmeil`)}</title>
+  <meta name="description" content="${escape(seoDescription)}">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#f7f5ef">
   <link rel="canonical" href="${url}">
@@ -47,16 +49,16 @@ export function guideDocument(lang, guide) {
   <meta property="og:type" content="article">
   <meta property="og:locale" content="${config.locale}">
   ${Object.entries(locales).filter(([code]) => code !== lang).map(([,l]) => `<meta property="og:locale:alternate" content="${l.locale}">`).join('\n  ')}
-  <meta property="og:title" content="${escape(guide.title)}">
-  <meta property="og:description" content="${escape(guide.description)}">
+  <meta property="og:title" content="${escape(seoTitle)}">
+  <meta property="og:description" content="${escape(seoDescription)}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${origin}/assets/product/appearance.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="800">
   <meta property="og:image:alt" content="${escape(ui.imageAlt)}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${escape(guide.title)}">
-  <meta name="twitter:description" content="${escape(guide.description)}">
+  <meta name="twitter:title" content="${escape(seoTitle)}">
+  <meta name="twitter:description" content="${escape(seoDescription)}">
   <meta name="twitter:image" content="${origin}/assets/product/appearance.png">
   <meta name="twitter:image:alt" content="${escape(ui.imageAlt)}">
   <script type="application/ld+json">${JSON.stringify(data, null, 2).replaceAll('<', '\\u003c')}</script>
